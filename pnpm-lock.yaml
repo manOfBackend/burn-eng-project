@@ -16,31 +16,6 @@ importers:
       prettier: 2.8.8
       turbo: 1.10.3
 
-  apps/docs:
-    specifiers:
-      '@types/node': ^17.0.12
-      '@types/react': ^18.0.22
-      '@types/react-dom': ^18.0.7
-      eslint-config-custom: workspace:*
-      next: ^13.4.1
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      tsconfig: workspace:*
-      typescript: ^4.5.3
-      ui: workspace:*
-    dependencies:
-      next: 13.4.1_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      ui: link:../../packages/ui
-    devDependencies:
-      '@types/node': 17.0.45
-      '@types/react': 18.2.5
-      '@types/react-dom': 18.2.3
-      eslint-config-custom: link:../../packages/eslint-config-custom
-      tsconfig: link:../../packages/tsconfig
-      typescript: 4.9.5
-
   apps/web:
     specifiers:
       '@types/node': ^17.0.12
@@ -1123,6 +1098,7 @@ packages:
 
   /eslint-config-prettier/8.8.0_eslint@7.32.0:
     resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
+    hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
@@ -2262,6 +2238,7 @@ packages:
   /next/13.4.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-JBw2kAIyhKDpjhEWvNVoFeIzNp9xNxg8wrthDOtMctfn3EpqGCmW0FSviNyGgOSOSn6zDaX48pmvbdf6X2W9xA==}
     engines: {node: '>=16.8.0'}
+    hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
       fibers: '>= 3.1.0'
@@ -2995,6 +2972,7 @@ packages:
 
   /ts-node/10.9.1_cin3sed6ohfsopbmt6orxeb4o4:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
     peerDependencies:
       '@swc/core': '>=1.2.50'
       '@swc/wasm': '>=1.2.50'
