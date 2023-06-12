@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "@sayvoca/ui",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
@@ -8,13 +8,19 @@
     "lint": "eslint \"**/*.ts*\"",
     "generate:component": "turbo gen react-component"
   },
+  "dependencies": {
+    "class-variance-authority": "^0.4.0",
+    "lucide-react": "^0.92.0",
+    "next-themes": "^0.2.1"
+  },
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
+    "@sayvoca/config": "workspace:*",
     "react": "^17.0.2",
-    "tsconfig": "workspace:*",
+    "@sayvoca/tsconfig": "workspace:*",
+    "@sayvoca/lib": "workspace:*",
     "typescript": "^4.5.2"
   }
 }

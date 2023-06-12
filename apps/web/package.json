@@ -12,14 +12,29 @@
     "next": "^13.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "@sayvoca/ui": "workspace:*",
+    "@sayvoca/lib": "workspace:*",
+    "tailwindcss-animate": "^1.0.5",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
-    "eslint-config-custom": "workspace:*",
-    "tsconfig": "workspace:*",
-    "typescript": "^4.5.3"
+    "@sayvoca/tsconfig": "workspace:*",
+    "@sayvoca/config": "workspace:*",
+    "typescript": "4.7.4",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.8",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.39.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-tailwindcss": "^3.11.0",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.9",
+    "tailwindcss": "^3.3.1"
   }
 }
