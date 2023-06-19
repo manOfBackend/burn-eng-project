@@ -4,6 +4,11 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "strictNullChecks": true,
+    "strict": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "plugins": [
       {
         "name": "next"

@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["@sayvoca/ui"],
+  transpilePackages: ["@sayvoca/ui", "@sayvoca/lib"],
 };
