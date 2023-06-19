@@ -17,6 +17,7 @@ export default function LoginPage() {
       <Link
         href="/"
         className={cn(
+          buttonVariants({ variant: "ghost" }),
           "absolute left-4 top-4 md:left-8 md:top-8"
         )}
       >
@@ -29,7 +30,7 @@ export default function LoginPage() {
             로그인
           </h1>
           <p className="text-sm text-muted-foreground">
-            이 사이트의 개발자 이름은?
+            이메일 주소를 입력해주세요
           </p>
         </div>
         <UserAuthForm />
