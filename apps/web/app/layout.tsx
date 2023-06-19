@@ -1,7 +1,7 @@
 import '@sayvoca/ui/styles/globals.css'
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@sayvoca/lib/utils"
-import { ThemeProvider } from '@sayvoca/ui'
+import { Analytics, ThemeProvider } from '@sayvoca/ui'
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -42,12 +42,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background mx-auto font-sans antialiased",
           fontSans.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
+          <div className='max-w-3xl'>
+            {children}
+          </div>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
