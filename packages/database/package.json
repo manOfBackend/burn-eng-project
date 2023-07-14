@@ -1,0 +1,21 @@
+{
+  "name": "@sayvoca/database",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate"
+  },
+  "devDependencies": {
+    "@sayvoca/tsconfig": "workspace:*",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.15.0",
+    "prisma": "^4.15.0"
+  }
+}

@@ -9,4 +9,5 @@ export * from "./input";
 export * from "./toast";
 export * from "./toaster";
 export * from "./label";
+export * from "./form";
 export * from "./use-toast";

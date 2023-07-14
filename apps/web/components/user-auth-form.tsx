@@ -38,18 +38,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
     setIsLoading(false)
 
-    if (!signInResult?.ok) {
-      return toast({
-        title: "Something went wrong.",
-        description: "Your sign in request failed. Please try again.",
-        variant: "destructive",
-      })
-    }
-
-    return toast({
-      title: "Check your email",
-      description: "We sent you a login link. Be sure to check your spam too.",
-    })
   }
 
   return (
@@ -58,11 +46,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
-              Email
+              이메일
             </Label>
             <Input
               id="email"
-              placeholder="name@example.com"
+              placeholder="email@gmail.com"
               type="email"
               autoCapitalize="none"
               autoComplete="email"
@@ -80,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Sign In with Email
+
           </button>
         </div>
       </form>
@@ -90,7 +78,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+
           </span>
         </div>
       </div>

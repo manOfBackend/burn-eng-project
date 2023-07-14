@@ -6,6 +6,8 @@ import {
   ChevronRight,
   Command,
   CreditCard,
+  Eye,
+  EyeOff,
   File,
   FileText,
   HelpCircle,
@@ -48,6 +50,8 @@ export const Icons = {
   help: HelpCircle,
   pizza: Pizza,
   sun: SunMedium,
+  view: Eye,
+  hide: EyeOff,
   moon: Moon,
   laptop: Laptop,
   gitHub: ({ ...props }: LucideProps) => (

@@ -3,12 +3,11 @@ import GitHubProvider from "next-auth/providers/github"
 import EmailProvider from "next-auth/providers/email"
 
 import { env } from "./env.mjs"
-import { db } from "./db"
+import { db } from "@sayvoca/database"
 import { NextAuthOptions } from "next-auth"
 
 export const authOptions: NextAuthOptions = {
   // @see https://github.com/prisma/prisma/issues/16117
-  adapter: PrismaAdapter(db as any),
   session: {
     strategy: "jwt",
   },
@@ -20,10 +19,8 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
-    EmailProvider({
-      
-    }),
   ],
+  adapter: PrismaAdapter(db as any),
   callbacks: {
     async session({ token, session }) {
       if (token) {
@@ -36,6 +33,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     async jwt({ token, user }) {
+      
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,

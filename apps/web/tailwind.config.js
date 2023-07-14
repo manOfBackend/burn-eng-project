@@ -4,7 +4,8 @@ const { fontFamily } = require("tailwindcss/defaultTheme")
 module.exports = {
   content: [
     "./app/**/*.{ts,tsx}",
-    "@sayvoca/ui/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "../../packages/ui/**/*.{js,ts,tsx,jsx}",
   ],
   darkMode: ["class"],
   theme: {

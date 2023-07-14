@@ -12,7 +12,8 @@
     "dotenv-cli": "^7.2.1",
     "eslint": "^7.32.0",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "^5.1.3"
   },
   "packageManager": "pnpm@7.15.0",
   "name": "sayvoca-with-gpt",
