@@ -36,8 +36,6 @@ export default function VerifyEmailForm() {
           code: data.code,
         })
         if (completeSignUp.status !== "complete") {
-          /*  investigate the response, to see if there was an error
-             or if the user needs to complete more steps.*/
           console.log(JSON.stringify(completeSignUp, null, 2))
         }
         if (completeSignUp.status === "complete") {

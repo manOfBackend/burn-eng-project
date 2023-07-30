@@ -26,6 +26,7 @@ import {
   User,
   X,
   type Icon as LucideIcon,
+  PlusCircle,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -44,6 +45,7 @@ export const Icons = {
   billing: CreditCard,
   ellipsis: MoreVertical,
   add: Plus,
+  addCircle: PlusCircle,
   warning: AlertTriangle,
   user: User,
   arrowRight: ArrowRight,

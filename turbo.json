@@ -12,6 +12,9 @@
     "db:push": {
       "cache": false
     },
+    "db:studio": {
+      "cache": false
+    },
     "lint": {},
     "dev": {
       "cache": false,

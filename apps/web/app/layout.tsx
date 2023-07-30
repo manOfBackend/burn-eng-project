@@ -46,7 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <div className='max-w-3xl'>
+            <div className='max-w-3xl w-full'>
               {children}
             </div>
             <Analytics />

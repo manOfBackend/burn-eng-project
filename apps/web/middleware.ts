@@ -14,13 +14,13 @@ export default authMiddleware({
     if (auth.isPublicRoute) {
       return NextResponse.next()
     }
-
+    
     const url = new URL(req.nextUrl.origin)
 
     if (!auth.userId) {
       url.pathname = "/signin"
       return NextResponse.redirect(url)
-    }
+    } 
 
     const user = await clerkClient.users.getUser(auth.userId)
 

@@ -1,8 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
+    "db:generate": "dotenv -- turbo run db:generate --filter=@sayvoca/database",
+    "db:push": "dotenv -- turbo run db:push --filter=@sayvoca/database",
+    "db:studio": "dotenv -- turbo run db:studio --filter=@sayvoca/database",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

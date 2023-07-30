@@ -8,7 +8,8 @@
   "scripts": {
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate"
+    "db:push": "prisma db push --skip-generate --accept-data-loss",
+    "db:studio": "prisma studio"
   },
   "devDependencies": {
     "@sayvoca/tsconfig": "workspace:*",

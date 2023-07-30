@@ -13,73 +13,26 @@ export type PrismaPromise<T> = runtime.Types.Public.PrismaPromise<T>
 
 
 /**
- * Model Account
+ * Model Word
  * 
  */
-export type Account = {
-  id: string
-  userId: string
-  type: string
-  provider: string
-  providerAccountId: string
-  refresh_token: string | null
-  access_token: string | null
-  expires_at: number | null
-  token_type: string | null
-  scope: string | null
-  id_token: string | null
-  session_state: string | null
+export type Word = {
+  id: number
+  word: string
+  meaning: string
   createdAt: Date
   updatedAt: Date
 }
 
 /**
- * Model Session
+ * Model Sentense
  * 
  */
-export type Session = {
-  id: string
-  sessionToken: string
-  userId: string
-  expires: Date
-}
-
-/**
- * Model User
- * 
- */
-export type User = {
-  id: string
-  name: string | null
-  email: string | null
-  emailVerified: Date | null
-  image: string | null
-  createdAt: Date
-  updatedAt: Date
-}
-
-/**
- * Model VerificationToken
- * 
- */
-export type VerificationToken = {
-  identifier: string
-  token: string
-  expires: Date
-}
-
-/**
- * Model Post
- * 
- */
-export type Post = {
-  id: string
-  title: string
-  content: Prisma.JsonValue | null
-  published: boolean
-  createdAt: Date
-  updatedAt: Date
-  authorId: string
+export type Sentense = {
+  id: number
+  sentense: string
+  meaning: string | null
+  wordId: number
 }
 
 
@@ -90,8 +43,8 @@ export type Post = {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Accounts
- * const accounts = await prisma.account.findMany()
+ * // Fetch zero or more Words
+ * const words = await prisma.word.findMany()
  * ```
  *
  * 
@@ -111,8 +64,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Accounts
-   * const accounts = await prisma.account.findMany()
+   * // Fetch zero or more Words
+   * const words = await prisma.word.findMany()
    * ```
    *
    * 
@@ -201,54 +154,24 @@ export class PrismaClient<
   $transaction<R>(fn: (prisma: Omit<this, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use">) => Promise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): Promise<R>
 
       /**
-   * `prisma.account`: Exposes CRUD operations for the **Account** model.
+   * `prisma.word`: Exposes CRUD operations for the **Word** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Accounts
-    * const accounts = await prisma.account.findMany()
+    * // Fetch zero or more Words
+    * const words = await prisma.word.findMany()
     * ```
     */
-  get account(): Prisma.AccountDelegate<GlobalReject>;
+  get word(): Prisma.WordDelegate<GlobalReject>;
 
   /**
-   * `prisma.session`: Exposes CRUD operations for the **Session** model.
+   * `prisma.sentense`: Exposes CRUD operations for the **Sentense** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Sessions
-    * const sessions = await prisma.session.findMany()
+    * // Fetch zero or more Sentenses
+    * const sentenses = await prisma.sentense.findMany()
     * ```
     */
-  get session(): Prisma.SessionDelegate<GlobalReject>;
-
-  /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
-  get user(): Prisma.UserDelegate<GlobalReject>;
-
-  /**
-   * `prisma.verificationToken`: Exposes CRUD operations for the **VerificationToken** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more VerificationTokens
-    * const verificationTokens = await prisma.verificationToken.findMany()
-    * ```
-    */
-  get verificationToken(): Prisma.VerificationTokenDelegate<GlobalReject>;
-
-  /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Posts
-    * const posts = await prisma.post.findMany()
-    * ```
-    */
-  get post(): Prisma.PostDelegate<GlobalReject>;
+  get sentense(): Prisma.SentenseDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -718,11 +641,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Account: 'Account',
-    Session: 'Session',
-    User: 'User',
-    VerificationToken: 'VerificationToken',
-    Post: 'Post'
+    Word: 'Word',
+    Sentense: 'Sentense'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -884,34 +804,30 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
+   * Count Type WordCountOutputType
    */
 
 
-  export type UserCountOutputType = {
-    accounts: number
-    sessions: number
-    Post: number
+  export type WordCountOutputType = {
+    sentenses: number
   }
 
-  export type UserCountOutputTypeSelect = {
-    accounts?: boolean
-    sessions?: boolean
-    Post?: boolean
+  export type WordCountOutputTypeSelect = {
+    sentenses?: boolean
   }
 
-  export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
+  export type WordCountOutputTypeGetPayload<S extends boolean | null | undefined | WordCountOutputTypeArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? UserCountOutputType :
+    S extends true ? WordCountOutputType :
     S extends undefined ? never :
-    S extends { include: any } & (UserCountOutputTypeArgs)
-    ? UserCountOutputType 
-    : S extends { select: any } & (UserCountOutputTypeArgs)
+    S extends { include: any } & (WordCountOutputTypeArgs)
+    ? WordCountOutputType 
+    : S extends { select: any } & (WordCountOutputTypeArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-    P extends keyof UserCountOutputType ? UserCountOutputType[P] : never
+    P extends keyof WordCountOutputType ? WordCountOutputType[P] : never
   } 
-      : UserCountOutputType
+      : WordCountOutputType
 
 
 
@@ -919,13 +835,13 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * UserCountOutputType without action
+   * WordCountOutputType without action
    */
-  export type UserCountOutputTypeArgs = {
+  export type WordCountOutputTypeArgs = {
     /**
-     * Select specific fields to fetch from the UserCountOutputType
+     * Select specific fields to fetch from the WordCountOutputType
      */
-    select?: UserCountOutputTypeSelect | null
+    select?: WordCountOutputTypeSelect | null
   }
 
 
@@ -935,449 +851,381 @@ export namespace Prisma {
    */
 
   /**
-   * Model Account
+   * Model Word
    */
 
 
-  export type AggregateAccount = {
-    _count: AccountCountAggregateOutputType | null
-    _avg: AccountAvgAggregateOutputType | null
-    _sum: AccountSumAggregateOutputType | null
-    _min: AccountMinAggregateOutputType | null
-    _max: AccountMaxAggregateOutputType | null
+  export type AggregateWord = {
+    _count: WordCountAggregateOutputType | null
+    _avg: WordAvgAggregateOutputType | null
+    _sum: WordSumAggregateOutputType | null
+    _min: WordMinAggregateOutputType | null
+    _max: WordMaxAggregateOutputType | null
   }
 
-  export type AccountAvgAggregateOutputType = {
-    expires_at: number | null
+  export type WordAvgAggregateOutputType = {
+    id: number | null
   }
 
-  export type AccountSumAggregateOutputType = {
-    expires_at: number | null
+  export type WordSumAggregateOutputType = {
+    id: number | null
   }
 
-  export type AccountMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    type: string | null
-    provider: string | null
-    providerAccountId: string | null
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
+  export type WordMinAggregateOutputType = {
+    id: number | null
+    word: string | null
+    meaning: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type AccountMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    type: string | null
-    provider: string | null
-    providerAccountId: string | null
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
+  export type WordMaxAggregateOutputType = {
+    id: number | null
+    word: string | null
+    meaning: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
-  export type AccountCountAggregateOutputType = {
+  export type WordCountAggregateOutputType = {
     id: number
-    userId: number
-    type: number
-    provider: number
-    providerAccountId: number
-    refresh_token: number
-    access_token: number
-    expires_at: number
-    token_type: number
-    scope: number
-    id_token: number
-    session_state: number
+    word: number
+    meaning: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
-  export type AccountAvgAggregateInputType = {
-    expires_at?: true
-  }
-
-  export type AccountSumAggregateInputType = {
-    expires_at?: true
-  }
-
-  export type AccountMinAggregateInputType = {
+  export type WordAvgAggregateInputType = {
     id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
+  }
+
+  export type WordSumAggregateInputType = {
+    id?: true
+  }
+
+  export type WordMinAggregateInputType = {
+    id?: true
+    word?: true
+    meaning?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type AccountMaxAggregateInputType = {
+  export type WordMaxAggregateInputType = {
     id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
+    word?: true
+    meaning?: true
     createdAt?: true
     updatedAt?: true
   }
 
-  export type AccountCountAggregateInputType = {
+  export type WordCountAggregateInputType = {
     id?: true
-    userId?: true
-    type?: true
-    provider?: true
-    providerAccountId?: true
-    refresh_token?: true
-    access_token?: true
-    expires_at?: true
-    token_type?: true
-    scope?: true
-    id_token?: true
-    session_state?: true
+    word?: true
+    meaning?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
   }
 
-  export type AccountAggregateArgs = {
+  export type WordAggregateArgs = {
     /**
-     * Filter which Account to aggregate.
+     * Filter which Word to aggregate.
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Accounts to fetch.
+     * Determine the order of Words to fetch.
      */
-    orderBy?: Enumerable<AccountOrderByWithRelationInput>
+    orderBy?: Enumerable<WordOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: AccountWhereUniqueInput
+    cursor?: WordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Accounts from the position of the cursor.
+     * Take `±n` Words from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Accounts.
+     * Skip the first `n` Words.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Accounts
+     * Count returned Words
     **/
-    _count?: true | AccountCountAggregateInputType
+    _count?: true | WordCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: AccountAvgAggregateInputType
+    _avg?: WordAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: AccountSumAggregateInputType
+    _sum?: WordSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: AccountMinAggregateInputType
+    _min?: WordMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: AccountMaxAggregateInputType
+    _max?: WordMaxAggregateInputType
   }
 
-  export type GetAccountAggregateType<T extends AccountAggregateArgs> = {
-        [P in keyof T & keyof AggregateAccount]: P extends '_count' | 'count'
+  export type GetWordAggregateType<T extends WordAggregateArgs> = {
+        [P in keyof T & keyof AggregateWord]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateAccount[P]>
-      : GetScalarType<T[P], AggregateAccount[P]>
+        : GetScalarType<T[P], AggregateWord[P]>
+      : GetScalarType<T[P], AggregateWord[P]>
   }
 
 
 
 
-  export type AccountGroupByArgs = {
-    where?: AccountWhereInput
-    orderBy?: Enumerable<AccountOrderByWithAggregationInput>
-    by: AccountScalarFieldEnum[]
-    having?: AccountScalarWhereWithAggregatesInput
+  export type WordGroupByArgs = {
+    where?: WordWhereInput
+    orderBy?: Enumerable<WordOrderByWithAggregationInput>
+    by: WordScalarFieldEnum[]
+    having?: WordScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: AccountCountAggregateInputType | true
-    _avg?: AccountAvgAggregateInputType
-    _sum?: AccountSumAggregateInputType
-    _min?: AccountMinAggregateInputType
-    _max?: AccountMaxAggregateInputType
+    _count?: WordCountAggregateInputType | true
+    _avg?: WordAvgAggregateInputType
+    _sum?: WordSumAggregateInputType
+    _min?: WordMinAggregateInputType
+    _max?: WordMaxAggregateInputType
   }
 
 
-  export type AccountGroupByOutputType = {
-    id: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token: string | null
-    access_token: string | null
-    expires_at: number | null
-    token_type: string | null
-    scope: string | null
-    id_token: string | null
-    session_state: string | null
+  export type WordGroupByOutputType = {
+    id: number
+    word: string
+    meaning: string
     createdAt: Date
     updatedAt: Date
-    _count: AccountCountAggregateOutputType | null
-    _avg: AccountAvgAggregateOutputType | null
-    _sum: AccountSumAggregateOutputType | null
-    _min: AccountMinAggregateOutputType | null
-    _max: AccountMaxAggregateOutputType | null
+    _count: WordCountAggregateOutputType | null
+    _avg: WordAvgAggregateOutputType | null
+    _sum: WordSumAggregateOutputType | null
+    _min: WordMinAggregateOutputType | null
+    _max: WordMaxAggregateOutputType | null
   }
 
-  type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
+  type GetWordGroupByPayload<T extends WordGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickArray<AccountGroupByOutputType, T['by']> &
+      PickArray<WordGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AccountGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof WordGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], AccountGroupByOutputType[P]>
-            : GetScalarType<T[P], AccountGroupByOutputType[P]>
+              : GetScalarType<T[P], WordGroupByOutputType[P]>
+            : GetScalarType<T[P], WordGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type AccountSelect = {
+  export type WordSelect = {
     id?: boolean
-    userId?: boolean
-    type?: boolean
-    provider?: boolean
-    providerAccountId?: boolean
-    refresh_token?: boolean
-    access_token?: boolean
-    expires_at?: boolean
-    token_type?: boolean
-    scope?: boolean
-    id_token?: boolean
-    session_state?: boolean
+    word?: boolean
+    meaning?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserArgs
+    sentenses?: boolean | Word$sentensesArgs
+    _count?: boolean | WordCountOutputTypeArgs
   }
 
 
-  export type AccountInclude = {
-    user?: boolean | UserArgs
+  export type WordInclude = {
+    sentenses?: boolean | Word$sentensesArgs
+    _count?: boolean | WordCountOutputTypeArgs
   }
 
-  export type AccountGetPayload<S extends boolean | null | undefined | AccountArgs> =
+  export type WordGetPayload<S extends boolean | null | undefined | WordArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Account :
+    S extends true ? Word :
     S extends undefined ? never :
-    S extends { include: any } & (AccountArgs | AccountFindManyArgs)
-    ? Account  & {
+    S extends { include: any } & (WordArgs | WordFindManyArgs)
+    ? Word  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'user' ? UserGetPayload<S['include'][P]> :  never
+        P extends 'sentenses' ? Array < SentenseGetPayload<S['include'][P]>>  :
+        P extends '_count' ? WordCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
-    : S extends { select: any } & (AccountArgs | AccountFindManyArgs)
+    : S extends { select: any } & (WordArgs | WordFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'user' ? UserGetPayload<S['select'][P]> :  P extends keyof Account ? Account[P] : never
+        P extends 'sentenses' ? Array < SentenseGetPayload<S['select'][P]>>  :
+        P extends '_count' ? WordCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Word ? Word[P] : never
   } 
-      : Account
+      : Word
 
 
-  type AccountCountArgs = 
-    Omit<AccountFindManyArgs, 'select' | 'include'> & {
-      select?: AccountCountAggregateInputType | true
+  type WordCountArgs = 
+    Omit<WordFindManyArgs, 'select' | 'include'> & {
+      select?: WordCountAggregateInputType | true
     }
 
-  export interface AccountDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface WordDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
 
     /**
-     * Find zero or one Account that matches the filter.
-     * @param {AccountFindUniqueArgs} args - Arguments to find a Account
+     * Find zero or one Word that matches the filter.
+     * @param {WordFindUniqueArgs} args - Arguments to find a Word
      * @example
-     * // Get one Account
-     * const account = await prisma.account.findUnique({
+     * // Get one Word
+     * const word = await prisma.word.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends AccountFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, AccountFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Account'> extends True ? Prisma__AccountClient<AccountGetPayload<T>> : Prisma__AccountClient<AccountGetPayload<T> | null, null>
+    findUnique<T extends WordFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, WordFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Word'> extends True ? Prisma__WordClient<WordGetPayload<T>> : Prisma__WordClient<WordGetPayload<T> | null, null>
 
     /**
-     * Find one Account that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Word that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {AccountFindUniqueOrThrowArgs} args - Arguments to find a Account
+     * @param {WordFindUniqueOrThrowArgs} args - Arguments to find a Word
      * @example
-     * // Get one Account
-     * const account = await prisma.account.findUniqueOrThrow({
+     * // Get one Word
+     * const word = await prisma.word.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends AccountFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, AccountFindUniqueOrThrowArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    findUniqueOrThrow<T extends WordFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, WordFindUniqueOrThrowArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Find the first Account that matches the filter.
+     * Find the first Word that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindFirstArgs} args - Arguments to find a Account
+     * @param {WordFindFirstArgs} args - Arguments to find a Word
      * @example
-     * // Get one Account
-     * const account = await prisma.account.findFirst({
+     * // Get one Word
+     * const word = await prisma.word.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends AccountFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, AccountFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Account'> extends True ? Prisma__AccountClient<AccountGetPayload<T>> : Prisma__AccountClient<AccountGetPayload<T> | null, null>
+    findFirst<T extends WordFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, WordFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Word'> extends True ? Prisma__WordClient<WordGetPayload<T>> : Prisma__WordClient<WordGetPayload<T> | null, null>
 
     /**
-     * Find the first Account that matches the filter or
+     * Find the first Word that matches the filter or
      * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindFirstOrThrowArgs} args - Arguments to find a Account
+     * @param {WordFindFirstOrThrowArgs} args - Arguments to find a Word
      * @example
-     * // Get one Account
-     * const account = await prisma.account.findFirstOrThrow({
+     * // Get one Word
+     * const word = await prisma.word.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends AccountFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, AccountFindFirstOrThrowArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    findFirstOrThrow<T extends WordFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, WordFindFirstOrThrowArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Find zero or more Accounts that matches the filter.
+     * Find zero or more Words that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {WordFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Accounts
-     * const accounts = await prisma.account.findMany()
+     * // Get all Words
+     * const words = await prisma.word.findMany()
      * 
-     * // Get first 10 Accounts
-     * const accounts = await prisma.account.findMany({ take: 10 })
+     * // Get first 10 Words
+     * const words = await prisma.word.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const accountWithIdOnly = await prisma.account.findMany({ select: { id: true } })
+     * const wordWithIdOnly = await prisma.word.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends AccountFindManyArgs>(
-      args?: SelectSubset<T, AccountFindManyArgs>
-    ): Prisma.PrismaPromise<Array<AccountGetPayload<T>>>
+    findMany<T extends WordFindManyArgs>(
+      args?: SelectSubset<T, WordFindManyArgs>
+    ): Prisma.PrismaPromise<Array<WordGetPayload<T>>>
 
     /**
-     * Create a Account.
-     * @param {AccountCreateArgs} args - Arguments to create a Account.
+     * Create a Word.
+     * @param {WordCreateArgs} args - Arguments to create a Word.
      * @example
-     * // Create one Account
-     * const Account = await prisma.account.create({
+     * // Create one Word
+     * const Word = await prisma.word.create({
      *   data: {
-     *     // ... data to create a Account
+     *     // ... data to create a Word
      *   }
      * })
      * 
     **/
-    create<T extends AccountCreateArgs>(
-      args: SelectSubset<T, AccountCreateArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    create<T extends WordCreateArgs>(
+      args: SelectSubset<T, WordCreateArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Create many Accounts.
-     *     @param {AccountCreateManyArgs} args - Arguments to create many Accounts.
+     * Create many Words.
+     *     @param {WordCreateManyArgs} args - Arguments to create many Words.
      *     @example
-     *     // Create many Accounts
-     *     const account = await prisma.account.createMany({
+     *     // Create many Words
+     *     const word = await prisma.word.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends AccountCreateManyArgs>(
-      args?: SelectSubset<T, AccountCreateManyArgs>
+    createMany<T extends WordCreateManyArgs>(
+      args?: SelectSubset<T, WordCreateManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Account.
-     * @param {AccountDeleteArgs} args - Arguments to delete one Account.
+     * Delete a Word.
+     * @param {WordDeleteArgs} args - Arguments to delete one Word.
      * @example
-     * // Delete one Account
-     * const Account = await prisma.account.delete({
+     * // Delete one Word
+     * const Word = await prisma.word.delete({
      *   where: {
-     *     // ... filter to delete one Account
+     *     // ... filter to delete one Word
      *   }
      * })
      * 
     **/
-    delete<T extends AccountDeleteArgs>(
-      args: SelectSubset<T, AccountDeleteArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    delete<T extends WordDeleteArgs>(
+      args: SelectSubset<T, WordDeleteArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Update one Account.
-     * @param {AccountUpdateArgs} args - Arguments to update one Account.
+     * Update one Word.
+     * @param {WordUpdateArgs} args - Arguments to update one Word.
      * @example
-     * // Update one Account
-     * const account = await prisma.account.update({
+     * // Update one Word
+     * const word = await prisma.word.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1387,34 +1235,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends AccountUpdateArgs>(
-      args: SelectSubset<T, AccountUpdateArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    update<T extends WordUpdateArgs>(
+      args: SelectSubset<T, WordUpdateArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Delete zero or more Accounts.
-     * @param {AccountDeleteManyArgs} args - Arguments to filter Accounts to delete.
+     * Delete zero or more Words.
+     * @param {WordDeleteManyArgs} args - Arguments to filter Words to delete.
      * @example
-     * // Delete a few Accounts
-     * const { count } = await prisma.account.deleteMany({
+     * // Delete a few Words
+     * const { count } = await prisma.word.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends AccountDeleteManyArgs>(
-      args?: SelectSubset<T, AccountDeleteManyArgs>
+    deleteMany<T extends WordDeleteManyArgs>(
+      args?: SelectSubset<T, WordDeleteManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Accounts.
+     * Update zero or more Words.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {WordUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Accounts
-     * const account = await prisma.account.updateMany({
+     * // Update many Words
+     * const word = await prisma.word.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1424,59 +1272,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends AccountUpdateManyArgs>(
-      args: SelectSubset<T, AccountUpdateManyArgs>
+    updateMany<T extends WordUpdateManyArgs>(
+      args: SelectSubset<T, WordUpdateManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Account.
-     * @param {AccountUpsertArgs} args - Arguments to update or create a Account.
+     * Create or update one Word.
+     * @param {WordUpsertArgs} args - Arguments to update or create a Word.
      * @example
-     * // Update or create a Account
-     * const account = await prisma.account.upsert({
+     * // Update or create a Word
+     * const word = await prisma.word.upsert({
      *   create: {
-     *     // ... data to create a Account
+     *     // ... data to create a Word
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Account we want to update
+     *     // ... the filter for the Word we want to update
      *   }
      * })
     **/
-    upsert<T extends AccountUpsertArgs>(
-      args: SelectSubset<T, AccountUpsertArgs>
-    ): Prisma__AccountClient<AccountGetPayload<T>>
+    upsert<T extends WordUpsertArgs>(
+      args: SelectSubset<T, WordUpsertArgs>
+    ): Prisma__WordClient<WordGetPayload<T>>
 
     /**
-     * Count the number of Accounts.
+     * Count the number of Words.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountCountArgs} args - Arguments to filter Accounts to count.
+     * @param {WordCountArgs} args - Arguments to filter Words to count.
      * @example
-     * // Count the number of Accounts
-     * const count = await prisma.account.count({
+     * // Count the number of Words
+     * const count = await prisma.word.count({
      *   where: {
-     *     // ... the filter for the Accounts we want to count
+     *     // ... the filter for the Words we want to count
      *   }
      * })
     **/
-    count<T extends AccountCountArgs>(
-      args?: Subset<T, AccountCountArgs>,
+    count<T extends WordCountArgs>(
+      args?: Subset<T, WordCountArgs>,
     ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], AccountCountAggregateOutputType>
+          : GetScalarType<T['select'], WordCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Account.
+     * Allows you to perform aggregations operations on a Word.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {WordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1496,13 +1344,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends AccountAggregateArgs>(args: Subset<T, AccountAggregateArgs>): Prisma.PrismaPromise<GetAccountAggregateType<T>>
+    aggregate<T extends WordAggregateArgs>(args: Subset<T, WordAggregateArgs>): Prisma.PrismaPromise<GetWordAggregateType<T>>
 
     /**
-     * Group by Account.
+     * Group by Word.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountGroupByArgs} args - Group by arguments.
+     * @param {WordGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1517,14 +1365,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends AccountGroupByArgs,
+      T extends WordGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AccountGroupByArgs['orderBy'] }
-        : { orderBy?: AccountGroupByArgs['orderBy'] },
+        ? { orderBy: WordGroupByArgs['orderBy'] }
+        : { orderBy?: WordGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1573,17 +1421,17 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, AccountGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccountGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, WordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Account.
+   * The delegate class that acts as a "Promise-like" for Word.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__AccountClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+  export class Prisma__WordClient<T, Null = never> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
     private readonly _queryType;
     private readonly _rootField;
@@ -1598,7 +1446,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
+    sentenses<T extends Word$sentensesArgs= {}>(args?: Subset<T, Word$sentensesArgs>): Prisma.PrismaPromise<Array<SentenseGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -1628,27 +1476,27 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * Account base type for findUnique actions
+   * Word base type for findUnique actions
    */
-  export type AccountFindUniqueArgsBase = {
+  export type WordFindUniqueArgsBase = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter, which Account to fetch.
+     * Filter, which Word to fetch.
      */
-    where: AccountWhereUniqueInput
+    where: WordWhereUniqueInput
   }
 
   /**
-   * Account findUnique
+   * Word findUnique
    */
-  export interface AccountFindUniqueArgs extends AccountFindUniqueArgsBase {
+  export interface WordFindUniqueArgs extends WordFindUniqueArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -1658,76 +1506,76 @@ export namespace Prisma {
       
 
   /**
-   * Account findUniqueOrThrow
+   * Word findUniqueOrThrow
    */
-  export type AccountFindUniqueOrThrowArgs = {
+  export type WordFindUniqueOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter, which Account to fetch.
+     * Filter, which Word to fetch.
      */
-    where: AccountWhereUniqueInput
+    where: WordWhereUniqueInput
   }
 
 
   /**
-   * Account base type for findFirst actions
+   * Word base type for findFirst actions
    */
-  export type AccountFindFirstArgsBase = {
+  export type WordFindFirstArgsBase = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter, which Account to fetch.
+     * Filter, which Word to fetch.
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Accounts to fetch.
+     * Determine the order of Words to fetch.
      */
-    orderBy?: Enumerable<AccountOrderByWithRelationInput>
+    orderBy?: Enumerable<WordOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Accounts.
+     * Sets the position for searching for Words.
      */
-    cursor?: AccountWhereUniqueInput
+    cursor?: WordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Accounts from the position of the cursor.
+     * Take `±n` Words from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Accounts.
+     * Skip the first `n` Words.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Accounts.
+     * Filter by unique combinations of Words.
      */
-    distinct?: Enumerable<AccountScalarFieldEnum>
+    distinct?: Enumerable<WordScalarFieldEnum>
   }
 
   /**
-   * Account findFirst
+   * Word findFirst
    */
-  export interface AccountFindFirstArgs extends AccountFindFirstArgsBase {
+  export interface WordFindFirstArgs extends WordFindFirstArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -1737,1529 +1585,629 @@ export namespace Prisma {
       
 
   /**
-   * Account findFirstOrThrow
+   * Word findFirstOrThrow
    */
-  export type AccountFindFirstOrThrowArgs = {
+  export type WordFindFirstOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter, which Account to fetch.
+     * Filter, which Word to fetch.
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Accounts to fetch.
+     * Determine the order of Words to fetch.
      */
-    orderBy?: Enumerable<AccountOrderByWithRelationInput>
+    orderBy?: Enumerable<WordOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Accounts.
+     * Sets the position for searching for Words.
      */
-    cursor?: AccountWhereUniqueInput
+    cursor?: WordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Accounts from the position of the cursor.
+     * Take `±n` Words from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Accounts.
+     * Skip the first `n` Words.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Accounts.
+     * Filter by unique combinations of Words.
      */
-    distinct?: Enumerable<AccountScalarFieldEnum>
+    distinct?: Enumerable<WordScalarFieldEnum>
   }
 
 
   /**
-   * Account findMany
+   * Word findMany
    */
-  export type AccountFindManyArgs = {
+  export type WordFindManyArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter, which Accounts to fetch.
+     * Filter, which Words to fetch.
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Accounts to fetch.
+     * Determine the order of Words to fetch.
      */
-    orderBy?: Enumerable<AccountOrderByWithRelationInput>
+    orderBy?: Enumerable<WordOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Accounts.
+     * Sets the position for listing Words.
      */
-    cursor?: AccountWhereUniqueInput
+    cursor?: WordWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Accounts from the position of the cursor.
+     * Take `±n` Words from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Accounts.
+     * Skip the first `n` Words.
      */
     skip?: number
-    distinct?: Enumerable<AccountScalarFieldEnum>
+    distinct?: Enumerable<WordScalarFieldEnum>
   }
 
 
   /**
-   * Account create
+   * Word create
    */
-  export type AccountCreateArgs = {
+  export type WordCreateArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * The data needed to create a Account.
+     * The data needed to create a Word.
      */
-    data: XOR<AccountCreateInput, AccountUncheckedCreateInput>
+    data: XOR<WordCreateInput, WordUncheckedCreateInput>
   }
 
 
   /**
-   * Account createMany
+   * Word createMany
    */
-  export type AccountCreateManyArgs = {
+  export type WordCreateManyArgs = {
     /**
-     * The data used to create many Accounts.
+     * The data used to create many Words.
      */
-    data: Enumerable<AccountCreateManyInput>
+    data: Enumerable<WordCreateManyInput>
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Account update
+   * Word update
    */
-  export type AccountUpdateArgs = {
+  export type WordUpdateArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * The data needed to update a Account.
+     * The data needed to update a Word.
      */
-    data: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
+    data: XOR<WordUpdateInput, WordUncheckedUpdateInput>
     /**
-     * Choose, which Account to update.
+     * Choose, which Word to update.
      */
-    where: AccountWhereUniqueInput
+    where: WordWhereUniqueInput
   }
 
 
   /**
-   * Account updateMany
+   * Word updateMany
    */
-  export type AccountUpdateManyArgs = {
+  export type WordUpdateManyArgs = {
     /**
-     * The data used to update Accounts.
+     * The data used to update Words.
      */
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyInput>
+    data: XOR<WordUpdateManyMutationInput, WordUncheckedUpdateManyInput>
     /**
-     * Filter which Accounts to update
+     * Filter which Words to update
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
   }
 
 
   /**
-   * Account upsert
+   * Word upsert
    */
-  export type AccountUpsertArgs = {
+  export type WordUpsertArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * The filter to search for the Account to update in case it exists.
+     * The filter to search for the Word to update in case it exists.
      */
-    where: AccountWhereUniqueInput
+    where: WordWhereUniqueInput
     /**
-     * In case the Account found by the `where` argument doesn't exist, create a new Account with this data.
+     * In case the Word found by the `where` argument doesn't exist, create a new Word with this data.
      */
-    create: XOR<AccountCreateInput, AccountUncheckedCreateInput>
+    create: XOR<WordCreateInput, WordUncheckedCreateInput>
     /**
-     * In case the Account was found with the provided `where` argument, update it with this data.
+     * In case the Word was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<AccountUpdateInput, AccountUncheckedUpdateInput>
+    update: XOR<WordUpdateInput, WordUncheckedUpdateInput>
   }
 
 
   /**
-   * Account delete
+   * Word delete
    */
-  export type AccountDeleteArgs = {
+  export type WordDeleteArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Word
      */
-    select?: AccountSelect | null
+    select?: WordSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: WordInclude | null
     /**
-     * Filter which Account to delete.
+     * Filter which Word to delete.
      */
-    where: AccountWhereUniqueInput
+    where: WordWhereUniqueInput
   }
 
 
   /**
-   * Account deleteMany
+   * Word deleteMany
    */
-  export type AccountDeleteManyArgs = {
+  export type WordDeleteManyArgs = {
     /**
-     * Filter which Accounts to delete
+     * Filter which Words to delete
      */
-    where?: AccountWhereInput
+    where?: WordWhereInput
   }
 
 
   /**
-   * Account without action
+   * Word.sentenses
    */
-  export type AccountArgs = {
+  export type Word$sentensesArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Sentense
      */
-    select?: AccountSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
+    include?: SentenseInclude | null
+    where?: SentenseWhereInput
+    orderBy?: Enumerable<SentenseOrderByWithRelationInput>
+    cursor?: SentenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<SentenseScalarFieldEnum>
+  }
+
+
+  /**
+   * Word without action
+   */
+  export type WordArgs = {
+    /**
+     * Select specific fields to fetch from the Word
+     */
+    select?: WordSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: WordInclude | null
   }
 
 
 
   /**
-   * Model Session
+   * Model Sentense
    */
 
 
-  export type AggregateSession = {
-    _count: SessionCountAggregateOutputType | null
-    _min: SessionMinAggregateOutputType | null
-    _max: SessionMaxAggregateOutputType | null
+  export type AggregateSentense = {
+    _count: SentenseCountAggregateOutputType | null
+    _avg: SentenseAvgAggregateOutputType | null
+    _sum: SentenseSumAggregateOutputType | null
+    _min: SentenseMinAggregateOutputType | null
+    _max: SentenseMaxAggregateOutputType | null
   }
 
-  export type SessionMinAggregateOutputType = {
-    id: string | null
-    sessionToken: string | null
-    userId: string | null
-    expires: Date | null
+  export type SentenseAvgAggregateOutputType = {
+    id: number | null
+    wordId: number | null
   }
 
-  export type SessionMaxAggregateOutputType = {
-    id: string | null
-    sessionToken: string | null
-    userId: string | null
-    expires: Date | null
+  export type SentenseSumAggregateOutputType = {
+    id: number | null
+    wordId: number | null
   }
 
-  export type SessionCountAggregateOutputType = {
+  export type SentenseMinAggregateOutputType = {
+    id: number | null
+    sentense: string | null
+    meaning: string | null
+    wordId: number | null
+  }
+
+  export type SentenseMaxAggregateOutputType = {
+    id: number | null
+    sentense: string | null
+    meaning: string | null
+    wordId: number | null
+  }
+
+  export type SentenseCountAggregateOutputType = {
     id: number
-    sessionToken: number
-    userId: number
-    expires: number
+    sentense: number
+    meaning: number
+    wordId: number
     _all: number
   }
 
 
-  export type SessionMinAggregateInputType = {
+  export type SentenseAvgAggregateInputType = {
     id?: true
-    sessionToken?: true
-    userId?: true
-    expires?: true
+    wordId?: true
   }
 
-  export type SessionMaxAggregateInputType = {
+  export type SentenseSumAggregateInputType = {
     id?: true
-    sessionToken?: true
-    userId?: true
-    expires?: true
+    wordId?: true
   }
 
-  export type SessionCountAggregateInputType = {
+  export type SentenseMinAggregateInputType = {
     id?: true
-    sessionToken?: true
-    userId?: true
-    expires?: true
+    sentense?: true
+    meaning?: true
+    wordId?: true
+  }
+
+  export type SentenseMaxAggregateInputType = {
+    id?: true
+    sentense?: true
+    meaning?: true
+    wordId?: true
+  }
+
+  export type SentenseCountAggregateInputType = {
+    id?: true
+    sentense?: true
+    meaning?: true
+    wordId?: true
     _all?: true
   }
 
-  export type SessionAggregateArgs = {
+  export type SentenseAggregateArgs = {
     /**
-     * Filter which Session to aggregate.
+     * Filter which Sentense to aggregate.
      */
-    where?: SessionWhereInput
+    where?: SentenseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Sessions to fetch.
+     * Determine the order of Sentenses to fetch.
      */
-    orderBy?: Enumerable<SessionOrderByWithRelationInput>
+    orderBy?: Enumerable<SentenseOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: SessionWhereUniqueInput
+    cursor?: SentenseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Sessions from the position of the cursor.
+     * Take `±n` Sentenses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Sessions.
+     * Skip the first `n` Sentenses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Sessions
+     * Count returned Sentenses
     **/
-    _count?: true | SessionCountAggregateInputType
+    _count?: true | SentenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SentenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SentenseSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: SessionMinAggregateInputType
+    _min?: SentenseMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: SessionMaxAggregateInputType
+    _max?: SentenseMaxAggregateInputType
   }
 
-  export type GetSessionAggregateType<T extends SessionAggregateArgs> = {
-        [P in keyof T & keyof AggregateSession]: P extends '_count' | 'count'
+  export type GetSentenseAggregateType<T extends SentenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateSentense]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateSession[P]>
-      : GetScalarType<T[P], AggregateSession[P]>
+        : GetScalarType<T[P], AggregateSentense[P]>
+      : GetScalarType<T[P], AggregateSentense[P]>
   }
 
 
 
 
-  export type SessionGroupByArgs = {
-    where?: SessionWhereInput
-    orderBy?: Enumerable<SessionOrderByWithAggregationInput>
-    by: SessionScalarFieldEnum[]
-    having?: SessionScalarWhereWithAggregatesInput
+  export type SentenseGroupByArgs = {
+    where?: SentenseWhereInput
+    orderBy?: Enumerable<SentenseOrderByWithAggregationInput>
+    by: SentenseScalarFieldEnum[]
+    having?: SentenseScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: SessionCountAggregateInputType | true
-    _min?: SessionMinAggregateInputType
-    _max?: SessionMaxAggregateInputType
+    _count?: SentenseCountAggregateInputType | true
+    _avg?: SentenseAvgAggregateInputType
+    _sum?: SentenseSumAggregateInputType
+    _min?: SentenseMinAggregateInputType
+    _max?: SentenseMaxAggregateInputType
   }
 
 
-  export type SessionGroupByOutputType = {
-    id: string
-    sessionToken: string
-    userId: string
-    expires: Date
-    _count: SessionCountAggregateOutputType | null
-    _min: SessionMinAggregateOutputType | null
-    _max: SessionMaxAggregateOutputType | null
-  }
-
-  type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickArray<SessionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SessionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SessionGroupByOutputType[P]>
-            : GetScalarType<T[P], SessionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SessionSelect = {
-    id?: boolean
-    sessionToken?: boolean
-    userId?: boolean
-    expires?: boolean
-    user?: boolean | UserArgs
-  }
-
-
-  export type SessionInclude = {
-    user?: boolean | UserArgs
-  }
-
-  export type SessionGetPayload<S extends boolean | null | undefined | SessionArgs> =
-    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Session :
-    S extends undefined ? never :
-    S extends { include: any } & (SessionArgs | SessionFindManyArgs)
-    ? Session  & {
-    [P in TruthyKeys<S['include']>]:
-        P extends 'user' ? UserGetPayload<S['include'][P]> :  never
-  } 
-    : S extends { select: any } & (SessionArgs | SessionFindManyArgs)
-      ? {
-    [P in TruthyKeys<S['select']>]:
-        P extends 'user' ? UserGetPayload<S['select'][P]> :  P extends keyof Session ? Session[P] : never
-  } 
-      : Session
-
-
-  type SessionCountArgs = 
-    Omit<SessionFindManyArgs, 'select' | 'include'> & {
-      select?: SessionCountAggregateInputType | true
-    }
-
-  export interface SessionDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
-
-    /**
-     * Find zero or one Session that matches the filter.
-     * @param {SessionFindUniqueArgs} args - Arguments to find a Session
-     * @example
-     * // Get one Session
-     * const session = await prisma.session.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends SessionFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, SessionFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Session'> extends True ? Prisma__SessionClient<SessionGetPayload<T>> : Prisma__SessionClient<SessionGetPayload<T> | null, null>
-
-    /**
-     * Find one Session that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {SessionFindUniqueOrThrowArgs} args - Arguments to find a Session
-     * @example
-     * // Get one Session
-     * const session = await prisma.session.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends SessionFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, SessionFindUniqueOrThrowArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Find the first Session that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionFindFirstArgs} args - Arguments to find a Session
-     * @example
-     * // Get one Session
-     * const session = await prisma.session.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends SessionFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, SessionFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Session'> extends True ? Prisma__SessionClient<SessionGetPayload<T>> : Prisma__SessionClient<SessionGetPayload<T> | null, null>
-
-    /**
-     * Find the first Session that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionFindFirstOrThrowArgs} args - Arguments to find a Session
-     * @example
-     * // Get one Session
-     * const session = await prisma.session.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends SessionFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, SessionFindFirstOrThrowArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Find zero or more Sessions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Sessions
-     * const sessions = await prisma.session.findMany()
-     * 
-     * // Get first 10 Sessions
-     * const sessions = await prisma.session.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const sessionWithIdOnly = await prisma.session.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends SessionFindManyArgs>(
-      args?: SelectSubset<T, SessionFindManyArgs>
-    ): Prisma.PrismaPromise<Array<SessionGetPayload<T>>>
-
-    /**
-     * Create a Session.
-     * @param {SessionCreateArgs} args - Arguments to create a Session.
-     * @example
-     * // Create one Session
-     * const Session = await prisma.session.create({
-     *   data: {
-     *     // ... data to create a Session
-     *   }
-     * })
-     * 
-    **/
-    create<T extends SessionCreateArgs>(
-      args: SelectSubset<T, SessionCreateArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Create many Sessions.
-     *     @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
-     *     @example
-     *     // Create many Sessions
-     *     const session = await prisma.session.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends SessionCreateManyArgs>(
-      args?: SelectSubset<T, SessionCreateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Session.
-     * @param {SessionDeleteArgs} args - Arguments to delete one Session.
-     * @example
-     * // Delete one Session
-     * const Session = await prisma.session.delete({
-     *   where: {
-     *     // ... filter to delete one Session
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends SessionDeleteArgs>(
-      args: SelectSubset<T, SessionDeleteArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Update one Session.
-     * @param {SessionUpdateArgs} args - Arguments to update one Session.
-     * @example
-     * // Update one Session
-     * const session = await prisma.session.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends SessionUpdateArgs>(
-      args: SelectSubset<T, SessionUpdateArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Delete zero or more Sessions.
-     * @param {SessionDeleteManyArgs} args - Arguments to filter Sessions to delete.
-     * @example
-     * // Delete a few Sessions
-     * const { count } = await prisma.session.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends SessionDeleteManyArgs>(
-      args?: SelectSubset<T, SessionDeleteManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Sessions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Sessions
-     * const session = await prisma.session.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends SessionUpdateManyArgs>(
-      args: SelectSubset<T, SessionUpdateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Session.
-     * @param {SessionUpsertArgs} args - Arguments to update or create a Session.
-     * @example
-     * // Update or create a Session
-     * const session = await prisma.session.upsert({
-     *   create: {
-     *     // ... data to create a Session
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Session we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends SessionUpsertArgs>(
-      args: SelectSubset<T, SessionUpsertArgs>
-    ): Prisma__SessionClient<SessionGetPayload<T>>
-
-    /**
-     * Count the number of Sessions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionCountArgs} args - Arguments to filter Sessions to count.
-     * @example
-     * // Count the number of Sessions
-     * const count = await prisma.session.count({
-     *   where: {
-     *     // ... the filter for the Sessions we want to count
-     *   }
-     * })
-    **/
-    count<T extends SessionCountArgs>(
-      args?: Subset<T, SessionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends _Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SessionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Session.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SessionAggregateArgs>(args: Subset<T, SessionAggregateArgs>): Prisma.PrismaPromise<GetSessionAggregateType<T>>
-
-    /**
-     * Group by Session.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SessionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SessionGroupByArgs['orderBy'] }
-        : { orderBy?: SessionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends TupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Session.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export class Prisma__SessionClient<T, Null = never> implements Prisma.PrismaPromise<T> {
-    private readonly _dmmf;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-
-    user<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
-
-    private get _document();
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-
-
-  // Custom InputTypes
-
-  /**
-   * Session base type for findUnique actions
-   */
-  export type SessionFindUniqueArgsBase = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter, which Session to fetch.
-     */
-    where: SessionWhereUniqueInput
-  }
-
-  /**
-   * Session findUnique
-   */
-  export interface SessionFindUniqueArgs extends SessionFindUniqueArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * Session findUniqueOrThrow
-   */
-  export type SessionFindUniqueOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter, which Session to fetch.
-     */
-    where: SessionWhereUniqueInput
-  }
-
-
-  /**
-   * Session base type for findFirst actions
-   */
-  export type SessionFindFirstArgsBase = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter, which Session to fetch.
-     */
-    where?: SessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sessions to fetch.
-     */
-    orderBy?: Enumerable<SessionOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Sessions.
-     */
-    cursor?: SessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sessions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Sessions.
-     */
-    distinct?: Enumerable<SessionScalarFieldEnum>
-  }
-
-  /**
-   * Session findFirst
-   */
-  export interface SessionFindFirstArgs extends SessionFindFirstArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * Session findFirstOrThrow
-   */
-  export type SessionFindFirstOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter, which Session to fetch.
-     */
-    where?: SessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sessions to fetch.
-     */
-    orderBy?: Enumerable<SessionOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Sessions.
-     */
-    cursor?: SessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sessions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Sessions.
-     */
-    distinct?: Enumerable<SessionScalarFieldEnum>
-  }
-
-
-  /**
-   * Session findMany
-   */
-  export type SessionFindManyArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter, which Sessions to fetch.
-     */
-    where?: SessionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sessions to fetch.
-     */
-    orderBy?: Enumerable<SessionOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Sessions.
-     */
-    cursor?: SessionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sessions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sessions.
-     */
-    skip?: number
-    distinct?: Enumerable<SessionScalarFieldEnum>
-  }
-
-
-  /**
-   * Session create
-   */
-  export type SessionCreateArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * The data needed to create a Session.
-     */
-    data: XOR<SessionCreateInput, SessionUncheckedCreateInput>
-  }
-
-
-  /**
-   * Session createMany
-   */
-  export type SessionCreateManyArgs = {
-    /**
-     * The data used to create many Sessions.
-     */
-    data: Enumerable<SessionCreateManyInput>
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * Session update
-   */
-  export type SessionUpdateArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * The data needed to update a Session.
-     */
-    data: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
-    /**
-     * Choose, which Session to update.
-     */
-    where: SessionWhereUniqueInput
-  }
-
-
-  /**
-   * Session updateMany
-   */
-  export type SessionUpdateManyArgs = {
-    /**
-     * The data used to update Sessions.
-     */
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
-    /**
-     * Filter which Sessions to update
-     */
-    where?: SessionWhereInput
-  }
-
-
-  /**
-   * Session upsert
-   */
-  export type SessionUpsertArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * The filter to search for the Session to update in case it exists.
-     */
-    where: SessionWhereUniqueInput
-    /**
-     * In case the Session found by the `where` argument doesn't exist, create a new Session with this data.
-     */
-    create: XOR<SessionCreateInput, SessionUncheckedCreateInput>
-    /**
-     * In case the Session was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Session delete
-   */
-  export type SessionDeleteArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    /**
-     * Filter which Session to delete.
-     */
-    where: SessionWhereUniqueInput
-  }
-
-
-  /**
-   * Session deleteMany
-   */
-  export type SessionDeleteManyArgs = {
-    /**
-     * Filter which Sessions to delete
-     */
-    where?: SessionWhereInput
-  }
-
-
-  /**
-   * Session without action
-   */
-  export type SessionArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-  }
-
-
-
-  /**
-   * Model User
-   */
-
-
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  export type UserMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    emailVerified: Date | null
-    image: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    email: string | null
-    emailVerified: Date | null
-    image: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserCountAggregateOutputType = {
+  export type SentenseGroupByOutputType = {
     id: number
-    name: number
-    email: number
-    emailVerified: number
-    image: number
-    createdAt: number
-    updatedAt: number
-    _all: number
+    sentense: string
+    meaning: string | null
+    wordId: number
+    _count: SentenseCountAggregateOutputType | null
+    _avg: SentenseAvgAggregateOutputType | null
+    _sum: SentenseSumAggregateOutputType | null
+    _min: SentenseMinAggregateOutputType | null
+    _max: SentenseMaxAggregateOutputType | null
   }
 
-
-  export type UserMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    emailVerified?: true
-    image?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    emailVerified?: true
-    image?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    emailVerified?: true
-    image?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type UserAggregateArgs = {
-    /**
-     * Filter which User to aggregate.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Users
-    **/
-    _count?: true | UserCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserMaxAggregateInputType
-  }
-
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
-  }
-
-
-
-
-  export type UserGroupByArgs = {
-    where?: UserWhereInput
-    orderBy?: Enumerable<UserOrderByWithAggregationInput>
-    by: UserScalarFieldEnum[]
-    having?: UserScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserCountAggregateInputType | true
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
-  }
-
-
-  export type UserGroupByOutputType = {
-    id: string
-    name: string | null
-    email: string | null
-    emailVerified: Date | null
-    image: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetSentenseGroupByPayload<T extends SentenseGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickArray<UserGroupByOutputType, T['by']> &
+      PickArray<SentenseGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SentenseGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
+              : GetScalarType<T[P], SentenseGroupByOutputType[P]>
+            : GetScalarType<T[P], SentenseGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type UserSelect = {
+  export type SentenseSelect = {
     id?: boolean
-    name?: boolean
-    email?: boolean
-    emailVerified?: boolean
-    image?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    accounts?: boolean | User$accountsArgs
-    sessions?: boolean | User$sessionsArgs
-    Post?: boolean | User$PostArgs
-    _count?: boolean | UserCountOutputTypeArgs
+    sentense?: boolean
+    meaning?: boolean
+    wordId?: boolean
+    word?: boolean | WordArgs
   }
 
 
-  export type UserInclude = {
-    accounts?: boolean | User$accountsArgs
-    sessions?: boolean | User$sessionsArgs
-    Post?: boolean | User$PostArgs
-    _count?: boolean | UserCountOutputTypeArgs
+  export type SentenseInclude = {
+    word?: boolean | WordArgs
   }
 
-  export type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
+  export type SentenseGetPayload<S extends boolean | null | undefined | SentenseArgs> =
     S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? User :
+    S extends true ? Sentense :
     S extends undefined ? never :
-    S extends { include: any } & (UserArgs | UserFindManyArgs)
-    ? User  & {
+    S extends { include: any } & (SentenseArgs | SentenseFindManyArgs)
+    ? Sentense  & {
     [P in TruthyKeys<S['include']>]:
-        P extends 'accounts' ? Array < AccountGetPayload<S['include'][P]>>  :
-        P extends 'sessions' ? Array < SessionGetPayload<S['include'][P]>>  :
-        P extends 'Post' ? Array < PostGetPayload<S['include'][P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
+        P extends 'word' ? WordGetPayload<S['include'][P]> :  never
   } 
-    : S extends { select: any } & (UserArgs | UserFindManyArgs)
+    : S extends { select: any } & (SentenseArgs | SentenseFindManyArgs)
       ? {
     [P in TruthyKeys<S['select']>]:
-        P extends 'accounts' ? Array < AccountGetPayload<S['select'][P]>>  :
-        P extends 'sessions' ? Array < SessionGetPayload<S['select'][P]>>  :
-        P extends 'Post' ? Array < PostGetPayload<S['select'][P]>>  :
-        P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
+        P extends 'word' ? WordGetPayload<S['select'][P]> :  P extends keyof Sentense ? Sentense[P] : never
   } 
-      : User
+      : Sentense
 
 
-  type UserCountArgs = 
-    Omit<UserFindManyArgs, 'select' | 'include'> & {
-      select?: UserCountAggregateInputType | true
+  type SentenseCountArgs = 
+    Omit<SentenseFindManyArgs, 'select' | 'include'> & {
+      select?: SentenseCountAggregateInputType | true
     }
 
-  export interface UserDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+  export interface SentenseDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
 
     /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * Find zero or one Sentense that matches the filter.
+     * @param {SentenseFindUniqueArgs} args - Arguments to find a Sentense
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
+     * // Get one Sentense
+     * const sentense = await prisma.sentense.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends UserFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, UserFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+    findUnique<T extends SentenseFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, SentenseFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Sentense'> extends True ? Prisma__SentenseClient<SentenseGetPayload<T>> : Prisma__SentenseClient<SentenseGetPayload<T> | null, null>
 
     /**
-     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Sentense that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @param {SentenseFindUniqueOrThrowArgs} args - Arguments to find a Sentense
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
+     * // Get one Sentense
+     * const sentense = await prisma.sentense.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, UserFindUniqueOrThrowArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    findUniqueOrThrow<T extends SentenseFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, SentenseFindUniqueOrThrowArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Find the first User that matches the filter.
+     * Find the first Sentense that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @param {SentenseFindFirstArgs} args - Arguments to find a Sentense
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
+     * // Get one Sentense
+     * const sentense = await prisma.sentense.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends UserFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, UserFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'User'> extends True ? Prisma__UserClient<UserGetPayload<T>> : Prisma__UserClient<UserGetPayload<T> | null, null>
+    findFirst<T extends SentenseFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, SentenseFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Sentense'> extends True ? Prisma__SentenseClient<SentenseGetPayload<T>> : Prisma__SentenseClient<SentenseGetPayload<T> | null, null>
 
     /**
-     * Find the first User that matches the filter or
+     * Find the first Sentense that matches the filter or
      * throw `NotFoundError` if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @param {SentenseFindFirstOrThrowArgs} args - Arguments to find a Sentense
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
+     * // Get one Sentense
+     * const sentense = await prisma.sentense.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, UserFindFirstOrThrowArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    findFirstOrThrow<T extends SentenseFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, SentenseFindFirstOrThrowArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Find zero or more Users that matches the filter.
+     * Find zero or more Sentenses that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SentenseFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
+     * // Get all Sentenses
+     * const sentenses = await prisma.sentense.findMany()
      * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
+     * // Get first 10 Sentenses
+     * const sentenses = await prisma.sentense.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * const sentenseWithIdOnly = await prisma.sentense.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends UserFindManyArgs>(
-      args?: SelectSubset<T, UserFindManyArgs>
-    ): Prisma.PrismaPromise<Array<UserGetPayload<T>>>
+    findMany<T extends SentenseFindManyArgs>(
+      args?: SelectSubset<T, SentenseFindManyArgs>
+    ): Prisma.PrismaPromise<Array<SentenseGetPayload<T>>>
 
     /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
+     * Create a Sentense.
+     * @param {SentenseCreateArgs} args - Arguments to create a Sentense.
      * @example
-     * // Create one User
-     * const User = await prisma.user.create({
+     * // Create one Sentense
+     * const Sentense = await prisma.sentense.create({
      *   data: {
-     *     // ... data to create a User
+     *     // ... data to create a Sentense
      *   }
      * })
      * 
     **/
-    create<T extends UserCreateArgs>(
-      args: SelectSubset<T, UserCreateArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    create<T extends SentenseCreateArgs>(
+      args: SelectSubset<T, SentenseCreateArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Create many Users.
-     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * Create many Sentenses.
+     *     @param {SentenseCreateManyArgs} args - Arguments to create many Sentenses.
      *     @example
-     *     // Create many Users
-     *     const user = await prisma.user.createMany({
+     *     // Create many Sentenses
+     *     const sentense = await prisma.sentense.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends UserCreateManyArgs>(
-      args?: SelectSubset<T, UserCreateManyArgs>
+    createMany<T extends SentenseCreateManyArgs>(
+      args?: SelectSubset<T, SentenseCreateManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * Delete a Sentense.
+     * @param {SentenseDeleteArgs} args - Arguments to delete one Sentense.
      * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
+     * // Delete one Sentense
+     * const Sentense = await prisma.sentense.delete({
      *   where: {
-     *     // ... filter to delete one User
+     *     // ... filter to delete one Sentense
      *   }
      * })
      * 
     **/
-    delete<T extends UserDeleteArgs>(
-      args: SelectSubset<T, UserDeleteArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    delete<T extends SentenseDeleteArgs>(
+      args: SelectSubset<T, SentenseDeleteArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * Update one Sentense.
+     * @param {SentenseUpdateArgs} args - Arguments to update one Sentense.
      * @example
-     * // Update one User
-     * const user = await prisma.user.update({
+     * // Update one Sentense
+     * const sentense = await prisma.sentense.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3269,34 +2217,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends UserUpdateArgs>(
-      args: SelectSubset<T, UserUpdateArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    update<T extends SentenseUpdateArgs>(
+      args: SelectSubset<T, SentenseUpdateArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * Delete zero or more Sentenses.
+     * @param {SentenseDeleteManyArgs} args - Arguments to filter Sentenses to delete.
      * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
+     * // Delete a few Sentenses
+     * const { count } = await prisma.sentense.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends UserDeleteManyArgs>(
-      args?: SelectSubset<T, UserDeleteManyArgs>
+    deleteMany<T extends SentenseDeleteManyArgs>(
+      args?: SelectSubset<T, SentenseDeleteManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users.
+     * Update zero or more Sentenses.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {SentenseUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
+     * // Update many Sentenses
+     * const sentense = await prisma.sentense.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3306,59 +2254,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends UserUpdateManyArgs>(
-      args: SelectSubset<T, UserUpdateManyArgs>
+    updateMany<T extends SentenseUpdateManyArgs>(
+      args: SelectSubset<T, SentenseUpdateManyArgs>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * Create or update one Sentense.
+     * @param {SentenseUpsertArgs} args - Arguments to update or create a Sentense.
      * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
+     * // Update or create a Sentense
+     * const sentense = await prisma.sentense.upsert({
      *   create: {
-     *     // ... data to create a User
+     *     // ... data to create a Sentense
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the User we want to update
+     *     // ... the filter for the Sentense we want to update
      *   }
      * })
     **/
-    upsert<T extends UserUpsertArgs>(
-      args: SelectSubset<T, UserUpsertArgs>
-    ): Prisma__UserClient<UserGetPayload<T>>
+    upsert<T extends SentenseUpsertArgs>(
+      args: SelectSubset<T, SentenseUpsertArgs>
+    ): Prisma__SentenseClient<SentenseGetPayload<T>>
 
     /**
-     * Count the number of Users.
+     * Count the number of Sentenses.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @param {SentenseCountArgs} args - Arguments to filter Sentenses to count.
      * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
+     * // Count the number of Sentenses
+     * const count = await prisma.sentense.count({
      *   where: {
-     *     // ... the filter for the Users we want to count
+     *     // ... the filter for the Sentenses we want to count
      *   }
      * })
     **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+    count<T extends SentenseCountArgs>(
+      args?: Subset<T, SentenseCountArgs>,
     ): Prisma.PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], SentenseCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a User.
+     * Allows you to perform aggregations operations on a Sentense.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {SentenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3378,13 +2326,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+    aggregate<T extends SentenseAggregateArgs>(args: Subset<T, SentenseAggregateArgs>): Prisma.PrismaPromise<GetSentenseAggregateType<T>>
 
     /**
-     * Group by User.
+     * Group by Sentense.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
+     * @param {SentenseGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3399,14 +2347,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserGroupByArgs,
+      T extends SentenseGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+        ? { orderBy: SentenseGroupByArgs['orderBy'] }
+        : { orderBy?: SentenseGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends TupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3455,17 +2403,17 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, SentenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSentenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for User.
+   * The delegate class that acts as a "Promise-like" for Sentense.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export class Prisma__UserClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+  export class Prisma__SentenseClient<T, Null = never> implements Prisma.PrismaPromise<T> {
     private readonly _dmmf;
     private readonly _queryType;
     private readonly _rootField;
@@ -3480,11 +2428,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
     constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
 
-    accounts<T extends User$accountsArgs= {}>(args?: Subset<T, User$accountsArgs>): Prisma.PrismaPromise<Array<AccountGetPayload<T>>| Null>;
-
-    sessions<T extends User$sessionsArgs= {}>(args?: Subset<T, User$sessionsArgs>): Prisma.PrismaPromise<Array<SessionGetPayload<T>>| Null>;
-
-    Post<T extends User$PostArgs= {}>(args?: Subset<T, User$PostArgs>): Prisma.PrismaPromise<Array<PostGetPayload<T>>| Null>;
+    word<T extends WordArgs= {}>(args?: Subset<T, WordArgs>): Prisma__WordClient<WordGetPayload<T> | Null>;
 
     private get _document();
     /**
@@ -3514,27 +2458,27 @@ export namespace Prisma {
   // Custom InputTypes
 
   /**
-   * User base type for findUnique actions
+   * Sentense base type for findUnique actions
    */
-  export type UserFindUniqueArgsBase = {
+  export type SentenseFindUniqueArgsBase = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Sentense to fetch.
      */
-    where: UserWhereUniqueInput
+    where: SentenseWhereUniqueInput
   }
 
   /**
-   * User findUnique
+   * Sentense findUnique
    */
-  export interface UserFindUniqueArgs extends UserFindUniqueArgsBase {
+  export interface SentenseFindUniqueArgs extends SentenseFindUniqueArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
@@ -3544,76 +2488,76 @@ export namespace Prisma {
       
 
   /**
-   * User findUniqueOrThrow
+   * Sentense findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs = {
+  export type SentenseFindUniqueOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Sentense to fetch.
      */
-    where: UserWhereUniqueInput
+    where: SentenseWhereUniqueInput
   }
 
 
   /**
-   * User base type for findFirst actions
+   * Sentense base type for findFirst actions
    */
-  export type UserFindFirstArgsBase = {
+  export type SentenseFindFirstArgsBase = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Sentense to fetch.
      */
-    where?: UserWhereInput
+    where?: SentenseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Sentenses to fetch.
      */
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    orderBy?: Enumerable<SentenseOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Sentenses.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: SentenseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Sentenses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Sentenses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Sentenses.
      */
-    distinct?: Enumerable<UserScalarFieldEnum>
+    distinct?: Enumerable<SentenseScalarFieldEnum>
   }
 
   /**
-   * User findFirst
+   * Sentense findFirst
    */
-  export interface UserFindFirstArgs extends UserFindFirstArgsBase {
+  export interface SentenseFindFirstArgs extends SentenseFindFirstArgsBase {
    /**
     * Throw an Error if query returns no results
     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
@@ -3623,2108 +2567,236 @@ export namespace Prisma {
       
 
   /**
-   * User findFirstOrThrow
+   * Sentense findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs = {
+  export type SentenseFindFirstOrThrowArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Sentense to fetch.
      */
-    where?: UserWhereInput
+    where?: SentenseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Sentenses to fetch.
      */
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    orderBy?: Enumerable<SentenseOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Sentenses.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: SentenseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Sentenses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Sentenses.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Sentenses.
      */
-    distinct?: Enumerable<UserScalarFieldEnum>
+    distinct?: Enumerable<SentenseScalarFieldEnum>
   }
 
 
   /**
-   * User findMany
+   * Sentense findMany
    */
-  export type UserFindManyArgs = {
+  export type SentenseFindManyArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter, which Users to fetch.
+     * Filter, which Sentenses to fetch.
      */
-    where?: UserWhereInput
+    where?: SentenseWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Sentenses to fetch.
      */
-    orderBy?: Enumerable<UserOrderByWithRelationInput>
+    orderBy?: Enumerable<SentenseOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Users.
+     * Sets the position for listing Sentenses.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: SentenseWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Sentenses from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Sentenses.
      */
     skip?: number
-    distinct?: Enumerable<UserScalarFieldEnum>
+    distinct?: Enumerable<SentenseScalarFieldEnum>
   }
 
 
   /**
-   * User create
+   * Sentense create
    */
-  export type UserCreateArgs = {
+  export type SentenseCreateArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * The data needed to create a User.
+     * The data needed to create a Sentense.
      */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<SentenseCreateInput, SentenseUncheckedCreateInput>
   }
 
 
   /**
-   * User createMany
+   * Sentense createMany
    */
-  export type UserCreateManyArgs = {
+  export type SentenseCreateManyArgs = {
     /**
-     * The data used to create many Users.
+     * The data used to create many Sentenses.
      */
-    data: Enumerable<UserCreateManyInput>
+    data: Enumerable<SentenseCreateManyInput>
     skipDuplicates?: boolean
   }
 
 
   /**
-   * User update
+   * Sentense update
    */
-  export type UserUpdateArgs = {
+  export type SentenseUpdateArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * The data needed to update a User.
+     * The data needed to update a Sentense.
      */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    data: XOR<SentenseUpdateInput, SentenseUncheckedUpdateInput>
     /**
-     * Choose, which User to update.
+     * Choose, which Sentense to update.
      */
-    where: UserWhereUniqueInput
+    where: SentenseWhereUniqueInput
   }
 
 
   /**
-   * User updateMany
+   * Sentense updateMany
    */
-  export type UserUpdateManyArgs = {
+  export type SentenseUpdateManyArgs = {
     /**
-     * The data used to update Users.
+     * The data used to update Sentenses.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<SentenseUpdateManyMutationInput, SentenseUncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which Sentenses to update
      */
-    where?: UserWhereInput
+    where?: SentenseWhereInput
   }
 
 
   /**
-   * User upsert
+   * Sentense upsert
    */
-  export type UserUpsertArgs = {
+  export type SentenseUpsertArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * The filter to search for the User to update in case it exists.
+     * The filter to search for the Sentense to update in case it exists.
      */
-    where: UserWhereUniqueInput
+    where: SentenseWhereUniqueInput
     /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     * In case the Sentense found by the `where` argument doesn't exist, create a new Sentense with this data.
      */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    create: XOR<SentenseCreateInput, SentenseUncheckedCreateInput>
     /**
-     * In case the User was found with the provided `where` argument, update it with this data.
+     * In case the Sentense was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    update: XOR<SentenseUpdateInput, SentenseUncheckedUpdateInput>
   }
 
 
   /**
-   * User delete
+   * Sentense delete
    */
-  export type UserDeleteArgs = {
+  export type SentenseDeleteArgs = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Sentense
      */
-    select?: UserSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: UserInclude | null
+    include?: SentenseInclude | null
     /**
-     * Filter which User to delete.
+     * Filter which Sentense to delete.
      */
-    where: UserWhereUniqueInput
+    where: SentenseWhereUniqueInput
   }
 
 
   /**
-   * User deleteMany
+   * Sentense deleteMany
    */
-  export type UserDeleteManyArgs = {
+  export type SentenseDeleteManyArgs = {
     /**
-     * Filter which Users to delete
+     * Filter which Sentenses to delete
      */
-    where?: UserWhereInput
+    where?: SentenseWhereInput
   }
 
 
   /**
-   * User.accounts
+   * Sentense without action
    */
-  export type User$accountsArgs = {
+  export type SentenseArgs = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the Sentense
      */
-    select?: AccountSelect | null
+    select?: SentenseSelect | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: AccountInclude | null
-    where?: AccountWhereInput
-    orderBy?: Enumerable<AccountOrderByWithRelationInput>
-    cursor?: AccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<AccountScalarFieldEnum>
-  }
-
-
-  /**
-   * User.sessions
-   */
-  export type User$sessionsArgs = {
-    /**
-     * Select specific fields to fetch from the Session
-     */
-    select?: SessionSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SessionInclude | null
-    where?: SessionWhereInput
-    orderBy?: Enumerable<SessionOrderByWithRelationInput>
-    cursor?: SessionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<SessionScalarFieldEnum>
-  }
-
-
-  /**
-   * User.Post
-   */
-  export type User$PostArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    where?: PostWhereInput
-    orderBy?: Enumerable<PostOrderByWithRelationInput>
-    cursor?: PostWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Enumerable<PostScalarFieldEnum>
-  }
-
-
-  /**
-   * User without action
-   */
-  export type UserArgs = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null
-  }
-
-
-
-  /**
-   * Model VerificationToken
-   */
-
-
-  export type AggregateVerificationToken = {
-    _count: VerificationTokenCountAggregateOutputType | null
-    _min: VerificationTokenMinAggregateOutputType | null
-    _max: VerificationTokenMaxAggregateOutputType | null
-  }
-
-  export type VerificationTokenMinAggregateOutputType = {
-    identifier: string | null
-    token: string | null
-    expires: Date | null
-  }
-
-  export type VerificationTokenMaxAggregateOutputType = {
-    identifier: string | null
-    token: string | null
-    expires: Date | null
-  }
-
-  export type VerificationTokenCountAggregateOutputType = {
-    identifier: number
-    token: number
-    expires: number
-    _all: number
-  }
-
-
-  export type VerificationTokenMinAggregateInputType = {
-    identifier?: true
-    token?: true
-    expires?: true
-  }
-
-  export type VerificationTokenMaxAggregateInputType = {
-    identifier?: true
-    token?: true
-    expires?: true
-  }
-
-  export type VerificationTokenCountAggregateInputType = {
-    identifier?: true
-    token?: true
-    expires?: true
-    _all?: true
-  }
-
-  export type VerificationTokenAggregateArgs = {
-    /**
-     * Filter which VerificationToken to aggregate.
-     */
-    where?: VerificationTokenWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VerificationTokens to fetch.
-     */
-    orderBy?: Enumerable<VerificationTokenOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VerificationTokenWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VerificationTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VerificationTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned VerificationTokens
-    **/
-    _count?: true | VerificationTokenCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VerificationTokenMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VerificationTokenMaxAggregateInputType
-  }
-
-  export type GetVerificationTokenAggregateType<T extends VerificationTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateVerificationToken]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVerificationToken[P]>
-      : GetScalarType<T[P], AggregateVerificationToken[P]>
-  }
-
-
-
-
-  export type VerificationTokenGroupByArgs = {
-    where?: VerificationTokenWhereInput
-    orderBy?: Enumerable<VerificationTokenOrderByWithAggregationInput>
-    by: VerificationTokenScalarFieldEnum[]
-    having?: VerificationTokenScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VerificationTokenCountAggregateInputType | true
-    _min?: VerificationTokenMinAggregateInputType
-    _max?: VerificationTokenMaxAggregateInputType
-  }
-
-
-  export type VerificationTokenGroupByOutputType = {
-    identifier: string
-    token: string
-    expires: Date
-    _count: VerificationTokenCountAggregateOutputType | null
-    _min: VerificationTokenMinAggregateOutputType | null
-    _max: VerificationTokenMaxAggregateOutputType | null
-  }
-
-  type GetVerificationTokenGroupByPayload<T extends VerificationTokenGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickArray<VerificationTokenGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VerificationTokenGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], VerificationTokenGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VerificationTokenSelect = {
-    identifier?: boolean
-    token?: boolean
-    expires?: boolean
-  }
-
-
-  export type VerificationTokenGetPayload<S extends boolean | null | undefined | VerificationTokenArgs> =
-    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? VerificationToken :
-    S extends undefined ? never :
-    S extends { include: any } & (VerificationTokenArgs | VerificationTokenFindManyArgs)
-    ? VerificationToken 
-    : S extends { select: any } & (VerificationTokenArgs | VerificationTokenFindManyArgs)
-      ? {
-    [P in TruthyKeys<S['select']>]:
-    P extends keyof VerificationToken ? VerificationToken[P] : never
-  } 
-      : VerificationToken
-
-
-  type VerificationTokenCountArgs = 
-    Omit<VerificationTokenFindManyArgs, 'select' | 'include'> & {
-      select?: VerificationTokenCountAggregateInputType | true
-    }
-
-  export interface VerificationTokenDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
-
-    /**
-     * Find zero or one VerificationToken that matches the filter.
-     * @param {VerificationTokenFindUniqueArgs} args - Arguments to find a VerificationToken
-     * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends VerificationTokenFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, VerificationTokenFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'VerificationToken'> extends True ? Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>> : Prisma__VerificationTokenClient<VerificationTokenGetPayload<T> | null, null>
-
-    /**
-     * Find one VerificationToken that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {VerificationTokenFindUniqueOrThrowArgs} args - Arguments to find a VerificationToken
-     * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends VerificationTokenFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, VerificationTokenFindUniqueOrThrowArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Find the first VerificationToken that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindFirstArgs} args - Arguments to find a VerificationToken
-     * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends VerificationTokenFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, VerificationTokenFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'VerificationToken'> extends True ? Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>> : Prisma__VerificationTokenClient<VerificationTokenGetPayload<T> | null, null>
-
-    /**
-     * Find the first VerificationToken that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindFirstOrThrowArgs} args - Arguments to find a VerificationToken
-     * @example
-     * // Get one VerificationToken
-     * const verificationToken = await prisma.verificationToken.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends VerificationTokenFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, VerificationTokenFindFirstOrThrowArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Find zero or more VerificationTokens that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all VerificationTokens
-     * const verificationTokens = await prisma.verificationToken.findMany()
-     * 
-     * // Get first 10 VerificationTokens
-     * const verificationTokens = await prisma.verificationToken.findMany({ take: 10 })
-     * 
-     * // Only select the `identifier`
-     * const verificationTokenWithIdentifierOnly = await prisma.verificationToken.findMany({ select: { identifier: true } })
-     * 
-    **/
-    findMany<T extends VerificationTokenFindManyArgs>(
-      args?: SelectSubset<T, VerificationTokenFindManyArgs>
-    ): Prisma.PrismaPromise<Array<VerificationTokenGetPayload<T>>>
-
-    /**
-     * Create a VerificationToken.
-     * @param {VerificationTokenCreateArgs} args - Arguments to create a VerificationToken.
-     * @example
-     * // Create one VerificationToken
-     * const VerificationToken = await prisma.verificationToken.create({
-     *   data: {
-     *     // ... data to create a VerificationToken
-     *   }
-     * })
-     * 
-    **/
-    create<T extends VerificationTokenCreateArgs>(
-      args: SelectSubset<T, VerificationTokenCreateArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Create many VerificationTokens.
-     *     @param {VerificationTokenCreateManyArgs} args - Arguments to create many VerificationTokens.
-     *     @example
-     *     // Create many VerificationTokens
-     *     const verificationToken = await prisma.verificationToken.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends VerificationTokenCreateManyArgs>(
-      args?: SelectSubset<T, VerificationTokenCreateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a VerificationToken.
-     * @param {VerificationTokenDeleteArgs} args - Arguments to delete one VerificationToken.
-     * @example
-     * // Delete one VerificationToken
-     * const VerificationToken = await prisma.verificationToken.delete({
-     *   where: {
-     *     // ... filter to delete one VerificationToken
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends VerificationTokenDeleteArgs>(
-      args: SelectSubset<T, VerificationTokenDeleteArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Update one VerificationToken.
-     * @param {VerificationTokenUpdateArgs} args - Arguments to update one VerificationToken.
-     * @example
-     * // Update one VerificationToken
-     * const verificationToken = await prisma.verificationToken.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends VerificationTokenUpdateArgs>(
-      args: SelectSubset<T, VerificationTokenUpdateArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Delete zero or more VerificationTokens.
-     * @param {VerificationTokenDeleteManyArgs} args - Arguments to filter VerificationTokens to delete.
-     * @example
-     * // Delete a few VerificationTokens
-     * const { count } = await prisma.verificationToken.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends VerificationTokenDeleteManyArgs>(
-      args?: SelectSubset<T, VerificationTokenDeleteManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more VerificationTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many VerificationTokens
-     * const verificationToken = await prisma.verificationToken.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends VerificationTokenUpdateManyArgs>(
-      args: SelectSubset<T, VerificationTokenUpdateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one VerificationToken.
-     * @param {VerificationTokenUpsertArgs} args - Arguments to update or create a VerificationToken.
-     * @example
-     * // Update or create a VerificationToken
-     * const verificationToken = await prisma.verificationToken.upsert({
-     *   create: {
-     *     // ... data to create a VerificationToken
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the VerificationToken we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends VerificationTokenUpsertArgs>(
-      args: SelectSubset<T, VerificationTokenUpsertArgs>
-    ): Prisma__VerificationTokenClient<VerificationTokenGetPayload<T>>
-
-    /**
-     * Count the number of VerificationTokens.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenCountArgs} args - Arguments to filter VerificationTokens to count.
-     * @example
-     * // Count the number of VerificationTokens
-     * const count = await prisma.verificationToken.count({
-     *   where: {
-     *     // ... the filter for the VerificationTokens we want to count
-     *   }
-     * })
-    **/
-    count<T extends VerificationTokenCountArgs>(
-      args?: Subset<T, VerificationTokenCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends _Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VerificationTokenCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a VerificationToken.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VerificationTokenAggregateArgs>(args: Subset<T, VerificationTokenAggregateArgs>): Prisma.PrismaPromise<GetVerificationTokenAggregateType<T>>
-
-    /**
-     * Group by VerificationToken.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationTokenGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VerificationTokenGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VerificationTokenGroupByArgs['orderBy'] }
-        : { orderBy?: VerificationTokenGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends TupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VerificationTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for VerificationToken.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export class Prisma__VerificationTokenClient<T, Null = never> implements Prisma.PrismaPromise<T> {
-    private readonly _dmmf;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-
-
-    private get _document();
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-
-
-  // Custom InputTypes
-
-  /**
-   * VerificationToken base type for findUnique actions
-   */
-  export type VerificationTokenFindUniqueArgsBase = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter, which VerificationToken to fetch.
-     */
-    where: VerificationTokenWhereUniqueInput
-  }
-
-  /**
-   * VerificationToken findUnique
-   */
-  export interface VerificationTokenFindUniqueArgs extends VerificationTokenFindUniqueArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * VerificationToken findUniqueOrThrow
-   */
-  export type VerificationTokenFindUniqueOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter, which VerificationToken to fetch.
-     */
-    where: VerificationTokenWhereUniqueInput
-  }
-
-
-  /**
-   * VerificationToken base type for findFirst actions
-   */
-  export type VerificationTokenFindFirstArgsBase = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter, which VerificationToken to fetch.
-     */
-    where?: VerificationTokenWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VerificationTokens to fetch.
-     */
-    orderBy?: Enumerable<VerificationTokenOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VerificationTokens.
-     */
-    cursor?: VerificationTokenWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VerificationTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VerificationTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VerificationTokens.
-     */
-    distinct?: Enumerable<VerificationTokenScalarFieldEnum>
-  }
-
-  /**
-   * VerificationToken findFirst
-   */
-  export interface VerificationTokenFindFirstArgs extends VerificationTokenFindFirstArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * VerificationToken findFirstOrThrow
-   */
-  export type VerificationTokenFindFirstOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter, which VerificationToken to fetch.
-     */
-    where?: VerificationTokenWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VerificationTokens to fetch.
-     */
-    orderBy?: Enumerable<VerificationTokenOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VerificationTokens.
-     */
-    cursor?: VerificationTokenWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VerificationTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VerificationTokens.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VerificationTokens.
-     */
-    distinct?: Enumerable<VerificationTokenScalarFieldEnum>
-  }
-
-
-  /**
-   * VerificationToken findMany
-   */
-  export type VerificationTokenFindManyArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter, which VerificationTokens to fetch.
-     */
-    where?: VerificationTokenWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VerificationTokens to fetch.
-     */
-    orderBy?: Enumerable<VerificationTokenOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing VerificationTokens.
-     */
-    cursor?: VerificationTokenWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VerificationTokens from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VerificationTokens.
-     */
-    skip?: number
-    distinct?: Enumerable<VerificationTokenScalarFieldEnum>
-  }
-
-
-  /**
-   * VerificationToken create
-   */
-  export type VerificationTokenCreateArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * The data needed to create a VerificationToken.
-     */
-    data: XOR<VerificationTokenCreateInput, VerificationTokenUncheckedCreateInput>
-  }
-
-
-  /**
-   * VerificationToken createMany
-   */
-  export type VerificationTokenCreateManyArgs = {
-    /**
-     * The data used to create many VerificationTokens.
-     */
-    data: Enumerable<VerificationTokenCreateManyInput>
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * VerificationToken update
-   */
-  export type VerificationTokenUpdateArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * The data needed to update a VerificationToken.
-     */
-    data: XOR<VerificationTokenUpdateInput, VerificationTokenUncheckedUpdateInput>
-    /**
-     * Choose, which VerificationToken to update.
-     */
-    where: VerificationTokenWhereUniqueInput
-  }
-
-
-  /**
-   * VerificationToken updateMany
-   */
-  export type VerificationTokenUpdateManyArgs = {
-    /**
-     * The data used to update VerificationTokens.
-     */
-    data: XOR<VerificationTokenUpdateManyMutationInput, VerificationTokenUncheckedUpdateManyInput>
-    /**
-     * Filter which VerificationTokens to update
-     */
-    where?: VerificationTokenWhereInput
-  }
-
-
-  /**
-   * VerificationToken upsert
-   */
-  export type VerificationTokenUpsertArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * The filter to search for the VerificationToken to update in case it exists.
-     */
-    where: VerificationTokenWhereUniqueInput
-    /**
-     * In case the VerificationToken found by the `where` argument doesn't exist, create a new VerificationToken with this data.
-     */
-    create: XOR<VerificationTokenCreateInput, VerificationTokenUncheckedCreateInput>
-    /**
-     * In case the VerificationToken was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VerificationTokenUpdateInput, VerificationTokenUncheckedUpdateInput>
-  }
-
-
-  /**
-   * VerificationToken delete
-   */
-  export type VerificationTokenDeleteArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-    /**
-     * Filter which VerificationToken to delete.
-     */
-    where: VerificationTokenWhereUniqueInput
-  }
-
-
-  /**
-   * VerificationToken deleteMany
-   */
-  export type VerificationTokenDeleteManyArgs = {
-    /**
-     * Filter which VerificationTokens to delete
-     */
-    where?: VerificationTokenWhereInput
-  }
-
-
-  /**
-   * VerificationToken without action
-   */
-  export type VerificationTokenArgs = {
-    /**
-     * Select specific fields to fetch from the VerificationToken
-     */
-    select?: VerificationTokenSelect | null
-  }
-
-
-
-  /**
-   * Model Post
-   */
-
-
-  export type AggregatePost = {
-    _count: PostCountAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
-  }
-
-  export type PostMinAggregateOutputType = {
-    id: string | null
-    title: string | null
-    published: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    authorId: string | null
-  }
-
-  export type PostMaxAggregateOutputType = {
-    id: string | null
-    title: string | null
-    published: boolean | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    authorId: string | null
-  }
-
-  export type PostCountAggregateOutputType = {
-    id: number
-    title: number
-    content: number
-    published: number
-    createdAt: number
-    updatedAt: number
-    authorId: number
-    _all: number
-  }
-
-
-  export type PostMinAggregateInputType = {
-    id?: true
-    title?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-  }
-
-  export type PostMaxAggregateInputType = {
-    id?: true
-    title?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-  }
-
-  export type PostCountAggregateInputType = {
-    id?: true
-    title?: true
-    content?: true
-    published?: true
-    createdAt?: true
-    updatedAt?: true
-    authorId?: true
-    _all?: true
-  }
-
-  export type PostAggregateArgs = {
-    /**
-     * Filter which Post to aggregate.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Posts
-    **/
-    _count?: true | PostCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PostMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PostMaxAggregateInputType
-  }
-
-  export type GetPostAggregateType<T extends PostAggregateArgs> = {
-        [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePost[P]>
-      : GetScalarType<T[P], AggregatePost[P]>
-  }
-
-
-
-
-  export type PostGroupByArgs = {
-    where?: PostWhereInput
-    orderBy?: Enumerable<PostOrderByWithAggregationInput>
-    by: PostScalarFieldEnum[]
-    having?: PostScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PostCountAggregateInputType | true
-    _min?: PostMinAggregateInputType
-    _max?: PostMaxAggregateInputType
-  }
-
-
-  export type PostGroupByOutputType = {
-    id: string
-    title: string
-    content: JsonValue | null
-    published: boolean
-    createdAt: Date
-    updatedAt: Date
-    authorId: string
-    _count: PostCountAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
-  }
-
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickArray<PostGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PostGroupByOutputType[P]>
-            : GetScalarType<T[P], PostGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PostSelect = {
-    id?: boolean
-    title?: boolean
-    content?: boolean
-    published?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    authorId?: boolean
-    author?: boolean | UserArgs
-  }
-
-
-  export type PostInclude = {
-    author?: boolean | UserArgs
-  }
-
-  export type PostGetPayload<S extends boolean | null | undefined | PostArgs> =
-    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
-    S extends true ? Post :
-    S extends undefined ? never :
-    S extends { include: any } & (PostArgs | PostFindManyArgs)
-    ? Post  & {
-    [P in TruthyKeys<S['include']>]:
-        P extends 'author' ? UserGetPayload<S['include'][P]> :  never
-  } 
-    : S extends { select: any } & (PostArgs | PostFindManyArgs)
-      ? {
-    [P in TruthyKeys<S['select']>]:
-        P extends 'author' ? UserGetPayload<S['select'][P]> :  P extends keyof Post ? Post[P] : never
-  } 
-      : Post
-
-
-  type PostCountArgs = 
-    Omit<PostFindManyArgs, 'select' | 'include'> & {
-      select?: PostCountAggregateInputType | true
-    }
-
-  export interface PostDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
-
-    /**
-     * Find zero or one Post that matches the filter.
-     * @param {PostFindUniqueArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends PostFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args: SelectSubset<T, PostFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Post'> extends True ? Prisma__PostClient<PostGetPayload<T>> : Prisma__PostClient<PostGetPayload<T> | null, null>
-
-    /**
-     * Find one Post that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, PostFindUniqueOrThrowArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Find the first Post that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends PostFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
-      args?: SelectSubset<T, PostFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Post'> extends True ? Prisma__PostClient<PostGetPayload<T>> : Prisma__PostClient<PostGetPayload<T> | null, null>
-
-    /**
-     * Find the first Post that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PostFindFirstOrThrowArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Find zero or more Posts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Posts
-     * const posts = await prisma.post.findMany()
-     * 
-     * // Get first 10 Posts
-     * const posts = await prisma.post.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const postWithIdOnly = await prisma.post.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends PostFindManyArgs>(
-      args?: SelectSubset<T, PostFindManyArgs>
-    ): Prisma.PrismaPromise<Array<PostGetPayload<T>>>
-
-    /**
-     * Create a Post.
-     * @param {PostCreateArgs} args - Arguments to create a Post.
-     * @example
-     * // Create one Post
-     * const Post = await prisma.post.create({
-     *   data: {
-     *     // ... data to create a Post
-     *   }
-     * })
-     * 
-    **/
-    create<T extends PostCreateArgs>(
-      args: SelectSubset<T, PostCreateArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Create many Posts.
-     *     @param {PostCreateManyArgs} args - Arguments to create many Posts.
-     *     @example
-     *     // Create many Posts
-     *     const post = await prisma.post.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends PostCreateManyArgs>(
-      args?: SelectSubset<T, PostCreateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Post.
-     * @param {PostDeleteArgs} args - Arguments to delete one Post.
-     * @example
-     * // Delete one Post
-     * const Post = await prisma.post.delete({
-     *   where: {
-     *     // ... filter to delete one Post
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends PostDeleteArgs>(
-      args: SelectSubset<T, PostDeleteArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Update one Post.
-     * @param {PostUpdateArgs} args - Arguments to update one Post.
-     * @example
-     * // Update one Post
-     * const post = await prisma.post.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends PostUpdateArgs>(
-      args: SelectSubset<T, PostUpdateArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Delete zero or more Posts.
-     * @param {PostDeleteManyArgs} args - Arguments to filter Posts to delete.
-     * @example
-     * // Delete a few Posts
-     * const { count } = await prisma.post.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends PostDeleteManyArgs>(
-      args?: SelectSubset<T, PostDeleteManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends PostUpdateManyArgs>(
-      args: SelectSubset<T, PostUpdateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Post.
-     * @param {PostUpsertArgs} args - Arguments to update or create a Post.
-     * @example
-     * // Update or create a Post
-     * const post = await prisma.post.upsert({
-     *   create: {
-     *     // ... data to create a Post
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Post we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends PostUpsertArgs>(
-      args: SelectSubset<T, PostUpsertArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>
-
-    /**
-     * Count the number of Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostCountArgs} args - Arguments to filter Posts to count.
-     * @example
-     * // Count the number of Posts
-     * const count = await prisma.post.count({
-     *   where: {
-     *     // ... the filter for the Posts we want to count
-     *   }
-     * })
-    **/
-    count<T extends PostCountArgs>(
-      args?: Subset<T, PostCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends _Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PostCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Prisma.PrismaPromise<GetPostAggregateType<T>>
-
-    /**
-     * Group by Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PostGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PostGroupByArgs['orderBy'] }
-        : { orderBy?: PostGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends TupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Post.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export class Prisma__PostClient<T, Null = never> implements Prisma.PrismaPromise<T> {
-    private readonly _dmmf;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-
-    author<T extends UserArgs= {}>(args?: Subset<T, UserArgs>): Prisma__UserClient<UserGetPayload<T> | Null>;
-
-    private get _document();
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-
-
-  // Custom InputTypes
-
-  /**
-   * Post base type for findUnique actions
-   */
-  export type PostFindUniqueArgsBase = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post findUnique
-   */
-  export interface PostFindUniqueArgs extends PostFindUniqueArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * Post findUniqueOrThrow
-   */
-  export type PostFindUniqueOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
-  }
-
-
-  /**
-   * Post base type for findFirst actions
-   */
-  export type PostFindFirstArgsBase = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: Enumerable<PostScalarFieldEnum>
-  }
-
-  /**
-   * Post findFirst
-   */
-  export interface PostFindFirstArgs extends PostFindFirstArgsBase {
-   /**
-    * Throw an Error if query returns no results
-    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
-    */
-    rejectOnNotFound?: RejectOnNotFound
-  }
-      
-
-  /**
-   * Post findFirstOrThrow
-   */
-  export type PostFindFirstOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: Enumerable<PostScalarFieldEnum>
-  }
-
-
-  /**
-   * Post findMany
-   */
-  export type PostFindManyArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter, which Posts to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    distinct?: Enumerable<PostScalarFieldEnum>
-  }
-
-
-  /**
-   * Post create
-   */
-  export type PostCreateArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * The data needed to create a Post.
-     */
-    data: XOR<PostCreateInput, PostUncheckedCreateInput>
-  }
-
-
-  /**
-   * Post createMany
-   */
-  export type PostCreateManyArgs = {
-    /**
-     * The data used to create many Posts.
-     */
-    data: Enumerable<PostCreateManyInput>
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * Post update
-   */
-  export type PostUpdateArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * The data needed to update a Post.
-     */
-    data: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-    /**
-     * Choose, which Post to update.
-     */
-    where: PostWhereUniqueInput
-  }
-
-
-  /**
-   * Post updateMany
-   */
-  export type PostUpdateManyArgs = {
-    /**
-     * The data used to update Posts.
-     */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
-    /**
-     * Filter which Posts to update
-     */
-    where?: PostWhereInput
-  }
-
-
-  /**
-   * Post upsert
-   */
-  export type PostUpsertArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * The filter to search for the Post to update in case it exists.
-     */
-    where: PostWhereUniqueInput
-    /**
-     * In case the Post found by the `where` argument doesn't exist, create a new Post with this data.
-     */
-    create: XOR<PostCreateInput, PostUncheckedCreateInput>
-    /**
-     * In case the Post was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Post delete
-   */
-  export type PostDeleteArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
-    /**
-     * Filter which Post to delete.
-     */
-    where: PostWhereUniqueInput
-  }
-
-
-  /**
-   * Post deleteMany
-   */
-  export type PostDeleteManyArgs = {
-    /**
-     * Filter which Posts to delete
-     */
-    where?: PostWhereInput
-  }
-
-
-  /**
-   * Post without action
-   */
-  export type PostArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null
+    include?: SentenseInclude | null
   }
 
 
@@ -5733,64 +2805,14 @@ export namespace Prisma {
    * Enums
    */
 
-  export const AccountScalarFieldEnum: {
+  export const SentenseScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
-    type: 'type',
-    provider: 'provider',
-    providerAccountId: 'providerAccountId',
-    refresh_token: 'refresh_token',
-    access_token: 'access_token',
-    expires_at: 'expires_at',
-    token_type: 'token_type',
-    scope: 'scope',
-    id_token: 'id_token',
-    session_state: 'session_state',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    sentense: 'sentense',
+    meaning: 'meaning',
+    wordId: 'wordId'
   };
 
-  export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
-
-
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const NullableJsonNullValueInput: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull
-  };
-
-  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-  export const PostScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    content: 'content',
-    published: 'published',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    authorId: 'authorId'
-  };
-
-  export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
-
-
-  export const SessionScalarFieldEnum: {
-    id: 'id',
-    sessionToken: 'sessionToken',
-    userId: 'userId',
-    expires: 'expires'
-  };
-
-  export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+  export type SentenseScalarFieldEnum = (typeof SentenseScalarFieldEnum)[keyof typeof SentenseScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5811,26 +2833,15 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const UserScalarFieldEnum: {
+  export const WordScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    email: 'email',
-    emailVerified: 'emailVerified',
-    image: 'image',
+    word: 'word',
+    meaning: 'meaning',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const VerificationTokenScalarFieldEnum: {
-    identifier: 'identifier',
-    token: 'token',
-    expires: 'expires'
-  };
-
-  export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+  export type WordScalarFieldEnum = (typeof WordScalarFieldEnum)[keyof typeof WordScalarFieldEnum]
 
 
   /**
@@ -5838,646 +2849,212 @@ export namespace Prisma {
    */
 
 
-  export type AccountWhereInput = {
-    AND?: Enumerable<AccountWhereInput>
-    OR?: Enumerable<AccountWhereInput>
-    NOT?: Enumerable<AccountWhereInput>
-    id?: StringFilter | string
-    userId?: StringFilter | string
-    type?: StringFilter | string
-    provider?: StringFilter | string
-    providerAccountId?: StringFilter | string
-    refresh_token?: StringNullableFilter | string | null
-    access_token?: StringNullableFilter | string | null
-    expires_at?: IntNullableFilter | number | null
-    token_type?: StringNullableFilter | string | null
-    scope?: StringNullableFilter | string | null
-    id_token?: StringNullableFilter | string | null
-    session_state?: StringNullableFilter | string | null
+  export type WordWhereInput = {
+    AND?: Enumerable<WordWhereInput>
+    OR?: Enumerable<WordWhereInput>
+    NOT?: Enumerable<WordWhereInput>
+    id?: IntFilter | number
+    word?: StringFilter | string
+    meaning?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    sentenses?: SentenseListRelationFilter
   }
 
-  export type AccountOrderByWithRelationInput = {
+  export type WordOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
+    word?: SortOrder
+    meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    sentenses?: SentenseOrderByRelationAggregateInput
   }
 
-  export type AccountWhereUniqueInput = {
-    id?: string
-    provider_providerAccountId?: AccountProviderProviderAccountIdCompoundUniqueInput
+  export type WordWhereUniqueInput = {
+    id?: number
+    word?: string
   }
 
-  export type AccountOrderByWithAggregationInput = {
+  export type WordOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
+    word?: SortOrder
+    meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: AccountCountOrderByAggregateInput
-    _avg?: AccountAvgOrderByAggregateInput
-    _max?: AccountMaxOrderByAggregateInput
-    _min?: AccountMinOrderByAggregateInput
-    _sum?: AccountSumOrderByAggregateInput
+    _count?: WordCountOrderByAggregateInput
+    _avg?: WordAvgOrderByAggregateInput
+    _max?: WordMaxOrderByAggregateInput
+    _min?: WordMinOrderByAggregateInput
+    _sum?: WordSumOrderByAggregateInput
   }
 
-  export type AccountScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<AccountScalarWhereWithAggregatesInput>
-    OR?: Enumerable<AccountScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<AccountScalarWhereWithAggregatesInput>
-    id?: StringWithAggregatesFilter | string
-    userId?: StringWithAggregatesFilter | string
-    type?: StringWithAggregatesFilter | string
-    provider?: StringWithAggregatesFilter | string
-    providerAccountId?: StringWithAggregatesFilter | string
-    refresh_token?: StringNullableWithAggregatesFilter | string | null
-    access_token?: StringNullableWithAggregatesFilter | string | null
-    expires_at?: IntNullableWithAggregatesFilter | number | null
-    token_type?: StringNullableWithAggregatesFilter | string | null
-    scope?: StringNullableWithAggregatesFilter | string | null
-    id_token?: StringNullableWithAggregatesFilter | string | null
-    session_state?: StringNullableWithAggregatesFilter | string | null
+  export type WordScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<WordScalarWhereWithAggregatesInput>
+    OR?: Enumerable<WordScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<WordScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    word?: StringWithAggregatesFilter | string
+    meaning?: StringWithAggregatesFilter | string
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
   }
 
-  export type SessionWhereInput = {
-    AND?: Enumerable<SessionWhereInput>
-    OR?: Enumerable<SessionWhereInput>
-    NOT?: Enumerable<SessionWhereInput>
-    id?: StringFilter | string
-    sessionToken?: StringFilter | string
-    userId?: StringFilter | string
-    expires?: DateTimeFilter | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+  export type SentenseWhereInput = {
+    AND?: Enumerable<SentenseWhereInput>
+    OR?: Enumerable<SentenseWhereInput>
+    NOT?: Enumerable<SentenseWhereInput>
+    id?: IntFilter | number
+    sentense?: StringFilter | string
+    meaning?: StringNullableFilter | string | null
+    wordId?: IntFilter | number
+    word?: XOR<WordRelationFilter, WordWhereInput>
   }
 
-  export type SessionOrderByWithRelationInput = {
+  export type SentenseOrderByWithRelationInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
-    userId?: SortOrder
-    expires?: SortOrder
-    user?: UserOrderByWithRelationInput
+    sentense?: SortOrder
+    meaning?: SortOrder
+    wordId?: SortOrder
+    word?: WordOrderByWithRelationInput
   }
 
-  export type SessionWhereUniqueInput = {
-    id?: string
-    sessionToken?: string
+  export type SentenseWhereUniqueInput = {
+    id?: number
   }
 
-  export type SessionOrderByWithAggregationInput = {
+  export type SentenseOrderByWithAggregationInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
-    userId?: SortOrder
-    expires?: SortOrder
-    _count?: SessionCountOrderByAggregateInput
-    _max?: SessionMaxOrderByAggregateInput
-    _min?: SessionMinOrderByAggregateInput
+    sentense?: SortOrder
+    meaning?: SortOrder
+    wordId?: SortOrder
+    _count?: SentenseCountOrderByAggregateInput
+    _avg?: SentenseAvgOrderByAggregateInput
+    _max?: SentenseMaxOrderByAggregateInput
+    _min?: SentenseMinOrderByAggregateInput
+    _sum?: SentenseSumOrderByAggregateInput
   }
 
-  export type SessionScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<SessionScalarWhereWithAggregatesInput>
-    OR?: Enumerable<SessionScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<SessionScalarWhereWithAggregatesInput>
-    id?: StringWithAggregatesFilter | string
-    sessionToken?: StringWithAggregatesFilter | string
-    userId?: StringWithAggregatesFilter | string
-    expires?: DateTimeWithAggregatesFilter | Date | string
+  export type SentenseScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<SentenseScalarWhereWithAggregatesInput>
+    OR?: Enumerable<SentenseScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<SentenseScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    sentense?: StringWithAggregatesFilter | string
+    meaning?: StringNullableWithAggregatesFilter | string | null
+    wordId?: IntWithAggregatesFilter | number
   }
 
-  export type UserWhereInput = {
-    AND?: Enumerable<UserWhereInput>
-    OR?: Enumerable<UserWhereInput>
-    NOT?: Enumerable<UserWhereInput>
-    id?: StringFilter | string
-    name?: StringNullableFilter | string | null
-    email?: StringNullableFilter | string | null
-    emailVerified?: DateTimeNullableFilter | Date | string | null
-    image?: StringNullableFilter | string | null
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-    accounts?: AccountListRelationFilter
-    sessions?: SessionListRelationFilter
-    Post?: PostListRelationFilter
-  }
-
-  export type UserOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    accounts?: AccountOrderByRelationAggregateInput
-    sessions?: SessionOrderByRelationAggregateInput
-    Post?: PostOrderByRelationAggregateInput
-  }
-
-  export type UserWhereUniqueInput = {
-    id?: string
-    email?: string
-  }
-
-  export type UserOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-  }
-
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<UserScalarWhereWithAggregatesInput>
-    OR?: Enumerable<UserScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<UserScalarWhereWithAggregatesInput>
-    id?: StringWithAggregatesFilter | string
-    name?: StringNullableWithAggregatesFilter | string | null
-    email?: StringNullableWithAggregatesFilter | string | null
-    emailVerified?: DateTimeNullableWithAggregatesFilter | Date | string | null
-    image?: StringNullableWithAggregatesFilter | string | null
-    createdAt?: DateTimeWithAggregatesFilter | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter | Date | string
-  }
-
-  export type VerificationTokenWhereInput = {
-    AND?: Enumerable<VerificationTokenWhereInput>
-    OR?: Enumerable<VerificationTokenWhereInput>
-    NOT?: Enumerable<VerificationTokenWhereInput>
-    identifier?: StringFilter | string
-    token?: StringFilter | string
-    expires?: DateTimeFilter | Date | string
-  }
-
-  export type VerificationTokenOrderByWithRelationInput = {
-    identifier?: SortOrder
-    token?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type VerificationTokenWhereUniqueInput = {
-    token?: string
-    identifier_token?: VerificationTokenIdentifierTokenCompoundUniqueInput
-  }
-
-  export type VerificationTokenOrderByWithAggregationInput = {
-    identifier?: SortOrder
-    token?: SortOrder
-    expires?: SortOrder
-    _count?: VerificationTokenCountOrderByAggregateInput
-    _max?: VerificationTokenMaxOrderByAggregateInput
-    _min?: VerificationTokenMinOrderByAggregateInput
-  }
-
-  export type VerificationTokenScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<VerificationTokenScalarWhereWithAggregatesInput>
-    OR?: Enumerable<VerificationTokenScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<VerificationTokenScalarWhereWithAggregatesInput>
-    identifier?: StringWithAggregatesFilter | string
-    token?: StringWithAggregatesFilter | string
-    expires?: DateTimeWithAggregatesFilter | Date | string
-  }
-
-  export type PostWhereInput = {
-    AND?: Enumerable<PostWhereInput>
-    OR?: Enumerable<PostWhereInput>
-    NOT?: Enumerable<PostWhereInput>
-    id?: StringFilter | string
-    title?: StringFilter | string
-    content?: JsonNullableFilter
-    published?: BoolFilter | boolean
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-    authorId?: StringFilter | string
-    author?: XOR<UserRelationFilter, UserWhereInput>
-  }
-
-  export type PostOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-    author?: UserOrderByWithRelationInput
-  }
-
-  export type PostWhereUniqueInput = {
-    id?: string
-  }
-
-  export type PostOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-    _count?: PostCountOrderByAggregateInput
-    _max?: PostMaxOrderByAggregateInput
-    _min?: PostMinOrderByAggregateInput
-  }
-
-  export type PostScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<PostScalarWhereWithAggregatesInput>
-    OR?: Enumerable<PostScalarWhereWithAggregatesInput>
-    NOT?: Enumerable<PostScalarWhereWithAggregatesInput>
-    id?: StringWithAggregatesFilter | string
-    title?: StringWithAggregatesFilter | string
-    content?: JsonNullableWithAggregatesFilter
-    published?: BoolWithAggregatesFilter | boolean
-    createdAt?: DateTimeWithAggregatesFilter | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter | Date | string
-    authorId?: StringWithAggregatesFilter | string
-  }
-
-  export type AccountCreateInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
+  export type WordCreateInput = {
+    word: string
+    meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutAccountsInput
+    sentenses?: SentenseCreateNestedManyWithoutWordInput
   }
 
-  export type AccountUncheckedCreateInput = {
-    id?: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
+  export type WordUncheckedCreateInput = {
+    id?: number
+    word: string
+    meaning: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sentenses?: SentenseUncheckedCreateNestedManyWithoutWordInput
+  }
+
+  export type WordUpdateInput = {
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sentenses?: SentenseUpdateManyWithoutWordNestedInput
+  }
+
+  export type WordUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sentenses?: SentenseUncheckedUpdateManyWithoutWordNestedInput
+  }
+
+  export type WordCreateManyInput = {
+    id?: number
+    word: string
+    meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type AccountUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutAccountsNestedInput
-  }
-
-  export type AccountUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
+  export type WordUpdateManyMutationInput = {
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AccountCreateManyInput = {
-    id?: string
-    userId: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AccountUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
+  export type WordUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AccountUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseCreateInput = {
+    sentense: string
+    meaning?: string | null
+    word: WordCreateNestedOneWithoutSentensesInput
   }
 
-  export type SessionCreateInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
-    user: UserCreateNestedOneWithoutSessionsInput
+  export type SentenseUncheckedCreateInput = {
+    id?: number
+    sentense: string
+    meaning?: string | null
+    wordId: number
   }
 
-  export type SessionUncheckedCreateInput = {
-    id?: string
-    sessionToken: string
-    userId: string
-    expires: Date | string
+  export type SentenseUpdateInput = {
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
+    word?: WordUpdateOneRequiredWithoutSentensesNestedInput
   }
 
-  export type SessionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSessionsNestedInput
+  export type SentenseUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
+    wordId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SessionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseCreateManyInput = {
+    id?: number
+    sentense: string
+    meaning?: string | null
+    wordId: number
   }
 
-  export type SessionCreateManyInput = {
-    id?: string
-    sessionToken: string
-    userId: string
-    expires: Date | string
+  export type SentenseUpdateManyMutationInput = {
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
+    wordId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type SessionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCreateInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    Post?: PostCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUncheckedCreateInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    Post?: PostUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserCreateManyInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenCreateInput = {
-    identifier: string
-    token: string
-    expires: Date | string
-  }
-
-  export type VerificationTokenUncheckedCreateInput = {
-    identifier: string
-    token: string
-    expires: Date | string
-  }
-
-  export type VerificationTokenUpdateInput = {
-    identifier?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenUncheckedUpdateInput = {
-    identifier?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenCreateManyInput = {
-    identifier: string
-    token: string
-    expires: Date | string
-  }
-
-  export type VerificationTokenUpdateManyMutationInput = {
-    identifier?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationTokenUncheckedUpdateManyInput = {
-    identifier?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostCreateInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutPostInput
-  }
-
-  export type PostUncheckedCreateInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-  }
-
-  export type PostUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutPostNestedInput
-  }
-
-  export type PostUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PostCreateManyInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    authorId: string
-  }
-
-  export type PostUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authorId?: StringFieldUpdateOperationsInput | string
+  export type IntFilter = {
+    equals?: number
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntFilter | number
   }
 
   export type StringFilter = {
@@ -6494,31 +3071,6 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
-  export type StringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | string | null
-    notIn?: Enumerable<string> | string | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableFilter | string | null
-  }
-
-  export type IntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
-  }
-
   export type DateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string> | Date | string
@@ -6530,73 +3082,62 @@ export namespace Prisma {
     not?: NestedDateTimeFilter | Date | string
   }
 
-  export type UserRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type SentenseListRelationFilter = {
+    every?: SentenseWhereInput
+    some?: SentenseWhereInput
+    none?: SentenseWhereInput
   }
 
-  export type AccountProviderProviderAccountIdCompoundUniqueInput = {
-    provider: string
-    providerAccountId: string
+  export type SentenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type AccountCountOrderByAggregateInput = {
+  export type WordCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
+    word?: SortOrder
+    meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type AccountAvgOrderByAggregateInput = {
-    expires_at?: SortOrder
+  export type WordAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
-  export type AccountMaxOrderByAggregateInput = {
+  export type WordMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
+    word?: SortOrder
+    meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type AccountMinOrderByAggregateInput = {
+  export type WordMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    type?: SortOrder
-    provider?: SortOrder
-    providerAccountId?: SortOrder
-    refresh_token?: SortOrder
-    access_token?: SortOrder
-    expires_at?: SortOrder
-    token_type?: SortOrder
-    scope?: SortOrder
-    id_token?: SortOrder
-    session_state?: SortOrder
+    word?: SortOrder
+    meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type AccountSumOrderByAggregateInput = {
-    expires_at?: SortOrder
+  export type WordSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
   }
 
   export type StringWithAggregatesFilter = {
@@ -6616,6 +3157,70 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
+  export type DateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    _count?: NestedIntFilter
+    _min?: NestedDateTimeFilter
+    _max?: NestedDateTimeFilter
+  }
+
+  export type StringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
+  }
+
+  export type WordRelationFilter = {
+    is?: WordWhereInput
+    isNot?: WordWhereInput
+  }
+
+  export type SentenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    sentense?: SortOrder
+    meaning?: SortOrder
+    wordId?: SortOrder
+  }
+
+  export type SentenseAvgOrderByAggregateInput = {
+    id?: SortOrder
+    wordId?: SortOrder
+  }
+
+  export type SentenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sentense?: SortOrder
+    meaning?: SortOrder
+    wordId?: SortOrder
+  }
+
+  export type SentenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    sentense?: SortOrder
+    meaning?: SortOrder
+    wordId?: SortOrder
+  }
+
+  export type SentenseSumOrderByAggregateInput = {
+    id?: SortOrder
+    wordId?: SortOrder
+  }
+
   export type StringNullableWithAggregatesFilter = {
     equals?: string | null
     in?: Enumerable<string> | string | null
@@ -6633,447 +3238,91 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter
   }
 
-  export type IntNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
+  export type SentenseCreateNestedManyWithoutWordInput = {
+    create?: XOR<Enumerable<SentenseCreateWithoutWordInput>, Enumerable<SentenseUncheckedCreateWithoutWordInput>>
+    connectOrCreate?: Enumerable<SentenseCreateOrConnectWithoutWordInput>
+    createMany?: SentenseCreateManyWordInputEnvelope
+    connect?: Enumerable<SentenseWhereUniqueInput>
   }
 
-  export type DateTimeWithAggregatesFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string> | Date | string
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeWithAggregatesFilter | Date | string
-    _count?: NestedIntFilter
-    _min?: NestedDateTimeFilter
-    _max?: NestedDateTimeFilter
-  }
-
-  export type SessionCountOrderByAggregateInput = {
-    id?: SortOrder
-    sessionToken?: SortOrder
-    userId?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type SessionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    sessionToken?: SortOrder
-    userId?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type SessionMinOrderByAggregateInput = {
-    id?: SortOrder
-    sessionToken?: SortOrder
-    userId?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type DateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableFilter | Date | string | null
-  }
-
-  export type AccountListRelationFilter = {
-    every?: AccountWhereInput
-    some?: AccountWhereInput
-    none?: AccountWhereInput
-  }
-
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
-  export type PostListRelationFilter = {
-    every?: PostWhereInput
-    some?: PostWhereInput
-    none?: PostWhereInput
-  }
-
-  export type AccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    emailVerified?: SortOrder
-    image?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedDateTimeNullableFilter
-    _max?: NestedDateTimeNullableFilter
-  }
-
-  export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
-    identifier: string
-    token: string
-  }
-
-  export type VerificationTokenCountOrderByAggregateInput = {
-    identifier?: SortOrder
-    token?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type VerificationTokenMaxOrderByAggregateInput = {
-    identifier?: SortOrder
-    token?: SortOrder
-    expires?: SortOrder
-  }
-
-  export type VerificationTokenMinOrderByAggregateInput = {
-    identifier?: SortOrder
-    token?: SortOrder
-    expires?: SortOrder
-  }
-  export type JsonNullableFilter = 
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase>, Exclude<keyof Required<JsonNullableFilterBase>, 'path'>>,
-        Required<JsonNullableFilterBase>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase>, 'path'>>
-
-  export type JsonNullableFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: string
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
-  }
-
-  export type BoolFilter = {
-    equals?: boolean
-    not?: NestedBoolFilter | boolean
-  }
-
-  export type PostCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-
-  export type PostMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    published?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
-  }
-  export type JsonNullableWithAggregatesFilter = 
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: string
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
-    _count?: NestedIntNullableFilter
-    _min?: NestedJsonNullableFilter
-    _max?: NestedJsonNullableFilter
-  }
-
-  export type BoolWithAggregatesFilter = {
-    equals?: boolean
-    not?: NestedBoolWithAggregatesFilter | boolean
-    _count?: NestedIntFilter
-    _min?: NestedBoolFilter
-    _max?: NestedBoolFilter
-  }
-
-  export type UserCreateNestedOneWithoutAccountsInput = {
-    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
-    connect?: UserWhereUniqueInput
+  export type SentenseUncheckedCreateNestedManyWithoutWordInput = {
+    create?: XOR<Enumerable<SentenseCreateWithoutWordInput>, Enumerable<SentenseUncheckedCreateWithoutWordInput>>
+    connectOrCreate?: Enumerable<SentenseCreateOrConnectWithoutWordInput>
+    createMany?: SentenseCreateManyWordInputEnvelope
+    connect?: Enumerable<SentenseWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
+  export type SentenseUpdateManyWithoutWordNestedInput = {
+    create?: XOR<Enumerable<SentenseCreateWithoutWordInput>, Enumerable<SentenseUncheckedCreateWithoutWordInput>>
+    connectOrCreate?: Enumerable<SentenseCreateOrConnectWithoutWordInput>
+    upsert?: Enumerable<SentenseUpsertWithWhereUniqueWithoutWordInput>
+    createMany?: SentenseCreateManyWordInputEnvelope
+    set?: Enumerable<SentenseWhereUniqueInput>
+    disconnect?: Enumerable<SentenseWhereUniqueInput>
+    delete?: Enumerable<SentenseWhereUniqueInput>
+    connect?: Enumerable<SentenseWhereUniqueInput>
+    update?: Enumerable<SentenseUpdateWithWhereUniqueWithoutWordInput>
+    updateMany?: Enumerable<SentenseUpdateManyWithWhereWithoutWordInput>
+    deleteMany?: Enumerable<SentenseScalarWhereInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type SentenseUncheckedUpdateManyWithoutWordNestedInput = {
+    create?: XOR<Enumerable<SentenseCreateWithoutWordInput>, Enumerable<SentenseUncheckedCreateWithoutWordInput>>
+    connectOrCreate?: Enumerable<SentenseCreateOrConnectWithoutWordInput>
+    upsert?: Enumerable<SentenseUpsertWithWhereUniqueWithoutWordInput>
+    createMany?: SentenseCreateManyWordInputEnvelope
+    set?: Enumerable<SentenseWhereUniqueInput>
+    disconnect?: Enumerable<SentenseWhereUniqueInput>
+    delete?: Enumerable<SentenseWhereUniqueInput>
+    connect?: Enumerable<SentenseWhereUniqueInput>
+    update?: Enumerable<SentenseUpdateWithWhereUniqueWithoutWordInput>
+    updateMany?: Enumerable<SentenseUpdateManyWithWhereWithoutWordInput>
+    deleteMany?: Enumerable<SentenseScalarWhereInput>
   }
 
-  export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
-    create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
-    upsert?: UserUpsertWithoutAccountsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
+  export type WordCreateNestedOneWithoutSentensesInput = {
+    create?: XOR<WordCreateWithoutSentensesInput, WordUncheckedCreateWithoutSentensesInput>
+    connectOrCreate?: WordCreateOrConnectWithoutSentensesInput
+    connect?: WordWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutSessionsInput = {
-    create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
-    connect?: UserWhereUniqueInput
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
-  export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
-    create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
-    upsert?: UserUpsertWithoutSessionsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutSessionsInput, UserUncheckedUpdateWithoutSessionsInput>
+  export type WordUpdateOneRequiredWithoutSentensesNestedInput = {
+    create?: XOR<WordCreateWithoutSentensesInput, WordUncheckedCreateWithoutSentensesInput>
+    connectOrCreate?: WordCreateOrConnectWithoutSentensesInput
+    upsert?: WordUpsertWithoutSentensesInput
+    connect?: WordWhereUniqueInput
+    update?: XOR<WordUpdateWithoutSentensesInput, WordUncheckedUpdateWithoutSentensesInput>
   }
 
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<AccountCreateWithoutUserInput>, Enumerable<AccountUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<AccountCreateOrConnectWithoutUserInput>
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: Enumerable<AccountWhereUniqueInput>
-  }
-
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<SessionCreateWithoutUserInput>, Enumerable<SessionUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<SessionCreateOrConnectWithoutUserInput>
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: Enumerable<SessionWhereUniqueInput>
-  }
-
-  export type PostCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: Enumerable<PostWhereUniqueInput>
-  }
-
-  export type AccountUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<AccountCreateWithoutUserInput>, Enumerable<AccountUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<AccountCreateOrConnectWithoutUserInput>
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: Enumerable<AccountWhereUniqueInput>
-  }
-
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<SessionCreateWithoutUserInput>, Enumerable<SessionUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<SessionCreateOrConnectWithoutUserInput>
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: Enumerable<SessionWhereUniqueInput>
-  }
-
-  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
-    createMany?: PostCreateManyAuthorInputEnvelope
-    connect?: Enumerable<PostWhereUniqueInput>
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<AccountCreateWithoutUserInput>, Enumerable<AccountUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<AccountCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<AccountUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: Enumerable<AccountWhereUniqueInput>
-    disconnect?: Enumerable<AccountWhereUniqueInput>
-    delete?: Enumerable<AccountWhereUniqueInput>
-    connect?: Enumerable<AccountWhereUniqueInput>
-    update?: Enumerable<AccountUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<AccountUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<AccountScalarWhereInput>
-  }
-
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<SessionCreateWithoutUserInput>, Enumerable<SessionUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<SessionCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<SessionUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: Enumerable<SessionWhereUniqueInput>
-    disconnect?: Enumerable<SessionWhereUniqueInput>
-    delete?: Enumerable<SessionWhereUniqueInput>
-    connect?: Enumerable<SessionWhereUniqueInput>
-    update?: Enumerable<SessionUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<SessionUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<SessionScalarWhereInput>
-  }
-
-  export type PostUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: Enumerable<PostWhereUniqueInput>
-    disconnect?: Enumerable<PostWhereUniqueInput>
-    delete?: Enumerable<PostWhereUniqueInput>
-    connect?: Enumerable<PostWhereUniqueInput>
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthorInput>
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthorInput>
-    deleteMany?: Enumerable<PostScalarWhereInput>
-  }
-
-  export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<AccountCreateWithoutUserInput>, Enumerable<AccountUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<AccountCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<AccountUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: Enumerable<AccountWhereUniqueInput>
-    disconnect?: Enumerable<AccountWhereUniqueInput>
-    delete?: Enumerable<AccountWhereUniqueInput>
-    connect?: Enumerable<AccountWhereUniqueInput>
-    update?: Enumerable<AccountUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<AccountUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<AccountScalarWhereInput>
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<SessionCreateWithoutUserInput>, Enumerable<SessionUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<SessionCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<SessionUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: Enumerable<SessionWhereUniqueInput>
-    disconnect?: Enumerable<SessionWhereUniqueInput>
-    delete?: Enumerable<SessionWhereUniqueInput>
-    connect?: Enumerable<SessionWhereUniqueInput>
-    update?: Enumerable<SessionUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<SessionUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<SessionScalarWhereInput>
-  }
-
-  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<Enumerable<PostCreateWithoutAuthorInput>, Enumerable<PostUncheckedCreateWithoutAuthorInput>>
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>
-    createMany?: PostCreateManyAuthorInputEnvelope
-    set?: Enumerable<PostWhereUniqueInput>
-    disconnect?: Enumerable<PostWhereUniqueInput>
-    delete?: Enumerable<PostWhereUniqueInput>
-    connect?: Enumerable<PostWhereUniqueInput>
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthorInput>
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthorInput>
-    deleteMany?: Enumerable<PostScalarWhereInput>
-  }
-
-  export type UserCreateNestedOneWithoutPostInput = {
-    create?: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type UserUpdateOneRequiredWithoutPostNestedInput = {
-    create?: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPostInput
-    upsert?: UserUpsertWithoutPostInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutPostInput, UserUncheckedUpdateWithoutPostInput>
+  export type NestedIntFilter = {
+    equals?: number
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntFilter | number
   }
 
   export type NestedStringFilter = {
@@ -7090,31 +3339,6 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
-  export type NestedStringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | string | null
-    notIn?: Enumerable<string> | string | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
-    not?: NestedStringNullableFilter | string | null
-  }
-
-  export type NestedIntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntNullableFilter | number | null
-  }
-
   export type NestedDateTimeFilter = {
     equals?: Date | string
     in?: Enumerable<Date> | Enumerable<string> | Date | string
@@ -7124,6 +3348,33 @@ export namespace Prisma {
     gt?: Date | string
     gte?: Date | string
     not?: NestedDateTimeFilter | Date | string
+  }
+
+  export type NestedIntWithAggregatesFilter = {
+    equals?: number
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedIntWithAggregatesFilter | number
+    _count?: NestedIntFilter
+    _avg?: NestedFloatFilter
+    _sum?: NestedIntFilter
+    _min?: NestedIntFilter
+    _max?: NestedIntFilter
+  }
+
+  export type NestedFloatFilter = {
+    equals?: number
+    in?: Enumerable<number> | number
+    notIn?: Enumerable<number> | number
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatFilter | number
   }
 
   export type NestedStringWithAggregatesFilter = {
@@ -7143,15 +3394,32 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
-  export type NestedIntFilter = {
-    equals?: number
-    in?: Enumerable<number> | number
-    notIn?: Enumerable<number> | number
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedIntFilter | number
+  export type NestedDateTimeWithAggregatesFilter = {
+    equals?: Date | string
+    in?: Enumerable<Date> | Enumerable<string> | Date | string
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
+    lt?: Date | string
+    lte?: Date | string
+    gt?: Date | string
+    gte?: Date | string
+    not?: NestedDateTimeWithAggregatesFilter | Date | string
+    _count?: NestedIntFilter
+    _min?: NestedDateTimeFilter
+    _max?: NestedDateTimeFilter
+  }
+
+  export type NestedStringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | string | null
+    notIn?: Enumerable<string> | string | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter = {
@@ -7171,7 +3439,7 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter
   }
 
-  export type NestedIntNullableWithAggregatesFilter = {
+  export type NestedIntNullableFilter = {
     equals?: number | null
     in?: Enumerable<number> | number | null
     notIn?: Enumerable<number> | number | null
@@ -7179,578 +3447,117 @@ export namespace Prisma {
     lte?: number
     gt?: number
     gte?: number
-    not?: NestedIntNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedIntNullableFilter
-    _min?: NestedIntNullableFilter
-    _max?: NestedIntNullableFilter
+    not?: NestedIntNullableFilter | number | null
   }
 
-  export type NestedFloatNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | number | null
-    notIn?: Enumerable<number> | number | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableFilter | number | null
+  export type SentenseCreateWithoutWordInput = {
+    sentense: string
+    meaning?: string | null
   }
 
-  export type NestedDateTimeWithAggregatesFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string> | Date | string
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeWithAggregatesFilter | Date | string
-    _count?: NestedIntFilter
-    _min?: NestedDateTimeFilter
-    _max?: NestedDateTimeFilter
+  export type SentenseUncheckedCreateWithoutWordInput = {
+    id?: number
+    sentense: string
+    meaning?: string | null
   }
 
-  export type NestedDateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableFilter | Date | string | null
+  export type SentenseCreateOrConnectWithoutWordInput = {
+    where: SentenseWhereUniqueInput
+    create: XOR<SentenseCreateWithoutWordInput, SentenseUncheckedCreateWithoutWordInput>
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    notIn?: Enumerable<Date> | Enumerable<string> | Date | string | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedDateTimeNullableFilter
-    _max?: NestedDateTimeNullableFilter
-  }
-
-  export type NestedBoolFilter = {
-    equals?: boolean
-    not?: NestedBoolFilter | boolean
-  }
-  export type NestedJsonNullableFilter = 
-    | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase>, Exclude<keyof Required<NestedJsonNullableFilterBase>, 'path'>>,
-        Required<NestedJsonNullableFilterBase>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase>, 'path'>>
-
-  export type NestedJsonNullableFilterBase = {
-    equals?: InputJsonValue | JsonNullValueFilter
-    path?: string
-    string_contains?: string
-    string_starts_with?: string
-    string_ends_with?: string
-    array_contains?: InputJsonValue | null
-    array_starts_with?: InputJsonValue | null
-    array_ends_with?: InputJsonValue | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonNullValueFilter
-  }
-
-  export type NestedBoolWithAggregatesFilter = {
-    equals?: boolean
-    not?: NestedBoolWithAggregatesFilter | boolean
-    _count?: NestedIntFilter
-    _min?: NestedBoolFilter
-    _max?: NestedBoolFilter
-  }
-
-  export type UserCreateWithoutAccountsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    Post?: PostCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUncheckedCreateWithoutAccountsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserCreateOrConnectWithoutAccountsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-  }
-
-  export type UserUpsertWithoutAccountsInput = {
-    update: XOR<UserUpdateWithoutAccountsInput, UserUncheckedUpdateWithoutAccountsInput>
-    create: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
-  }
-
-  export type UserUpdateWithoutAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    Post?: PostUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserCreateWithoutSessionsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    Post?: PostCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserUncheckedCreateWithoutSessionsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
-  }
-
-  export type UserCreateOrConnectWithoutSessionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
-  }
-
-  export type UserUpsertWithoutSessionsInput = {
-    update: XOR<UserUpdateWithoutSessionsInput, UserUncheckedUpdateWithoutSessionsInput>
-    create: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
-  }
-
-  export type UserUpdateWithoutSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    Post?: PostUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type AccountCreateWithoutUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AccountUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AccountCreateOrConnectWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type AccountCreateManyUserInputEnvelope = {
-    data: Enumerable<AccountCreateManyUserInput>
+  export type SentenseCreateManyWordInputEnvelope = {
+    data: Enumerable<SentenseCreateManyWordInput>
     skipDuplicates?: boolean
   }
 
-  export type SessionCreateWithoutUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
+  export type SentenseUpsertWithWhereUniqueWithoutWordInput = {
+    where: SentenseWhereUniqueInput
+    update: XOR<SentenseUpdateWithoutWordInput, SentenseUncheckedUpdateWithoutWordInput>
+    create: XOR<SentenseCreateWithoutWordInput, SentenseUncheckedCreateWithoutWordInput>
   }
 
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
+  export type SentenseUpdateWithWhereUniqueWithoutWordInput = {
+    where: SentenseWhereUniqueInput
+    data: XOR<SentenseUpdateWithoutWordInput, SentenseUncheckedUpdateWithoutWordInput>
   }
 
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type SentenseUpdateManyWithWhereWithoutWordInput = {
+    where: SentenseScalarWhereInput
+    data: XOR<SentenseUpdateManyMutationInput, SentenseUncheckedUpdateManyWithoutSentensesInput>
   }
 
-  export type SessionCreateManyUserInputEnvelope = {
-    data: Enumerable<SessionCreateManyUserInput>
-    skipDuplicates?: boolean
+  export type SentenseScalarWhereInput = {
+    AND?: Enumerable<SentenseScalarWhereInput>
+    OR?: Enumerable<SentenseScalarWhereInput>
+    NOT?: Enumerable<SentenseScalarWhereInput>
+    id?: IntFilter | number
+    sentense?: StringFilter | string
+    meaning?: StringNullableFilter | string | null
+    wordId?: IntFilter | number
   }
 
-  export type PostCreateWithoutAuthorInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
+  export type WordCreateWithoutSentensesInput = {
+    word: string
+    meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type PostUncheckedCreateWithoutAuthorInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
+  export type WordUncheckedCreateWithoutSentensesInput = {
+    id?: number
+    word: string
+    meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type PostCreateOrConnectWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+  export type WordCreateOrConnectWithoutSentensesInput = {
+    where: WordWhereUniqueInput
+    create: XOR<WordCreateWithoutSentensesInput, WordUncheckedCreateWithoutSentensesInput>
   }
 
-  export type PostCreateManyAuthorInputEnvelope = {
-    data: Enumerable<PostCreateManyAuthorInput>
-    skipDuplicates?: boolean
+  export type WordUpsertWithoutSentensesInput = {
+    update: XOR<WordUpdateWithoutSentensesInput, WordUncheckedUpdateWithoutSentensesInput>
+    create: XOR<WordCreateWithoutSentensesInput, WordUncheckedCreateWithoutSentensesInput>
   }
 
-  export type AccountUpsertWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-    create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type AccountUpdateWithWhereUniqueWithoutUserInput = {
-    where: AccountWhereUniqueInput
-    data: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AccountUpdateManyWithWhereWithoutUserInput = {
-    where: AccountScalarWhereInput
-    data: XOR<AccountUpdateManyMutationInput, AccountUncheckedUpdateManyWithoutAccountsInput>
-  }
-
-  export type AccountScalarWhereInput = {
-    AND?: Enumerable<AccountScalarWhereInput>
-    OR?: Enumerable<AccountScalarWhereInput>
-    NOT?: Enumerable<AccountScalarWhereInput>
-    id?: StringFilter | string
-    userId?: StringFilter | string
-    type?: StringFilter | string
-    provider?: StringFilter | string
-    providerAccountId?: StringFilter | string
-    refresh_token?: StringNullableFilter | string | null
-    access_token?: StringNullableFilter | string | null
-    expires_at?: IntNullableFilter | number | null
-    token_type?: StringNullableFilter | string | null
-    scope?: StringNullableFilter | string | null
-    id_token?: StringNullableFilter | string | null
-    session_state?: StringNullableFilter | string | null
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-  }
-
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutSessionsInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: Enumerable<SessionScalarWhereInput>
-    OR?: Enumerable<SessionScalarWhereInput>
-    NOT?: Enumerable<SessionScalarWhereInput>
-    id?: StringFilter | string
-    sessionToken?: StringFilter | string
-    userId?: StringFilter | string
-    expires?: DateTimeFilter | Date | string
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutAuthorInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutPostInput>
-  }
-
-  export type PostScalarWhereInput = {
-    AND?: Enumerable<PostScalarWhereInput>
-    OR?: Enumerable<PostScalarWhereInput>
-    NOT?: Enumerable<PostScalarWhereInput>
-    id?: StringFilter | string
-    title?: StringFilter | string
-    content?: JsonNullableFilter
-    published?: BoolFilter | boolean
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-    authorId?: StringFilter | string
-  }
-
-  export type UserCreateWithoutPostInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPostInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPostInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
-  }
-
-  export type UserUpsertWithoutPostInput = {
-    update: XOR<UserUpdateWithoutPostInput, UserUncheckedUpdateWithoutPostInput>
-    create: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
-  }
-
-  export type UserUpdateWithoutPostInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutPostInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type AccountCreateManyUserInput = {
-    id?: string
-    type: string
-    provider: string
-    providerAccountId: string
-    refresh_token?: string | null
-    access_token?: string | null
-    expires_at?: number | null
-    token_type?: string | null
-    scope?: string | null
-    id_token?: string | null
-    session_state?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SessionCreateManyUserInput = {
-    id?: string
-    sessionToken: string
-    expires: Date | string
-  }
-
-  export type PostCreateManyAuthorInput = {
-    id?: string
-    title: string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type AccountUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
+  export type WordUpdateWithoutSentensesInput = {
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AccountUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
+  export type WordUncheckedUpdateWithoutSentensesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    word?: StringFieldUpdateOperationsInput | string
+    meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AccountUncheckedUpdateManyWithoutAccountsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    provider?: StringFieldUpdateOperationsInput | string
-    providerAccountId?: StringFieldUpdateOperationsInput | string
-    refresh_token?: NullableStringFieldUpdateOperationsInput | string | null
-    access_token?: NullableStringFieldUpdateOperationsInput | string | null
-    expires_at?: NullableIntFieldUpdateOperationsInput | number | null
-    token_type?: NullableStringFieldUpdateOperationsInput | string | null
-    scope?: NullableStringFieldUpdateOperationsInput | string | null
-    id_token?: NullableStringFieldUpdateOperationsInput | string | null
-    session_state?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseCreateManyWordInput = {
+    id?: number
+    sentense: string
+    meaning?: string | null
   }
 
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseUpdateWithoutWordInput = {
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseUncheckedUpdateWithoutWordInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SessionUncheckedUpdateManyWithoutSessionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
-    expires?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUncheckedUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUncheckedUpdateManyWithoutPostInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: NullableJsonNullValueInput | InputJsonValue
-    published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SentenseUncheckedUpdateManyWithoutSentensesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sentense?: StringFieldUpdateOperationsInput | string
+    meaning?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
