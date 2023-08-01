@@ -30,3 +30,12 @@ export const DeniedLottie = (props: Omit<ComponentProps<typeof Lottie>, 'src'>) 
     loop={true}
   />
 );
+
+export const WaitingLottie = (props: Omit<ComponentProps<typeof Lottie>, 'src'>) => (
+  <Lottie
+    {...props}
+    data-testid="completeLottie"
+    src="https://assets6.lottiefiles.com/packages/lf20_CXGNxPqYqJ.json"
+    loop={true}
+  />
+);
