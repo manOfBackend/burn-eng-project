@@ -41,6 +41,7 @@ export default function SignInForm() {
         })
 
         if (result.status === "complete") {
+
           await setActive({ session: result.createdSessionId })
 
           router.push(`${window.location.origin}/`)

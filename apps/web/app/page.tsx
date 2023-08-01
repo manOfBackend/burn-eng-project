@@ -5,9 +5,8 @@ import { Icons } from '@sayvoca/ui';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger } from '@sayvoca/ui/navigation-menu';
 
 export default async function page() {
-  const a = await currentUser()
-
-  const userEmail = a?.emailAddresses[0].emailAddress ?? ''
+  const user = await currentUser()
+  const userEmail = user?.emailAddresses[0].emailAddress ?? ''
   return (
     <Shell>
       <NavigationMenu>
@@ -38,7 +37,7 @@ export default async function page() {
       </NavigationMenu>
       <h2>로그인에 성공하신 것을 축하합니다.</h2>
       <p>로그인 아이디: {userEmail}</p>
-      <VocaForm name={a?.username ?? ''} />
+      <VocaForm name={user?.username ?? ''} />
     </Shell>
   )
 }

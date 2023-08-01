@@ -14,7 +14,7 @@ export default authMiddleware({
     if (auth.isPublicRoute) {
       return NextResponse.next()
     }
-    
+
     const url = new URL(req.nextUrl.origin)
 
     if (!auth.userId) {
@@ -23,9 +23,17 @@ export default authMiddleware({
     } 
 
     const user = await clerkClient.users.getUser(auth.userId)
-
+  
     if (!user) {
       throw new Error("User not found.")
+    }
+
+    if (req.nextUrl.pathname.startsWith('/admin')) {
+      const { role } = user.privateMetadata
+      if (role !== 'admin') {
+        url.pathname = '/no-admin'
+        return NextResponse.redirect(url)
+      }
     }
 
     if (!user.privateMetadata.role) {
