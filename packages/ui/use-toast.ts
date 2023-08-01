@@ -6,13 +6,20 @@ import { ToastActionElement, type ToastProps } from "./toast"
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
-type ToasterToast = ToastProps & {
-  id: string
+type t1 = {
+  title?: number | undefined
+}
+type t2 = {
   title?: React.ReactNode
+}
+type ToasterToast = Omit<ToastProps, 'title'> & {
+  id: string
+  title?: React.ReactNode | string
   description?: React.ReactNode
   action?: ToastActionElement
 }
 
+type a = ToasterToast['title']
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",
