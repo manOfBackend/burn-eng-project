@@ -49,6 +49,7 @@ importers:
       eslint-plugin-react: ^7.32.2
       eslint-plugin-tailwindcss: ^3.11.0
       faker: ^6.6.6
+      lottie-web: ^5.12.2
       next: ^13.4.1
       next-auth: ^4.22.1
       postcss: ^8.4.24
@@ -70,6 +71,7 @@ importers:
       '@sayvoca/ui': link:../../packages/ui
       '@t3-oss/env-nextjs': 0.4.1_i2fvzue2cjjncoywjfv7hcm7mu
       faker: 6.6.6
+      lottie-web: 5.12.2
       next: 13.4.1_ob7c7ogpcitikph4afkm5ompve
       next-auth: 4.22.1_2xek2u27flvv5bywadnu4xxgx4
       react: 18.2.0
@@ -179,6 +181,7 @@ importers:
       '@vercel/analytics': ^1.0.1
       class-variance-authority: ^0.4.0
       eslint: ^7.32.0
+      lottie-web: ^5.12.2
       lucide-react: ^0.92.0
       next-themes: ^0.2.1
       react: ^17.0.2
@@ -192,6 +195,7 @@ importers:
       '@radix-ui/react-toast': 1.1.4_czyoc7iqhqd7ipt2vpbh43nw4a
       '@vercel/analytics': 1.0.1
       class-variance-authority: 0.4.0_typescript@4.9.5
+      lottie-web: 5.12.2
       lucide-react: 0.92.0_at7mkepldmzoo6silmqc5bca74
       next-themes: 0.2.1_affsfizzz24fajhyr3634uqxbi
       react-hook-form: 7.45.0_react@17.0.2
@@ -3818,6 +3822,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+
+  /lottie-web/5.12.2:
+    resolution: {integrity: sha512-uvhvYPC8kGPjXT3MyKMrL3JitEAmDMp30lVkuq/590Mw9ok6pWcFCwXJveo0t5uqYw1UREQHofD+jVpdjBv8wg==}
+    dev: false
 
   /lower-case-first/1.0.2:
     resolution: {integrity: sha512-UuxaYakO7XeONbKrZf5FEgkantPf5DUqDayzP5VXZrtRPdH86s4kN47I8B3TW10S4QKiE3ziHNf3kRN//okHjA==}

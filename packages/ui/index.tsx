@@ -12,4 +12,5 @@ export * from "./label";
 export * from "./navigation-menu";
 export * from "./dialog";
 export * from "./form";
+export * from "./lotties";
 export * from "./use-toast";

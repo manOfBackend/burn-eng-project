@@ -2,13 +2,17 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Shell } from "@/components/shell";
 import SignInForm from "@/components/signin-form";
 import Link from "next/link";
+import { ZammanboLottie } from "@sayvoca/ui";
 
 export default function Page() {
   return (
     <Shell layout="auth">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">로그인</CardTitle>
+          <div className="flex justify-center items-center mb-5">
+            <ZammanboLottie className='max-w-xs' />
+          </div>
+          <CardTitle className="text-2xl text-center">Hi</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <SignInForm />

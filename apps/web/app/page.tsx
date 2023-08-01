@@ -1,7 +1,7 @@
 import { Shell } from '@/components/shell';
 import VocaForm from '@/components/voca-form';
 import { currentUser } from '@clerk/nextjs';
-import { Icons } from '@sayvoca/ui';
+import { DevelopingLottie, Icons, WelcomeLottie, ZammanboLottie } from '@sayvoca/ui';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuTrigger } from '@sayvoca/ui/navigation-menu';
 
 export default async function page() {
@@ -9,6 +9,10 @@ export default async function page() {
   const userEmail = user?.emailAddresses[0].emailAddress ?? ''
   return (
     <Shell>
+      <div className='flex flex-col items-center justify-center'>
+        <WelcomeLottie className='max-w-sm' />
+        <DevelopingLottie className='max-w-sm' />
+      </div>
       <NavigationMenu>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="h-auto">
@@ -30,12 +34,10 @@ export default async function page() {
                   </a>
                 </NavigationMenuLink>
               </li>
-
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenu>
-      <h2>로그인에 성공하신 것을 축하합니다.</h2>
       <p>로그인 아이디: {userEmail}</p>
       <VocaForm name={user?.username ?? ''} />
     </Shell>
