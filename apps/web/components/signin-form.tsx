@@ -1,14 +1,16 @@
 "use client"
 
 import { Inputs } from '@/types'
+import { signinErrorMessages } from '@/utils/errorMessage'
 import { useSignIn } from '@clerk/nextjs'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { userAuthSchema } from "@sayvoca/lib/validations/auth"
-import { Button, Icons, Input, PasswordInput } from "@sayvoca/ui"
+import { Button, Icons, Input, PasswordInput, useToast } from "@sayvoca/ui"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@sayvoca/ui/form"
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+
 
 
 export default function SignInForm() {
@@ -16,6 +18,8 @@ export default function SignInForm() {
   const [isPending, startTransition] = React.useTransition()
 
   const router = useRouter()
+
+  const { toast } = useToast()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(userAuthSchema),
@@ -43,8 +47,10 @@ export default function SignInForm() {
         } else {
           console.log(result)
         }
-      } catch (error) {
-        console.error(error)
+      } catch (error: any) {
+        toast({
+          title: signinErrorMessages.get(error.errors[0].code) ?? '알 수 없는 오류'
+        })
       }
     })
   }
