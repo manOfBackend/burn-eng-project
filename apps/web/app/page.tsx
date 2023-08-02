@@ -6,7 +6,7 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 
 export default async function page() {
   const user = await currentUser()
-  const userEmail = user?.emailAddresses[0].emailAddress ?? ''
+  const userEmail = user?.emailAddresses[0].emailAddress ?? ' '
   return (
     <Shell>
       <div className='flex flex-col items-center justify-center'>
