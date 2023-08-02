@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "packageManager": "pnpm@7.15.0",
   "dependencies": {
     "@clerk/nextjs": "^4.21.13",
     "@faker-js/faker": "^8.0.2",
