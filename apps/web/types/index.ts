@@ -1,10 +1,12 @@
-import { userAuthSchema } from "@sayvoca/lib/validations/auth"
+import { signUpSchema, userAuthSchema } from "@sayvoca/lib/validations/auth"
 import { wordInputSchema, wordSchema } from "@sayvoca/lib/validations/word"
 import { z } from "zod"
 
 export type UserRole = "user" | "admin" | "superadmin"
 
 export type Inputs = z.infer<typeof userAuthSchema>
+
+export type signUpInputs = z.infer<typeof signUpSchema>
 
 export type Word = z.infer<typeof wordSchema>
 

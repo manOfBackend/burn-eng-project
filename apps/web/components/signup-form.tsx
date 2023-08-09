@@ -1,10 +1,10 @@
 "use client"
 
-import { Inputs } from '@/types'
+import { Inputs, signUpInputs } from '@/types'
 import { signUpErrorMessages } from '@/utils/errorMessage'
 import { useSignUp } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { userAuthSchema } from '@sayvoca/lib/validations/auth'
+import { signUpSchema, userAuthSchema } from '@sayvoca/lib/validations/auth'
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, PasswordInput, useToast } from '@sayvoca/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -17,8 +17,8 @@ export default function SignUpForm() {
 
   const { toast } = useToast()
 
-  const form = useForm<Inputs>({
-    resolver: zodResolver(userAuthSchema),
+  const form = useForm<signUpInputs>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: "",
       password: "",
