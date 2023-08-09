@@ -11,7 +11,23 @@ export const userAuthSchema = z.object({
     })
     .max(30, {
       message: '패스워드는 30글자 이하이어야 합니다.',
+    }),
+  confirmPassword: z
+    .string()
+    .min(8, {
+      message: "패스워드는 8글자 이상이어야 합니다.",
     })
+    .max(30, {
+      message: '패스워드는 30글자 이하이어야 합니다.',
+    }),
+}).superRefine(({ confirmPassword, password }, ctx) => {
+  if (confirmPassword !== password) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["confirmPassword"],
+      message: "패스워드가 일치하지 않습니다."
+    })
+  }
 })
 
 export const verfifyEmailSchema = z.object({
