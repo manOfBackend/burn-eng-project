@@ -1,10 +1,11 @@
 "use client"
 
 import { Inputs } from '@/types'
+import { signUpErrorMessages, signinErrorMessages } from '@/utils/errorMessage'
 import { useSignUp } from '@clerk/nextjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userAuthSchema } from '@sayvoca/lib/validations/auth'
-import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, PasswordInput } from '@sayvoca/ui'
+import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, PasswordInput, useToast } from '@sayvoca/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -13,6 +14,8 @@ export default function SignUpForm() {
   const router = useRouter()
   const { isLoaded, signUp } = useSignUp()
   const [isPending, startTransition] = React.useTransition()
+
+  const { toast } = useToast()
 
   const form = useForm<Inputs>({
     resolver: zodResolver(userAuthSchema),
@@ -38,7 +41,10 @@ export default function SignUpForm() {
 
         router.push("/signup/verify-email")
 
-      } catch (error) {
+      } catch (error: any) {
+        toast({
+          title: signUpErrorMessages.get(error.errors[0].code) ?? '알 수 없는 오류'
+        })
         console.error(error)
       }
     })
