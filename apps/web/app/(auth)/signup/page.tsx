@@ -16,8 +16,8 @@ export default function Page() {
         <CardFooter className="flex flex-wrap items-center space-x-2">
           <div className="flex-1 text-sm text-muted-foreground">
             <Link
-              aria-label="Sign up"
-              href="/signup"
+              aria-label="Sign in"
+              href="/signin"
               className="text-primary underline-offset-4 transition-colors hover:underline"
             >
               로그인하기

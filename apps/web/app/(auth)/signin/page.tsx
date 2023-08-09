@@ -9,7 +9,7 @@ export default function Page() {
     <Shell layout="auth">
       <Card>
         <CardHeader className="space-y-1">
-          <div className="flex justify-center items-center mb-5">
+          <div className="flex justify-center items-center mb-5 min-w-[320px] min-h-[375px]">
             <ZammanboLottie className='max-w-xs' />
           </div>
           <CardTitle className="text-2xl text-center">Hi</CardTitle>
