@@ -17,6 +17,7 @@
     "@sayvoca/lib": "workspace:*",
     "@sayvoca/ui": "workspace:*",
     "@t3-oss/env-nextjs": "^0.4.1",
+    "@tanstack/react-table": "^8.9.3",
     "@types/jsonwebtoken": "^9.0.2",
     "faker": "^6.6.6",
     "jose": "^4.14.4",

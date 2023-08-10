@@ -17,7 +17,7 @@ model Word {
   meaning     String    
   createdAt   DateTime  @default(now()) @map(name: "created_at")
   updatedAt   DateTime  @default(now()) @map(name: "updated_at")
-
+  status      Status    @default(active)
   sentenses   Sentense[]
 }
 
@@ -31,4 +31,8 @@ model Sentense {
   @@index([wordId])
 }
 
+enum Status {
+  active
+  inactive
+}
 

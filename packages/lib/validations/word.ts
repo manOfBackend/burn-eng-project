@@ -16,4 +16,5 @@ export const wordSchema = z.object({
     sentense: z.string(),
     meaning: z.string().nullish(),
   }).array().nullish(),
+  status: z.enum(['active', 'inactive']).default('active'),
 }).and(wordInputSchema)

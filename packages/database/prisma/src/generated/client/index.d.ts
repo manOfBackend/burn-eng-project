@@ -22,6 +22,7 @@ export type Word = {
   meaning: string
   createdAt: Date
   updatedAt: Date
+  status: Status
 }
 
 /**
@@ -34,6 +35,18 @@ export type Sentense = {
   meaning: string | null
   wordId: number
 }
+
+
+/**
+ * Enums
+ */
+
+export const Status: {
+  active: 'active',
+  inactive: 'inactive'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
 
 
 /**
@@ -877,6 +890,7 @@ export namespace Prisma {
     meaning: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: Status | null
   }
 
   export type WordMaxAggregateOutputType = {
@@ -885,6 +899,7 @@ export namespace Prisma {
     meaning: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: Status | null
   }
 
   export type WordCountAggregateOutputType = {
@@ -893,6 +908,7 @@ export namespace Prisma {
     meaning: number
     createdAt: number
     updatedAt: number
+    status: number
     _all: number
   }
 
@@ -911,6 +927,7 @@ export namespace Prisma {
     meaning?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
   }
 
   export type WordMaxAggregateInputType = {
@@ -919,6 +936,7 @@ export namespace Prisma {
     meaning?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
   }
 
   export type WordCountAggregateInputType = {
@@ -927,6 +945,7 @@ export namespace Prisma {
     meaning?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
     _all?: true
   }
 
@@ -1023,6 +1042,7 @@ export namespace Prisma {
     meaning: string
     createdAt: Date
     updatedAt: Date
+    status: Status
     _count: WordCountAggregateOutputType | null
     _avg: WordAvgAggregateOutputType | null
     _sum: WordSumAggregateOutputType | null
@@ -1050,6 +1070,7 @@ export namespace Prisma {
     meaning?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
     sentenses?: boolean | Word$sentensesArgs
     _count?: boolean | WordCountOutputTypeArgs
   }
@@ -2838,7 +2859,8 @@ export namespace Prisma {
     word: 'word',
     meaning: 'meaning',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    status: 'status'
   };
 
   export type WordScalarFieldEnum = (typeof WordScalarFieldEnum)[keyof typeof WordScalarFieldEnum]
@@ -2858,6 +2880,7 @@ export namespace Prisma {
     meaning?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
+    status?: EnumStatusFilter | Status
     sentenses?: SentenseListRelationFilter
   }
 
@@ -2867,6 +2890,7 @@ export namespace Prisma {
     meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
     sentenses?: SentenseOrderByRelationAggregateInput
   }
 
@@ -2881,6 +2905,7 @@ export namespace Prisma {
     meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
     _count?: WordCountOrderByAggregateInput
     _avg?: WordAvgOrderByAggregateInput
     _max?: WordMaxOrderByAggregateInput
@@ -2897,6 +2922,7 @@ export namespace Prisma {
     meaning?: StringWithAggregatesFilter | string
     createdAt?: DateTimeWithAggregatesFilter | Date | string
     updatedAt?: DateTimeWithAggregatesFilter | Date | string
+    status?: EnumStatusWithAggregatesFilter | Status
   }
 
   export type SentenseWhereInput = {
@@ -2949,6 +2975,7 @@ export namespace Prisma {
     meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: Status
     sentenses?: SentenseCreateNestedManyWithoutWordInput
   }
 
@@ -2958,6 +2985,7 @@ export namespace Prisma {
     meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: Status
     sentenses?: SentenseUncheckedCreateNestedManyWithoutWordInput
   }
 
@@ -2966,6 +2994,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
     sentenses?: SentenseUpdateManyWithoutWordNestedInput
   }
 
@@ -2975,6 +3004,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
     sentenses?: SentenseUncheckedUpdateManyWithoutWordNestedInput
   }
 
@@ -2984,6 +3014,7 @@ export namespace Prisma {
     meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: Status
   }
 
   export type WordUpdateManyMutationInput = {
@@ -2991,6 +3022,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
   }
 
   export type WordUncheckedUpdateManyInput = {
@@ -2999,6 +3031,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
   }
 
   export type SentenseCreateInput = {
@@ -3082,6 +3115,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter | Date | string
   }
 
+  export type EnumStatusFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusFilter | Status
+  }
+
   export type SentenseListRelationFilter = {
     every?: SentenseWhereInput
     some?: SentenseWhereInput
@@ -3098,6 +3138,7 @@ export namespace Prisma {
     meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
   }
 
   export type WordAvgOrderByAggregateInput = {
@@ -3110,6 +3151,7 @@ export namespace Prisma {
     meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
   }
 
   export type WordMinOrderByAggregateInput = {
@@ -3118,6 +3160,7 @@ export namespace Prisma {
     meaning?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
   }
 
   export type WordSumOrderByAggregateInput = {
@@ -3169,6 +3212,16 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
+  }
+
+  export type EnumStatusWithAggregatesFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusWithAggregatesFilter | Status
+    _count?: NestedIntFilter
+    _min?: NestedEnumStatusFilter
+    _max?: NestedEnumStatusFilter
   }
 
   export type StringNullableFilter = {
@@ -3258,6 +3311,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: Status
   }
 
   export type SentenseUpdateManyWithoutWordNestedInput = {
@@ -3350,6 +3407,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter | Date | string
   }
 
+  export type NestedEnumStatusFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusFilter | Status
+  }
+
   export type NestedIntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number> | number
@@ -3406,6 +3470,16 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedDateTimeFilter
     _max?: NestedDateTimeFilter
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter = {
+    equals?: Status
+    in?: Enumerable<Status>
+    notIn?: Enumerable<Status>
+    not?: NestedEnumStatusWithAggregatesFilter | Status
+    _count?: NestedIntFilter
+    _min?: NestedEnumStatusFilter
+    _max?: NestedEnumStatusFilter
   }
 
   export type NestedStringNullableFilter = {
@@ -3502,6 +3576,7 @@ export namespace Prisma {
     meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: Status
   }
 
   export type WordUncheckedCreateWithoutSentensesInput = {
@@ -3510,6 +3585,7 @@ export namespace Prisma {
     meaning: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: Status
   }
 
   export type WordCreateOrConnectWithoutSentensesInput = {
@@ -3527,6 +3603,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
   }
 
   export type WordUncheckedUpdateWithoutSentensesInput = {
@@ -3535,6 +3612,7 @@ export namespace Prisma {
     meaning?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumStatusFieldUpdateOperationsInput | Status
   }
 
   export type SentenseCreateManyWordInput = {

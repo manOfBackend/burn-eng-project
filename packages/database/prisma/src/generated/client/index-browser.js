@@ -110,9 +110,13 @@ exports.Prisma.WordScalarFieldEnum = {
   word: 'word',
   meaning: 'meaning',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  status: 'status'
 };
-
+exports.Status = {
+  active: 'active',
+  inactive: 'inactive'
+};
 
 exports.Prisma.ModelName = {
   Word: 'Word',

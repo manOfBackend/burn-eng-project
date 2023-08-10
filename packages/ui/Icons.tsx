@@ -1,3 +1,4 @@
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, CheckCircledIcon, ChevronLeftIcon, ChevronRightIcon, CircleIcon, DotsHorizontalIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon } from "@radix-ui/react-icons"
 import {
   AlertTriangle,
   ArrowRight,
@@ -19,14 +20,14 @@ import {
   MoreVertical,
   Pizza,
   Plus,
+  PlusCircle,
   Settings,
   SunMedium,
   Trash,
   Twitter,
   User,
   X,
-  type Icon as LucideIcon,
-  PlusCircle,
+  type Icon as LucideIcon
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -75,4 +76,15 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
+  arrowDown: ArrowDownIcon,
+  arrowUp: ArrowUpIcon,
+  carpetSort: CaretSortIcon,
+  eyeNone: EyeNoneIcon,
+  checkCircled: CheckCircledIcon,
+  circle: CircleIcon,
+  dotsHorizontal: DotsHorizontalIcon,
+  doubleArrowLeft: DoubleArrowLeftIcon,
+  chevronLeftIcon: ChevronLeftIcon,
+  chevronRightIcon: ChevronRightIcon,
+  doubleArrowRightIcon: DoubleArrowRightIcon
 }
