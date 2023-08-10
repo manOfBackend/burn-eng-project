@@ -21,15 +21,14 @@ export default authMiddleware({
     const publicKeySet = await jose.importSPKI(publicKey, "RS256")
     const verified = await jose.jwtVerify(sessionObj?.value as string, publicKeySet)
     
-
-    const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
-
     const url = new URL(req.nextUrl.origin)
 
-    if (!auth.userId) {
+    if (!auth.userId || !sessionTokenSchema.safeParse(verified)) {
       url.pathname = "/signin"
       return NextResponse.redirect(url)
     } 
+    const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
+
 
     if (req.nextUrl.pathname.startsWith('/admin')) {
       const { role } = sessionTokenBody.publicMeta
