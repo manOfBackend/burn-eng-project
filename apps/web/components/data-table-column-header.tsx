@@ -42,16 +42,16 @@ export function DataTableColumnHeader<TData, TValue>({
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
             <Icons.arrowUp className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            Asc
+            오름차순
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
             <Icons.arrowDown className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            Desc
+            내림차순
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
             <Icons.eyeNone className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            Hide
+            숨기기
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
