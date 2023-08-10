@@ -15,13 +15,18 @@ export default authMiddleware({
     if (auth.isPublicRoute) {
       return NextResponse.next()
     }
+    const url = new URL(req.nextUrl.origin)
 
     const publicKey = process.env.CLERK_PEM_PUBLIC_KEY as string;
     const sessionObj = req.cookies.get('__session')
+
+    if (!sessionObj || !sessionObj.value) { 
+      url.pathname = "/signin"
+      return NextResponse.redirect(url)
+    }
+
     const publicKeySet = await jose.importSPKI(publicKey, "RS256")
     const verified = await jose.jwtVerify(sessionObj?.value as string, publicKeySet)
-    
-    const url = new URL(req.nextUrl.origin)
 
     if (!auth.userId || !sessionTokenSchema.safeParse(verified)) {
       url.pathname = "/signin"
