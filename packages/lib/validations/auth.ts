@@ -1,5 +1,23 @@
 import * as z from "zod"
 
+export const userRoleSchema = z.enum(['admin', 'user'])
+
+export const sessionTokenSchema = z.object({
+  payload: z.object({
+    publicMeta: z.object({
+      role: userRoleSchema,
+    }),
+    email: z.string(),
+    emailVerified: z.boolean(),
+    azp: z.string(),
+    iss: z.string(),
+    sub: z.string(),
+    exp: z.number(),
+    iat: z.number(),
+    jti: z.string(),
+  })
+})
+
 export const userAuthSchema = z.object({
   email: z.string().email({
     message: "유효한 이메일 주소를 입력하세요.",

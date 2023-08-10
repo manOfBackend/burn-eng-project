@@ -1,7 +1,8 @@
 import { authMiddleware, clerkClient } from "@clerk/nextjs";
-import { UserRole } from "./types";
+import { sessionTokenSchema } from "@sayvoca/lib/validations/auth";
+import * as jose from "jose";
 import { NextResponse } from "next/server";
-
+import { UserRole } from "./types";
 
 export default authMiddleware({
   publicRoutes: [
@@ -15,6 +16,14 @@ export default authMiddleware({
       return NextResponse.next()
     }
 
+    const publicKey = process.env.CLERK_PEM_PUBLIC_KEY as string;
+    const sessionObj = req.cookies.get('__session')
+    const publicKeySet = await jose.importSPKI(publicKey, "RS256")
+    const verified = await jose.jwtVerify(sessionObj?.value as string, publicKeySet)
+    
+
+    const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
+
     const url = new URL(req.nextUrl.origin)
 
     if (!auth.userId) {
@@ -22,26 +31,20 @@ export default authMiddleware({
       return NextResponse.redirect(url)
     } 
 
-    const user = await clerkClient.users.getUser(auth.userId)
-  
-    if (!user) {
-      throw new Error("User not found.")
-    }
-
     if (req.nextUrl.pathname.startsWith('/admin')) {
-      const { role } = user.privateMetadata
+      const { role } = sessionTokenBody.publicMeta
       if (role !== 'admin') {
         url.pathname = '/no-admin'
         return NextResponse.redirect(url)
       }
     }
 
-    if (!user.privateMetadata.role) {
+    if (!sessionTokenBody.publicMeta.role) {
       await clerkClient.users.updateUser(auth.userId, {
-        privateMetadata: {
-          ...user.privateMetadata,
-          role: "user" satisfies UserRole,
-        },
+        publicMetadata: {
+          ...sessionTokenBody.publicMeta,
+          role: "user" satisfies UserRole
+        }
       })
     }
   },
