@@ -25,10 +25,14 @@ export default authMiddleware({
       return NextResponse.redirect(url)
     }
 
-    const publicKeySet = await jose.importSPKI(publicKey, "RS256")
-    const verified = await jose.jwtVerify(sessionObj?.value as string, publicKeySet)
-
-    if (!auth.userId || !sessionTokenSchema.safeParse(verified)) {
+    let verified;
+    try {
+      const publicKeySet = await jose.importSPKI(publicKey, "RS256")
+      verified = await jose.jwtVerify(sessionObj?.value as string, publicKeySet)
+    }
+    catch (e) {
+    }
+    if (!verified || !auth.userId || !sessionTokenSchema.safeParse(verified)) {
       url.pathname = "/signin"
       return NextResponse.redirect(url)
     } 
