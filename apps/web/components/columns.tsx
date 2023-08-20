@@ -54,32 +54,62 @@ export const columns: ColumnDef<Word>[] = [
     },
   },
   {
-    accessorKey: "status",
+    accessorKey: "meaning",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="상태" />
+      <DataTableColumnHeader column={column} title="뜻" />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
-        (status) => status.value === row.getValue("status")
-      )
-
-      if (!status) {
-        return null
-      }
-
       return (
-        <div className="flex w-[100px] items-center">
-          {status.icon && (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{status.label}</span>
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("meaning")}
+          </span>
         </div>
       )
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+  },
+  {
+    accessorKey: "difficultyLevel",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="레벨" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("difficultyLevel")}
+          </span>
+        </div>
+      )
     },
   },
+  // {
+  //   accessorKey: "status",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="상태" />
+  //   ),
+  //   cell: ({ row }) => {
+  //     const status = statuses.find(
+  //       (status) => status.value === row.getValue("status")
+  //     )
+
+  //     if (!status) {
+  //       return null
+  //     }
+
+  //     return (
+  //       <div className="flex w-[100px] items-center">
+  //         {status.icon && (
+  //           <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+  //         )}
+  //         <span>{status.label}</span>
+  //       </div>
+  //     )
+  //   },
+  //   filterFn: (row, id, value) => {
+  //     return value.includes(row.getValue(id))
+  //   },
+  // },
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,

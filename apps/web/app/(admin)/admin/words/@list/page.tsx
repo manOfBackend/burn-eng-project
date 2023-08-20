@@ -5,9 +5,9 @@ interface WordsListPageProps {
 }
 export default async function AdminPage() {
 
-  const words = await db.word.findMany()
+  // const words = await db.word.findMany()
 
   return (
-    <AdminWordsView words={words} />
+    <AdminWordsView />
   )
 }

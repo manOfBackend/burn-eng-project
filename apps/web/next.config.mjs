@@ -7,6 +7,7 @@ const nextConfig = {
   transpilePackages: ["@sayvoca/ui", "@sayvoca/lib"],
   experimental: {
     serverComponentsExternalPackages: ["@prisma/client"],
+    serverActions: true,
   },
   webpack: (config, { isServer }) => {
     config.plugins = [...config.plugins, new PrismaPlugin()]

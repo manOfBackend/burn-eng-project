@@ -6,11 +6,12 @@ import { ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreR
 import { useState } from 'react'
 import { columns } from './columns'
 import { DataTablePagination } from './data-table-pagination'
+import { useQuery } from '@tanstack/react-query'
+import React from 'react'
+import { http } from '@sayvoca/lib/http'
+import { getWordPage } from '@sayvoca/lib/api'
 
-interface AdminWordsViewProps {
-  words: Word[],
-}
-export default function AdminWordsView({ words }: AdminWordsViewProps) {
+export default function AdminWordsView() {
 
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -18,9 +19,15 @@ export default function AdminWordsView({ words }: AdminWordsViewProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
+  const [page, setPage] = React.useState(0)
+
+  const { status, data: words, error } = useQuery({
+    queryKey: ['words', page],
+    queryFn: () => getWordPage({ page, size: 20 })
+  })
 
   const table = useReactTable({
-    data: words,
+    data: words?.content ?? [],
     columns,
     initialState: {
       pagination: {

@@ -20,7 +20,7 @@ export default authMiddleware({
     const publicKey = process.env.CLERK_PEM_PUBLIC_KEY as string;
     const sessionObj = req.cookies.get('__session')
 
-    if (!sessionObj || !sessionObj.value) { 
+    if (!sessionObj || !sessionObj.value) {
       url.pathname = "/signin"
       return NextResponse.redirect(url)
     }
@@ -35,11 +35,11 @@ export default authMiddleware({
     if (!verified || !auth.userId || !sessionTokenSchema.safeParse(verified)) {
       url.pathname = "/signin"
       return NextResponse.redirect(url)
-    } 
+    }
     const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
 
 
-    if (req.nextUrl.pathname.startsWith('/admin')) {
+    if (req.nextUrl.pathname.startsWith('/admin') && sessionTokenBody.publicMeta) {
       const { role } = sessionTokenBody.publicMeta
       if (role !== 'admin') {
         url.pathname = '/no-admin'
@@ -47,7 +47,7 @@ export default authMiddleware({
       }
     }
 
-    if (!sessionTokenBody.publicMeta.role) {
+    if (!sessionTokenBody.publicMeta?.role) {
       await clerkClient.users.updateUser(auth.userId, {
         publicMetadata: {
           ...sessionTokenBody.publicMeta,

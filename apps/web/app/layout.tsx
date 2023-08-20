@@ -3,6 +3,7 @@ import { cn } from "@sayvoca/lib/utils"
 import { Analytics, ThemeProvider, Toaster } from '@sayvoca/ui'
 import '../styles/globals.css'
 import { Inter as FontSans } from "next/font/google"
+import Providers from "@/components/providers"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -45,13 +46,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable,
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Providers>
             <div className='max-w-3xl w-full'>
               {children}
             </div>
             <Analytics />
             <Toaster />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
