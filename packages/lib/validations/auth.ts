@@ -5,8 +5,8 @@ export const userRoleSchema = z.enum(['admin', 'user'])
 export const sessionTokenSchema = z.object({
   payload: z.object({
     publicMeta: z.object({
-      role: userRoleSchema,
-    }),
+      role: userRoleSchema.optional(),
+    }).optional(),
     email: z.string(),
     emailVerified: z.boolean(),
     azp: z.string(),
@@ -35,13 +35,13 @@ export const userAuthSchema = z.object({
 
 export const signUpSchema = userAuthSchema.extend({
   confirmPassword: z
-  .string()
-  .min(8, {
-    message: "패스워드는 8글자 이상이어야 합니다.",
-  })
-  .max(30, {
-    message: '패스워드는 30글자 이하이어야 합니다.',
-  }),
+    .string()
+    .min(8, {
+      message: "패스워드는 8글자 이상이어야 합니다.",
+    })
+    .max(30, {
+      message: '패스워드는 30글자 이하이어야 합니다.',
+    }),
 }).superRefine(({ confirmPassword, password }, ctx) => {
   if (confirmPassword !== password) {
     ctx.addIssue({
