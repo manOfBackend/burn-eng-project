@@ -26,8 +26,11 @@ import {
   Trash,
   Twitter,
   User,
+  BookOpenCheck,
+  Pencil,
   X,
-  type Icon as LucideIcon
+  type Icon as LucideIcon,
+  BookOpen
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -53,10 +56,13 @@ export const Icons = {
   help: HelpCircle,
   pizza: Pizza,
   sun: SunMedium,
+  pencil: Pencil,
   view: Eye,
   hide: EyeOff,
   moon: Moon,
   laptop: Laptop,
+  bookOpenCheck: BookOpenCheck,
+  bookOpen: BookOpen,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

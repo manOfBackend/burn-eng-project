@@ -22,6 +22,7 @@ import {
   Trash,
   Twitter,
   User,
+  BookOpenCheck,
   X,
   type Icon as LucideIcon,
 } from "lucide-react"
@@ -50,6 +51,7 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  bookOpenCheck: BookOpenCheck,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

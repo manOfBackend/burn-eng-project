@@ -42,7 +42,7 @@ export default function SignInForm() {
 
           await setActive({ session: result.createdSessionId })
 
-          router.push(`${window.location.origin}/`)
+          router.push(`${window.location.origin}/dashboard`)
         } else {
           console.log(result)
         }
