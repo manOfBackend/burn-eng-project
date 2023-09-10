@@ -72,49 +72,36 @@ export default function VocaListAddForm() {
           </Button>
         </form>
       </Form>
-      <article className=''>
-        <div className="">
-          <table className="table table-xs">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1</th>
-                <td>
-                  <div>
-                    <p>Cy Ganderton</p>
-                    <p className='text-purple-400'>해석입니다.</p>
-                  </div>
-                </td>
-                <td><Button>선택</Button></td>
-              </tr>
-              <tr>
-                <th>2</th>
-                <td>
-                  <div>
-                    <p>Cy Ganderton</p>
-                    <p className='text-purple-400'>해석입니다.</p>
-                  </div>
-                </td>
-                <td><Button>선택</Button></td>
-              </tr>
-              <tr>
-                <th>3</th>
-                <td>
-                  <div>
-                    <p>Cy Ganderton</p>
-                    <p className='text-purple-400'>해석입니다.</p>
-                  </div>
-                </td>
-                <td><Button>선택</Button></td>
-              </tr>
-            </tbody>
-          </table>
+      <article className='flex flex-col gap-4 pt-4'>
+        <div className='flex flex-col gap-2'>
+          <div className="grid grid-cols-[1fr_8fr] gap-4 justify-center items-center">
+            <p className='font-bold'>1</p>
+            <div>
+              <p>Cy Gandertony Ganderton</p>
+              <p className='text-purple-400'>해석입니다.</p>
+            </div>
+          </div>
+          <Button><Icons.check /></Button>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <div className="grid grid-cols-[1fr_8fr] gap-4 justify-center items-center">
+            <p className='font-bold'>2</p>
+            <div>
+              <p>Cy Gandertony Ganderton</p>
+              <p className='text-purple-400'>해석입니다.</p>
+            </div>
+          </div>
+          <Button><Icons.check /></Button>
+        </div>
+        <div className='flex flex-col gap-2'>
+          <div className="grid grid-cols-[1fr_8fr] gap-4 justify-center items-center">
+            <p className='font-bold'>3</p>
+            <div>
+              <p>Cy Gandertony Ganderton</p>
+              <p className='text-purple-400'>해석입니다.</p>
+            </div>
+          </div>
+          <Button><Icons.check /></Button>
         </div>
       </article>
     </section>
