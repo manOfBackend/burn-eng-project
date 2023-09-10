@@ -42,12 +42,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background mx-auto font-sans antialiased flex justify-center w-full",
+            "min-h-screen max-w-md bg-background mx-auto font-sans antialiased flex justify-center w-full",
             fontSans.variable,
           )}
         >
           <Providers>
-            <div className='max-w-3xl w-full'>
+            <div className='w-full'>
               {children}
             </div>
             <Analytics />

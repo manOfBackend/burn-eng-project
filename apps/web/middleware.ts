@@ -38,7 +38,6 @@ export default authMiddleware({
     }
     const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
 
-
     if (req.nextUrl.pathname.startsWith('/admin') && sessionTokenBody.publicMeta) {
       const { role } = sessionTokenBody.publicMeta
       if (role !== 'admin') {

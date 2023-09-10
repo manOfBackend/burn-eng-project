@@ -32,6 +32,12 @@ export const userAuthSchema = z.object({
     }),
 })
 
+export const addWordSchema = z.object({
+  word: z.string().min(1, { message: "단어를 입력하세요." }),
+  meaning: z
+    .string().min(1, { message: "뜻을 입력하세요." })
+})
+
 
 export const signUpSchema = userAuthSchema.extend({
   confirmPassword: z

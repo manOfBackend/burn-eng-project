@@ -2,7 +2,7 @@
 
 import { Inputs } from '@/types'
 import { signinErrorMessages } from '@/utils/errorMessage'
-import { useSignIn } from '@clerk/nextjs'
+import { useAuth, useSignIn } from '@clerk/nextjs'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { userAuthSchema } from "@sayvoca/lib/validations/auth"
 import { Button, Icons, Input, PasswordInput, useToast } from "@sayvoca/ui"
@@ -13,6 +13,8 @@ import { useForm } from 'react-hook-form'
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn()
+  const { isSignedIn } = useAuth()
+
   const [isPending, startTransition] = React.useTransition()
 
   const router = useRouter()
@@ -30,6 +32,13 @@ export default function SignInForm() {
 
   function onSubmit(data: Inputs) {
     if (!isLoaded) return
+    if (isSignedIn) {
+      toast({
+        title: '이미 로그인 중입니다.'
+      })
+      router.push('/dashboard')
+      return
+    }
 
     startTransition(async () => {
       try {
