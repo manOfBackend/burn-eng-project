@@ -13,6 +13,7 @@
     "@faker-js/faker": "^8.0.2",
     "@hookform/resolvers": "^3.1.1",
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@nivo/bar": "^0.83.0",
     "@nivo/line": "^0.83.0",
     "@sayvoca/database": "workspace:*",
     "@sayvoca/lib": "workspace:*",

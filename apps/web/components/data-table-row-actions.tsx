@@ -1,6 +1,6 @@
 "use client"
 
-import { wordSchema } from "@sayvoca/lib/validations/word"
+import { sentenceSchema } from "@sayvoca/lib/validations/word"
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@sayvoca/ui/dropdown"
@@ -16,7 +16,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const word = wordSchema.parse(row.original)
+  const word = sentenceSchema.parse(row.original)
 
   return (
     <DropdownMenu>
@@ -35,7 +35,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>상태</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={word.word}>
+            <DropdownMenuRadioGroup value={word.sentence}>
               {statuses.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                   {label.label}

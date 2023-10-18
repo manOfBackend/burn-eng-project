@@ -1,18 +1,24 @@
-import { signUpSchema, userAuthSchema, userRoleSchema } from "../validations/auth"
-import { wordInputSchema, wordPageResponseSchema, wordSchema } from "../validations/word"
+import { addWordSchema, signUpSchema, userAuthSchema, userRoleSchema } from "../validations/auth"
+import { sentenceInputSchema, sentencePageResponseSchema, sentenceResponseSchema, sentenceSchema } from "../validations/word"
 import { z } from "zod"
 
 export type UserRole = z.infer<typeof userRoleSchema>
 
 export type Inputs = z.infer<typeof userAuthSchema>
 
+export type AddWord = z.infer<typeof addWordSchema>
+
+
+
 export type signUpInputs = z.infer<typeof signUpSchema>
 
-export type Word = z.infer<typeof wordSchema>
+export type Sentence = z.infer<typeof sentenceSchema>
 
-export type WordPage = z.infer<typeof wordPageResponseSchema>
+export type SentenceResponse = z.infer<typeof sentenceResponseSchema>
 
-export type InputWord = z.infer<typeof wordInputSchema>
+export type SentencePage = z.infer<typeof sentencePageResponseSchema>
+
+export type InputSentence = z.infer<typeof sentenceInputSchema>
 
 export type CommonErrorCode = 'too_many_requests'
 

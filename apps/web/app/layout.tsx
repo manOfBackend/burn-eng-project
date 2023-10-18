@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen max-w-md bg-background mx-auto font-sans antialiased flex justify-center w-full",
+            "min-h-screen max-w-screen overflow-hidden bg-background mx-auto font-sans antialiased flex justify-center w-full",
             fontSans.variable,
           )}
         >

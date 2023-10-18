@@ -1,13 +1,13 @@
 "use client"
 
-import { Word } from "@/types"
+import { Sentence } from "@/types"
 import { Checkbox } from "@sayvoca/ui/checkbox"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { Icons } from "@sayvoca/ui/Icons"
 import { DataTableRowActions } from "./data-table-row-actions"
 
-export const columns: ColumnDef<Word>[] = [
+export const columns: ColumnDef<Sentence>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -39,37 +39,52 @@ export const columns: ColumnDef<Word>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "word",
+    accessorKey: "enable",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="단어" />
+      <DataTableColumnHeader column={column} title="사용" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
           <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("word")}
+            {Boolean(row.getValue("enable")) ? <Icons.checkCircled /> : <Icons.circle />}
           </span>
         </div>
       )
     },
   },
   {
-    accessorKey: "meaning",
+    accessorKey: "sentence",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="뜻" />
+      <DataTableColumnHeader column={column} title="문장" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
           <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("meaning")}
+            {row.getValue("sentence")}
           </span>
         </div>
       )
     },
   },
   {
-    accessorKey: "difficultyLevel",
+    accessorKey: "language",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="언어" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("language")}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "level",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="레벨" />
     ),
@@ -77,7 +92,22 @@ export const columns: ColumnDef<Word>[] = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("difficultyLevel")}
+            {row.getValue("level")}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="최근수정시간" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("updatedAt")}
           </span>
         </div>
       )

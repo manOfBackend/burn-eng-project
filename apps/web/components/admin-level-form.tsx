@@ -1,31 +1,35 @@
 "use client"
 
-import { InputWord } from '@/types'
+import { InputSentence } from '@/types'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { addWord } from '@sayvoca/lib/fetch'
-import { wordInputSchema } from '@sayvoca/lib/validations/word'
+import { addSentence } from '@sayvoca/lib'
+import { sentenceInputSchema } from '@sayvoca/lib/validations/word'
 import { Button, Dialog, DialogContent, DialogTrigger, Input } from "@sayvoca/ui"
 import { Icons } from '@sayvoca/ui/Icons'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@sayvoca/ui/form"
+import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
 
-export default function AdminWordsForm() {
+export default function AdminLevelForm() {
   const [isPending, startTransition] = React.useTransition()
 
-  const form = useForm<InputWord>({
-    resolver: zodResolver(wordInputSchema),
+  const { mutate } = useMutation({
+    mutationKey: ['addSentence'],
+    mutationFn: addSentence,
+  })
+
+  const form = useForm<InputSentence>({
+    resolver: zodResolver(sentenceInputSchema),
     defaultValues: {
-      word: '',
-      meaning: '',
+      sentence: '',
     },
   })
 
-
-  function onSubmit(data: InputWord) {
+  function onSubmit(data: InputSentence) {
     startTransition(async () => {
-      addWord(data.word, data.meaning ?? '')
+      mutate(data)
     })
   }
 
@@ -49,23 +53,10 @@ export default function AdminWordsForm() {
           >
             <FormField
               control={form.control}
-              name="word"
+              name="sentence"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>단어</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="meaning"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>뜻</FormLabel>
+                  <FormLabel>문장</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>

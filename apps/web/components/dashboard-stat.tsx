@@ -12,7 +12,7 @@ export default function DashboardStat() {
           </div>
         </div>
         <div className="stat-value">80%</div>
-        <div className="stat-title">어휘 학습</div>
+        <div className="stat-title">작문 학습</div>
         <div className="stat-desc text-purple-600">일일 목표 10문제 남음</div>
         <div className="rating">
           <input type="radio" name="rating-4" className="mask mask-star-2 bg-purple-500" />
