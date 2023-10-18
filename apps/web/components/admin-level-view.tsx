@@ -7,7 +7,7 @@ import { ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreR
 import React, { useState } from 'react'
 import { columns } from './columns'
 import { DataTablePagination } from './data-table-pagination'
-import { InputSentence, Sentence } from '@/types'
+import { InputSentence, Sentence } from '@sayvoca/lib/types'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sentenceInputSchema } from '@sayvoca/lib'

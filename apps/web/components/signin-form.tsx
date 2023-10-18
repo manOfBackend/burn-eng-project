@@ -1,6 +1,6 @@
 "use client"
 
-import { Inputs } from '@/types'
+import { Inputs } from '@sayvoca/lib/types'
 import { signinErrorMessages } from '@/utils/errorMessage'
 import { useAuth, useSignIn } from '@clerk/nextjs'
 import { zodResolver } from "@hookform/resolvers/zod"

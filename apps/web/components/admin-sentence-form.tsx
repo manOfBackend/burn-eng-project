@@ -1,6 +1,6 @@
 "use client"
 
-import { InputSentence } from '@/types'
+import { InputSentence } from '@sayvoca/lib/types'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { addSentence } from '@sayvoca/lib'
 import { sentenceInputSchema } from '@sayvoca/lib/validations/word'

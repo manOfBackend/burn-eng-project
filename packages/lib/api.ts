@@ -1,11 +1,11 @@
-import { Sentence, SentencePage, SentenceResponse } from '../lib/types';
+import { InputSentence, Sentence, SentencePage, SentenceResponse } from '../lib/types';
 import { http } from './http';
 
 export function getSentencePage({ page, size }: { page: number, size: number }) {
   return http.get<SentencePage>('https://zammanvoca-api.m0n5t3r.com/admin/sentence', { params: { page, size } });
 }
 
-export function addSentence({ language, sentence }: { language: 'KOREAN', sentence: string }) {
+export function addSentence({ language, sentence }: InputSentence) {
   return http.post<Sentence>('https://zammanvoca-api.m0n5t3r.com/admin/sentence', { language, sentence });
 }
 

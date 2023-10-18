@@ -1,6 +1,6 @@
 "use client"
 
-import { Sentence } from "@/types"
+import { Sentence } from "@sayvoca/lib/types"
 import { Checkbox } from "@sayvoca/ui/checkbox"
 import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "./data-table-column-header"

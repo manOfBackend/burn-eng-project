@@ -2,7 +2,7 @@ import { authMiddleware, clerkClient } from "@clerk/nextjs";
 import { sessionTokenSchema } from "@sayvoca/lib/validations/auth";
 import * as jose from "jose";
 import { NextResponse } from "next/server";
-import { UserRole } from "./types";
+import { UserRole } from "@sayvoca/lib/types";
 
 export default authMiddleware({
   publicRoutes: [
