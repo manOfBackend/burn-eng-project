@@ -1,32 +1,39 @@
-import React from 'react'
+'use client'
+import React, { useMemo } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
+import { SentenceResponse } from '@sayvoca/lib'
 
-const data = [
-  {
-    "type": "의미정확도",
-    "score": 85,
-    "color": "hsl(261, 70%, 50%)",
-  },
-  {
-    "type": "문법정확도",
-    "score": 100,
-    "color": "hsl(352, 70%, 50%)",
+interface SentenceFeedbackChartProps {
+  data: Pick<SentenceResponse, 'grammarAccuracy' | 'meaningAccuracy' | 'naturalness' | 'overallEvaluationScore'>
+}
+export default function SentenceFeedbackChart({ data: { grammarAccuracy, meaningAccuracy, naturalness, overallEvaluationScore } }: SentenceFeedbackChartProps) {
 
-  },
-  {
-    "type": "자연스러움",
-    "score": 90,
-    "color": "hsl(195, 70%, 50%)",
 
-  },
-  {
-    "type": "종합점수",
-    "score": 50,
-    "color": "hsl(7, 70%, 50%)",
-  },
-]
+  const data = useMemo(() => [
+    {
+      "type": "의미정확도",
+      "score": meaningAccuracy,
+      "color": "hsl(195, 70%, 60%)",
+    },
+    {
+      "type": "문법정확도",
+      "score": grammarAccuracy,
+      "color": "hsl(195, 70%, 60%)",
 
-export default function SentenceFeedbackChart() {
+    },
+    {
+      "type": "자연스러움",
+      "score": naturalness,
+      "color": "hsl(195, 70%, 60%)",
+
+    },
+    {
+      "type": "종합점수",
+      "score": overallEvaluationScore,
+      "color": "hsl(7, 70%, 50%)",
+    },
+  ], [grammarAccuracy, meaningAccuracy, naturalness, overallEvaluationScore])
+
   return (
     <ResponsiveBar
       data={data}
