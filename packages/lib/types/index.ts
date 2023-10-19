@@ -2,13 +2,13 @@ import { addWordSchema, signUpSchema, userAuthSchema, userRoleSchema } from "../
 import { sentenceInputSchema, sentencePageResponseSchema, sentenceResponseSchema, sentenceSchema } from "../validations/word"
 import { z } from "zod"
 
+export * as env from '../env.mjs'
+
 export type UserRole = z.infer<typeof userRoleSchema>
 
 export type Inputs = z.infer<typeof userAuthSchema>
 
 export type AddWord = z.infer<typeof addWordSchema>
-
-
 
 export type signUpInputs = z.infer<typeof signUpSchema>
 

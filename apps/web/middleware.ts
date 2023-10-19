@@ -3,6 +3,7 @@ import { sessionTokenSchema } from "@sayvoca/lib/validations/auth";
 import * as jose from "jose";
 import { NextResponse } from "next/server";
 import { UserRole } from "@sayvoca/lib/types";
+import { env } from "@sayvoca/lib/env.mjs";
 
 export default authMiddleware({
   publicRoutes: [
@@ -17,7 +18,7 @@ export default authMiddleware({
     }
     const url = new URL(req.nextUrl.origin)
 
-    const publicKey = process.env.CLERK_PEM_PUBLIC_KEY as string;
+    const publicKey = env.CLERK_PEM_PUBLIC_KEY as string;
     const sessionObj = req.cookies.get('__session')
 
     if (!sessionObj || !sessionObj.value) {

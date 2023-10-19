@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
+import { env } from './env.mjs'
 
 const axiosInstance = axios.create();
 
@@ -14,6 +15,7 @@ http.interceptors.response.use(res => res.data);
 
 http.interceptors.request.use((config) => {
   if (!config.headers) return config;
+  config.baseURL = env.NEXT_PUBLIC_API_URL;
 
   const sessionToken = Cookies.get('__session');
 
