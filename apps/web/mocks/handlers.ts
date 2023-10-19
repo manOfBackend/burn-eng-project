@@ -4,6 +4,7 @@ import { rest } from 'msw'
 export const handlers = [
   rest.post('/translated-feedback', (req, res, ctx) => {
     return res(
+      ctx.delay(3000),
       ctx.json({
         meaningAccuracy: 30,
         grammarAccuracy: 50,

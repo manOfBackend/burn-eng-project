@@ -13,24 +13,24 @@ export default function SentenceFeedbackChart({ data: { grammarAccuracy, meaning
     {
       "type": "의미정확도",
       "score": meaningAccuracy,
-      "color": "hsl(195, 70%, 60%)",
+      "color": "hsl(173, 58%, 39%)",
     },
     {
       "type": "문법정확도",
       "score": grammarAccuracy,
-      "color": "hsl(195, 70%, 60%)",
+      "color": "hsl(173, 58%, 39%)",
 
     },
     {
       "type": "자연스러움",
       "score": naturalness,
-      "color": "hsl(195, 70%, 60%)",
+      "color": "hsl(173, 58%, 39%)",
 
     },
     {
       "type": "종합점수",
       "score": overallEvaluationScore,
-      "color": "hsl(7, 70%, 50%)",
+      "color": "hsl(12, 76%, 61%)",
     },
   ], [grammarAccuracy, meaningAccuracy, naturalness, overallEvaluationScore])
 
@@ -49,6 +49,7 @@ export default function SentenceFeedbackChart({ data: { grammarAccuracy, meaning
       colors={({ data }) => data['color']}
       axisTop={null}
       axisRight={null}
+      borderRadius={10}
       axisBottom={null}
       axisLeft={{
         tickSize: 0,

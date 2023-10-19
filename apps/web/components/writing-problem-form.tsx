@@ -11,11 +11,11 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import SentenceFeedbackChart from './sentence-feedback-chart'
+import { useFeedbackStore } from '@/store/feedback'
 
 export default function WritingProblemForm() {
-  const router = useRouter();
-  const [isPending, startTransition] = React.useTransition()
-
+  const router = useRouter()
+  const { addFeedback } = useFeedbackStore()
   const form = useForm<InputSentence>({
     resolver: zodResolver(sentenceInputSchema),
     defaultValues: {
@@ -23,22 +23,21 @@ export default function WritingProblemForm() {
     },
   })
 
-  const { mutate, data } = useMutation({
+  const { mutate, data, isLoading } = useMutation({
     mutationKey: ['writing'],
     mutationFn: submitWriting,
     onSuccess: (data) => {
+      addFeedback(data)
       router.push('/writing/result')
     }
   })
 
 
   function onSubmit(data: InputSentence) {
-    startTransition(async () => {
-      await mutate({
-        sentenceId: 2,
-        translatedLanguage: 'ENGLISH',
-        translatedSentence: data.sentence,
-      })
+    mutate({
+      sentenceId: 2,
+      translatedLanguage: 'ENGLISH',
+      translatedSentence: data.sentence,
     })
   }
 
@@ -71,8 +70,8 @@ export default function WritingProblemForm() {
                 </FormItem>
               )}
             />
-            <Button disabled={isPending}>
-              {isPending && (
+            <Button disabled={isLoading}>
+              {isLoading && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"
                   aria-hidden="true"
