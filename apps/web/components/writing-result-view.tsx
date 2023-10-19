@@ -21,19 +21,23 @@ export default function WritingResultView() {
       </div>
 
       <section className='h-52 w-full mt-4 border-solid border-2 p-2'>
-        <h2 className='font-bold'>코멘트</h2>
+        <h2 className='font-bold text-lg'>코멘트</h2>
         <p className='text-sm pl-2'>
           {data?.advice}
         </p>
       </section>
-      <ul className='mt-4 flex flex-col'>
-        {data?.betterTranslatedSentences?.map((sentence, index) => (
-          <li key={index} className='border-solid border-2 p-2'>
-            {sentence}
-          </li>
-        ))
-        }
-      </ul>
+      {data?.betterTranslatedSentences?.length > 0 && (
+        <ul className='mt-4 flex flex-col gap-2'>
+          <h2 className='font-bold text-lg'>제안</h2>
+          {data?.betterTranslatedSentences.map((sentence, index) => (
+            <li key={index} className='border-solid border-2 p-2 font-medium'>
+              {`${index + 1}. ${sentence}`}
+            </li>
+          ))
+          }
+        </ul>
+      )
+      }
     </section>
   )
 }
