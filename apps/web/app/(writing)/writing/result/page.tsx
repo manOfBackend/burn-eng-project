@@ -1,4 +1,4 @@
-import WritingResultView from '@/components/writing-result-view'
+import WritingResultView from '@/components/problem/writing-result-view'
 import React from 'react'
 
 export default function WritingResultPage() {

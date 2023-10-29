@@ -1,4 +1,4 @@
-import { InputSentence, Sentence, SentencePage, SentenceResponse } from '../lib/types';
+import { InputSentence, Sentence, SentenceHistoryResponse, SentencePage, SentenceProblemResponse, SentenceResponse, UserInfoResponse } from '../lib/types';
 import { http } from './http';
 
 export function getSentencePage({ page, size }: { page: number, size: number }) {
@@ -15,4 +15,16 @@ export function submitWriting({ sentenceId, translatedLanguage, translatedSenten
 
 export function searchSentence({ search }: { search: string }) {
   return http.post<Sentence[]>('/admin/sentence/search', { search });
+}
+
+export function getSentenceProblem({ level }: { level: number }) {
+  return http.get<SentenceProblemResponse>(`/sentence/random`);
+}
+
+export function getSentenceProblemHistory({ date, languageFrom, languageTo }: { date: string, languageFrom: string, languageTo: string }) {
+  return http.get<SentenceHistoryResponse>(`/sentence/random?language-from=${languageFrom}&language-to=${languageTo}&date=${date}`);
+}
+
+export function getUserInfo() {
+  return http.get<UserInfoResponse>(`/users`);
 }

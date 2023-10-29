@@ -41,7 +41,7 @@ export default function VerifyEmailForm() {
         if (completeSignUp.status === "complete") {
           await setActive({ session: completeSignUp.createdSessionId })
 
-          router.push(`${window.location.origin}/`)
+          router.push(`${window.location.origin}/dashboard`)
         }
       } catch (error) {
         console.error(error)

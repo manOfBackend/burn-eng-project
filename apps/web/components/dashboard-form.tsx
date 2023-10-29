@@ -119,6 +119,17 @@ export default function DashboardForm() {
           <Icons.pencil color='#9108bf' />
           작문 학습
         </Button>
+        <Button
+          className='w-full gap-2'
+          variant={'dashboard'}
+          size={'icon'}
+          onClick={() => {
+            router.push('/writing/history')
+          }}
+        >
+          <Icons.history color='#9108bf' />
+          학습이력
+        </Button>
       </article>
     </section>
   )

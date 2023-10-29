@@ -15,6 +15,34 @@ export const sentenceResponseSchema = z.object({
   betterTranslatedSentences: z.string().array(),
 })
 
+export const sentenceProblemResponseSchema = z.object({
+  id: z.number(),
+  sentence: z.string(),
+  level: z.number(),
+  createdAt: z.any(),
+  updatedAt: z.any().nullable(),
+  deletedAt: z.any().nullable(),
+  enable: z.boolean(),
+  language: z.enum(['KOREAN', 'ENGLISH']),
+})
+
+export const sentenceHistoryResponseSchema = z.array(z.object({
+  sentence: z.string(),
+  translatedSentence: z.string(),
+  translatedFeedback: z.object(sentenceResponseSchema.shape),
+}))
+
+export const userInfoResponseSchema = z.object({
+  email: z.string(),
+  role: z.enum(['ADMIN', 'USER']),
+  recentLevelHistories: z.object({
+    additionalProp1: z.number(),
+    additionalProp2: z.number(),
+    additionalProp3: z.number(),
+  }),
+  level: z.number().min(1),
+  exp: z.number(),
+})
 
 export const sentenceSchema = z.object({
   id: z.number(),

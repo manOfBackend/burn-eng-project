@@ -1,6 +1,8 @@
-import WritingProblemForm from "@/components/writing-problem-form";
-export default function Page() {
+import WritingProblemForm from "@/components/problem/writing-problem-form";
+import WritingProblemView from "@/components/problem/writing-problem-view";
+export default async function Page() {
+
   return (
-    <WritingProblemForm />
+    <WritingProblemView />
   );
 }

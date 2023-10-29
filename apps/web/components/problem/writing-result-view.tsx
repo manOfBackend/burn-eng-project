@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import SentenceFeedbackChart from './sentence-feedback-chart'
+import SentenceFeedbackChart from '../sentence-feedback-chart'
 import { useMutation } from '@tanstack/react-query'
 import { submitWriting } from '@sayvoca/lib/api'
-import { queryClient } from './queryClient'
+import { queryClient } from '../queryClient'
 import { useFeedbackStore } from '@/store/feedback'
 
 export default function WritingResultView() {

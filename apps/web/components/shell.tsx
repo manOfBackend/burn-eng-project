@@ -22,8 +22,8 @@ export function Shell({
       className={cn(
         "grid items-center gap-8 pb-8 pt-6 md:py-8",
         layout === "default" && "container",
-        layout === "auth" && "container max-w-lg h-screen",
-        layout === "dashboard" && "container max-w-lg h-screen",
+        layout === "auth" && "container h-screen",
+        layout === "dashboard" && "container h-screen",
         className
       )}
       {...props}

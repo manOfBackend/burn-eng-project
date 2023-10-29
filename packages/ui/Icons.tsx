@@ -29,6 +29,7 @@ import {
   BookOpenCheck,
   Pencil,
   X,
+  History,
   type Icon as LucideIcon,
   BookOpen
 } from "lucide-react"
@@ -92,5 +93,6 @@ export const Icons = {
   doubleArrowLeft: DoubleArrowLeftIcon,
   chevronLeftIcon: ChevronLeftIcon,
   chevronRightIcon: ChevronRightIcon,
-  doubleArrowRightIcon: DoubleArrowRightIcon
+  doubleArrowRightIcon: DoubleArrowRightIcon,
+  history: History,
 }
