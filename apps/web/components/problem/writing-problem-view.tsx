@@ -38,8 +38,9 @@ export default function WritingProblemView() {
 
 
   function onSubmit(data: InputSentence) {
+    if (!problem) return;
     submit({
-      sentenceId: problem?.id,
+      sentenceId: problem.id,
       translatedLanguage: 'ENGLISH',
       translatedSentence: data.sentence,
     })
