@@ -13,4 +13,5 @@ export const useFeedbackStore = create<FeedbackStore>((set) => ({
   meaningAccuracy: 0,
   naturalness: 0,
   overallEvaluationScore: 0,
+  feedbackResult: 'FAIL',
 }))
