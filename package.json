@@ -3,6 +3,7 @@
   "scripts": {
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
+    "dev:mock": "dotenv -- turbo run dev:mock",
     "db:generate": "dotenv -- turbo run db:generate --filter=@sayvoca/database",
     "db:push": "dotenv -- turbo run db:push --filter=@sayvoca/database",
     "db:studio": "dotenv -- turbo run db:studio --filter=@sayvoca/database",

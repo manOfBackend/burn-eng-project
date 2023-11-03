@@ -9,6 +9,10 @@ export function addSentence({ language, sentence }: InputSentence) {
   return http.post<Sentence>('/admin/sentence', { language, sentence });
 }
 
+export function deleteSentence(sentenceId: Sentence['id']) {
+  return http.delete<void>(`/admin/sentence/${sentenceId}`);
+}
+
 export function submitWriting({ sentenceId, translatedLanguage, translatedSentence }: { translatedLanguage: string, translatedSentence: string, sentenceId: number }) {
   return http.post<SentenceResponse>('/translated-feedback', { translatedLanguage, translatedSentence, sentenceId });
 }

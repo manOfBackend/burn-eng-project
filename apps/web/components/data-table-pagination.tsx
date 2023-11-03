@@ -1,9 +1,13 @@
-
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@sayvoca/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@sayvoca/ui/select"
 import { Table } from "@tanstack/react-table"
-
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -14,11 +18,12 @@ export function DataTablePagination<TData>({
 }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2">
-      <div className="flex-1 text-sm text-muted-foreground">
-      </div>
+      <div className="text-muted-foreground flex-1 text-sm"></div>
       <div className="flex items-center space-x-6 lg:space-x-8">
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium text-muted-foreground">표시 단어 개수</p>
+          <p className="text-muted-foreground text-sm font-medium">
+            표시 단어 개수
+          </p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -57,8 +62,7 @@ export function DataTablePagination<TData>({
             <Icons.chevronLeftIcon className="h-4 w-4" />
           </Button>
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            {table.getState().pagination.pageIndex + 1} / {" "}
-            {table.getPageCount()}
+            {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
           </div>
           <Button
             variant="outline"

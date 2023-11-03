@@ -1,8 +1,13 @@
-
 import { cn } from "@sayvoca/lib/utils"
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@sayvoca/ui/dropdown"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@sayvoca/ui/dropdown"
 import { Column } from "@tanstack/react-table"
 
 interface DataTableColumnHeaderProps<TData, TValue>
@@ -27,7 +32,7 @@ export function DataTableColumnHeader<TData, TValue>({
           <Button
             variant="ghost"
             size="sm"
-            className="-ml-3 h-8 data-[state=open]:bg-accent"
+            className="data-[state=open]:bg-accent -ml-3 h-8"
           >
             <span>{title}</span>
             {column.getIsSorted() === "desc" ? (
@@ -41,16 +46,16 @@ export function DataTableColumnHeader<TData, TValue>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-            <Icons.arrowUp className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.arrowUp className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             오름차순
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-            <Icons.arrowDown className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.arrowDown className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             내림차순
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-            <Icons.eyeNone className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.eyeNone className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             숨기기
           </DropdownMenuItem>
         </DropdownMenuContent>

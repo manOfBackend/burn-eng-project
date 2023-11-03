@@ -1,4 +1,16 @@
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, CheckCircledIcon, ChevronLeftIcon, ChevronRightIcon, CircleIcon, DotsHorizontalIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon, EyeNoneIcon } from "@radix-ui/react-icons"
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  CheckCircledIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CircleIcon,
+  DotsHorizontalIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+  EyeNoneIcon,
+} from "@radix-ui/react-icons"
 import {
   AlertTriangle,
   ArrowRight,
@@ -31,7 +43,9 @@ import {
   X,
   History,
   type Icon as LucideIcon,
-  BookOpen
+  BookOpen,
+  Lock,
+  LogOut,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -95,4 +109,6 @@ export const Icons = {
   chevronRightIcon: ChevronRightIcon,
   doubleArrowRightIcon: DoubleArrowRightIcon,
   history: History,
+  lock: Lock,
+  logOut: LogOut,
 }

@@ -35,7 +35,7 @@ export const handlers = [
       ctx.json(
         {
           "email": "aaa@aa.com",
-          "role": "USER",
+          "role": "ADMIN",
           "recentLevelHistories": {
             "additionalProp1": 0,
             "additionalProp2": 0,

@@ -14,7 +14,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1).optional(),
     NEXT_PUBLIC_API_URL: z.string().min(1),
-    NEXT_PUBLIC_IS_USE_MOCK: z.boolean().optional(),
+    NEXT_PUBLIC_IS_USE_MOCK: z.string().transform((v) => v === "true"),
   },
   runtimeEnv: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
