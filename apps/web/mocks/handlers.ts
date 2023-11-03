@@ -30,6 +30,18 @@ export const handlers = [
         }
       ))
   }),
+  rest.get('/translated/history/dates', (req, res, ctx) => {
+    return res(
+      ctx.json(
+        {
+         dates: [
+          "2023-11-01",
+          "2023-11-02",
+         ]
+        }
+      ))
+  }),
+
   rest.get('/users', (req, res, ctx) => {
     return res(
       ctx.json(

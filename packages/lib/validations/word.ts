@@ -13,6 +13,7 @@ export const sentenceResponseSchema = z.object({
   overallEvaluationScore: z.number(),
   advice: z.string(),
   betterTranslatedSentences: z.string().array(),
+  feedbackResult: z.enum(['PASS', 'FAIL']),
 })
 
 export const sentenceProblemResponseSchema = z.object({
@@ -24,6 +25,10 @@ export const sentenceProblemResponseSchema = z.object({
   deletedAt: z.any().nullable(),
   enable: z.boolean(),
   language: z.enum(['KOREAN', 'ENGLISH']),
+})
+
+export const sentenceHistoryDatesResponseSchema = z.object({
+  dates: z.string().array(),
 })
 
 export const sentenceHistoryResponseSchema = z.array(z.object({
@@ -42,6 +47,7 @@ export const userInfoResponseSchema = z.object({
   }),
   level: z.number().min(1),
   exp: z.number(),
+  todayTranslated: z.number(),
 })
 
 export const sentenceSchema = z.object({

@@ -1,13 +1,16 @@
+import { useClerk } from "@clerk/nextjs"
 import React from "react"
 
 export default function DashboardStat() {
+  const { user } = useClerk()
+
   return (
     <div className="stats w-full shadow">
       <div className="stat">
         <div className="stat-figure text-secondary">
           <div className="avatar placeholder">
             <div className="text-neutral-content w-24 rounded-full bg-purple-900">
-              <span className="text-3xl">K</span>
+              <span className="text-3xl">{user?.username?.slice(0, 1)}</span>
             </div>
           </div>
         </div>

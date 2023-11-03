@@ -87,7 +87,7 @@ export default function DashboardForm() {
   const { signOut } = useClerk()
 
   return (
-    <section>
+    <section className="overflow-y-scroll">
       <article className="mb-5">
         <DashboardStat />
       </article>
@@ -95,12 +95,6 @@ export default function DashboardForm() {
         <h3 className="font-bold">레벨</h3>
         <div className="h-52 w-full">
           <DashboardChart data={data} />
-        </div>
-      </article>
-      <article>
-        <h3 className="font-bold">최고 점수</h3>
-        <div className="h-52 w-full">
-          <DashboardChart data={data2} />
         </div>
       </article>
       <article className="mt-7 flex flex-col gap-3">
