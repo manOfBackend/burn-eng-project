@@ -9,6 +9,10 @@ export function addSentence({ language, sentence }: InputSentence) {
   return http.post<Sentence>('/admin/sentence', { language, sentence });
 }
 
+export function editSentence({ enable, id, language, level, sentence }: Pick<Sentence, 'id' | 'enable' | 'language' | 'sentence' | 'level'>) {
+  return http.put<void>(`/admin/sentence`, { enable, id, language, level, sentence });
+}
+
 export function deleteSentence(sentenceId: Sentence['id']) {
   return http.delete<void>(`/admin/sentence/${sentenceId}`);
 }

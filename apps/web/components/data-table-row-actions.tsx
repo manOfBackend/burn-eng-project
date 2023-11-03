@@ -29,11 +29,7 @@ interface DataTableRowActionsProps {
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const word = sentenceSchema.parse(row.original)
 
-  const {
-    mutate: submitDelete,
-    isLoading,
-    isSuccess,
-  } = useMutation({
+  const { mutate: submitDelete } = useMutation({
     mutationKey: ["deleteSentence"],
     mutationFn: deleteSentence,
     onSuccess: () => {

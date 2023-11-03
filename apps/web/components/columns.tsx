@@ -6,6 +6,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { Icons } from "@sayvoca/ui/Icons"
 import { DataTableRowActions } from "./data-table-row-actions"
+import AdminSentenceEnableHeadder from "./admin-sentence-enable-header"
 
 export const columns: ColumnDef<Sentence>[] = [
   {
@@ -43,15 +44,7 @@ export const columns: ColumnDef<Sentence>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="사용" />
     ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <span className="max-w-[700px] truncate font-medium">
-            {Boolean(row.getValue("enable")) ? <Icons.checkCircled /> : <Icons.circle />}
-          </span>
-        </div>
-      )
-    },
+    cell: AdminSentenceEnableHeadder,
   },
   {
     accessorKey: "sentence",
@@ -146,16 +139,15 @@ export const columns: ColumnDef<Sentence>[] = [
   },
 ]
 
-
 export const statuses = [
   {
     value: "active",
-    label: "Active",
+    label: "활성화",
     icon: Icons.checkCircled,
   },
   {
     value: "inactive",
-    label: "Inactive",
+    label: "비활성화",
     icon: Icons.circle,
   },
 ]
