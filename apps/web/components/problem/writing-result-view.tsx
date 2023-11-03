@@ -6,6 +6,8 @@ import { submitWriting } from "@sayvoca/lib/api"
 import { queryClient } from "../queryClient"
 import { useFeedbackStore } from "@/store/feedback"
 import { useRouter } from "next/navigation"
+import { Button } from "@sayvoca/ui/Button"
+import { Icons } from "@sayvoca/ui/Icons"
 
 export default function WritingResultView() {
   const { addFeedback, ...data } = useFeedbackStore()
@@ -31,7 +33,6 @@ export default function WritingResultView() {
           />
         )}
       </div>
-
       <section className="mt-4 h-52 w-full border-2 border-solid p-2">
         <h2 className="text-lg font-bold">코멘트</h2>
         <p className="pl-2 text-sm">{data?.advice}</p>
@@ -46,6 +47,31 @@ export default function WritingResultView() {
           ))}
         </ul>
       )}
+      <article className="flex gap-2 mt-4">
+        <Button
+          className="w-full gap-2"
+          variant={"dashboard"}
+          disabled={data?.feedbackResult !== "PASS"}
+          size={"icon"}
+          onClick={() => {
+            router.replace("/writing")
+          }}
+        >
+          <Icons.arrowRightCircle color="#9108bf" />
+          다음문제
+        </Button>
+        <Button
+          className="w-full gap-2"
+          variant={"dashboard"}
+          size={"icon"}
+          onClick={() => {
+            router.replace("/dashboard")
+          }}
+        >
+          <Icons.home color="#9108bf" />
+          돌아가기
+        </Button>
+      </article>
     </section>
   )
 }

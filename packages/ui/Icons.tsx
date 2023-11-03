@@ -46,6 +46,8 @@ import {
   BookOpen,
   Lock,
   LogOut,
+  Home,
+  ArrowRightCircle,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -111,4 +113,6 @@ export const Icons = {
   history: History,
   lock: Lock,
   logOut: LogOut,
+  home: Home,
+  arrowRightCircle: ArrowRightCircle,
 }

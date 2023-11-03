@@ -12,6 +12,7 @@ export const handlers = [
         overallEvaluationScore: 80,
         advice: '더 분발하세요',
         betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
+        feedbackResult: 'PASS',
       })
     )
   }),
