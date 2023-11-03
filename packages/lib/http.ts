@@ -11,11 +11,13 @@ export interface HttpClient extends AxiosInstance {
 
 export const http: HttpClient = axiosInstance;
 
+const MOCK_API_URL = 'http://localhost:3000'
+
 http.interceptors.response.use(res => res.data);
 
 http.interceptors.request.use((config) => {
   if (!config.headers) return config;
-  config.baseURL = env.NEXT_PUBLIC_API_URL;
+  config.baseURL = env.NEXT_PUBLIC_IS_USE_MOCK ? MOCK_API_URL : env.NEXT_PUBLIC_API_URL;
   const sessionToken = Cookies.get('__session');
 
   if (sessionToken !== null) {

@@ -2,11 +2,11 @@ import React from 'react'
 
 export default function DashboardStat() {
   return (
-    <div className="stats shadow w-full">
+    <div className="stats w-full shadow">
       <div className="stat">
         <div className="stat-figure text-secondary">
           <div className="avatar placeholder">
-            <div className="bg-purple-900 text-neutral-content rounded-full w-24">
+            <div className="text-neutral-content w-24 rounded-full bg-purple-900">
               <span className="text-3xl">K</span>
             </div>
           </div>

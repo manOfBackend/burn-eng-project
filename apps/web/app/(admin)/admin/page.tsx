@@ -2,11 +2,10 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 
 
 export default async function AdminPage() {
-
   return (
     <section className="mx-auto mt-20">
       <NavigationMenu className=''>
-        <NavigationMenuList className='shadow-lg rounded-xl menu'>
+        <NavigationMenuList className='menu rounded-xl shadow-lg'>
           <NavigationMenuItem>
             <NavigationMenuLink href='/admin/sentense'>
               <p className="text-2xl font-bold">문장</p>

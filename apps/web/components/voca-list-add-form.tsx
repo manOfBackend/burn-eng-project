@@ -1,8 +1,8 @@
 'use client'
 
-import { AddWord, InputSentence } from '@sayvoca/lib/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { addWordSchema, sentenceInputSchema } from '@sayvoca/lib/validations'
+import { InputSentence } from '@sayvoca/lib/types'
+import { sentenceInputSchema } from '@sayvoca/lib/validations'
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '@sayvoca/ui'
 import { Icons } from '@sayvoca/ui/Icons'
 import { useRouter } from 'next/navigation'
@@ -34,7 +34,7 @@ export default function VocaListAddForm() {
             <h2 className='mb-2 font-bold'>문제</h2>
             <p>레벨 4</p>
           </div>
-          <p className='text-base font-semibold ml-2 text-green-900'>너가 아니였으면, 나는 정말 힘들었을 거야</p>
+          <p className='ml-2 text-base font-semibold text-green-900'>너가 아니였으면, 나는 정말 힘들었을 거야</p>
         </section>
         <section>
           <form
@@ -68,8 +68,8 @@ export default function VocaListAddForm() {
         </section>
       </Form>
       <section className='mt-4'>
-        <h2 className='font-bold mb-2'>피드백</h2>
-        <div className='flex gap-4 ml-2'>
+        <h2 className='mb-2 font-bold'>피드백</h2>
+        <div className='ml-2 flex gap-4'>
           <div className='flex flex-col gap-2'>
             <p className='font-bold'>의미정확도</p>
             <p className='text-base font-semibold text-green-900'>90%</p>
@@ -87,7 +87,7 @@ export default function VocaListAddForm() {
             <p className='text-base font-semibold text-green-900'>90점</p>
           </div>
         </div>
-        <div className='h-52 w-full mt-4 border-solid border-2'>
+        <div className='mt-4 h-52 w-full border-2 border-solid'>
 
         </div>
       </section>

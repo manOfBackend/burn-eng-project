@@ -15,8 +15,8 @@ const fontSans = FontSans({
 })
 
 export const metadata = {
-  title: '세이보카',
-  description: '세이보카 프로젝트',
+  title: '쓰평',
+  description: '쓰평 프로젝트',
   keywords: [
     "english voca learning",
     "chatGPT",
@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen max-w-screen overflow-hidden bg-background mx-auto font-sans antialiased flex justify-center w-full",
+            "max-w-screen bg-background mx-auto flex min-h-screen w-full justify-center overflow-hidden font-sans antialiased",
             fontSans.variable,
           )}
         >

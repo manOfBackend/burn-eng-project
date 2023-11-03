@@ -29,7 +29,7 @@ export default function WritingProblemForm({ level, problem, onSubmit, isLoading
             <h2 className='mb-2 font-bold'>문제</h2>
             <p>레벨 {level}</p>
           </div>
-          <p className='text-base font-semibold ml-2 text-green-900'>{problem}</p>
+          <p className='ml-2 text-base font-semibold text-green-900'>{problem}</p>
         </section>
         <section>
           <form

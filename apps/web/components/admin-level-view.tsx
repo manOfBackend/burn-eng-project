@@ -99,8 +99,8 @@ export default function AdminLevelView() {
   }
 
   return (
-    <div className='flex flex-col w-full'>
-      <div className='flex gap-4 justify-end w-full items-center pb-4'>
+    <div className='flex w-full flex-col'>
+      <div className='flex w-full items-center justify-end gap-4 pb-4'>
         <div>
           <Form {...form}>
             <form
@@ -132,7 +132,7 @@ export default function AdminLevelView() {
           </Form>
         </div>
       </div>
-      <div className="rounded-md border mb-5">
+      <div className="mb-5 rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

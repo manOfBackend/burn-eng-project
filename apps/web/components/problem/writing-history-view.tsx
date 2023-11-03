@@ -11,7 +11,7 @@ export default function WritingHistoryView() {
   // })
   return (
     <section className='mt-4'>
-      <h2 className='font-bold mb-2 text-xl'>피드백</h2>
+      <h2 className='mb-2 text-xl font-bold'>피드백</h2>
     </section>
   )
 }

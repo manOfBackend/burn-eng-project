@@ -11,7 +11,7 @@ export default function WritingResultView() {
 
   return (
     <section className='mt-4'>
-      <h2 className='font-bold mb-2 text-xl'>피드백</h2>
+      <h2 className='mb-2 text-xl font-bold'>피드백</h2>
       <div className='h-[200px] w-full'>
         {data && (
           <SentenceFeedbackChart data={{
@@ -20,17 +20,17 @@ export default function WritingResultView() {
         )}
       </div>
 
-      <section className='h-52 w-full mt-4 border-solid border-2 p-2'>
-        <h2 className='font-bold text-lg'>코멘트</h2>
-        <p className='text-sm pl-2'>
+      <section className='mt-4 h-52 w-full border-2 border-solid p-2'>
+        <h2 className='text-lg font-bold'>코멘트</h2>
+        <p className='pl-2 text-sm'>
           {data?.advice}
         </p>
       </section>
       {data?.betterTranslatedSentences?.length > 0 && (
         <ul className='mt-4 flex flex-col gap-2'>
-          <h2 className='font-bold text-lg'>제안</h2>
+          <h2 className='text-lg font-bold'>제안</h2>
           {data?.betterTranslatedSentences.map((sentence, index) => (
-            <li key={index} className='border-solid border-2 p-2 font-medium'>
+            <li key={index} className='border-2 border-solid p-2 font-medium'>
               {`${index + 1}. ${sentence}`}
             </li>
           ))

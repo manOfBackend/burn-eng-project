@@ -8,9 +8,9 @@ interface AdminSentenseProps {
 
 export default function AdminLevelLayout({ children, addModal, list }: AdminSentenseProps) {
   return (
-    <section className='flex flex-col w-full'>
-      <h2 className='text-center my-10'>난이도 관리</h2>
-      <div className='w-full flex justify-end mb-2'>
+    <section className='flex w-full flex-col'>
+      <h2 className='my-10 text-center'>난이도 관리</h2>
+      <div className='mb-2 flex w-full justify-end'>
         {addModal}
       </div>
       {list}

@@ -19,12 +19,12 @@ export default async function page() {
             관리자 메뉴
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid w-[500px] gap-3 p-6 lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
                     aria-label="admin-words"
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
                     href="/admin/words"
                   >
                     <div className="mb-2 mt-4 text-lg font-medium">

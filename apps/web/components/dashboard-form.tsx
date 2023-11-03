@@ -85,17 +85,17 @@ export default function DashboardForm() {
       </article>
       <article>
         <h3 className='font-bold'>레벨</h3>
-        <div className='w-full h-52'>
+        <div className='h-52 w-full'>
           <DashboardChart data={data} />
         </div>
       </article>
       <article>
         <h3 className='font-bold'>최고 점수</h3>
-        <div className='w-full h-52'>
+        <div className='h-52 w-full'>
           <DashboardChart data={data2} />
         </div>
       </article>
-      <article className='flex flex-col gap-3 mt-7'>
+      <article className='mt-7 flex flex-col gap-3'>
         {/* <div className='flex gap-4'>
           <Button className='flex-[3] gap-2' variant={'dashboard'} size={'icon'}>
             <Icons.bookOpenCheck color='#9108bf' />

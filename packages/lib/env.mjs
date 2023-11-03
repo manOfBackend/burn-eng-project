@@ -14,6 +14,7 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1).optional(),
     NEXT_PUBLIC_API_URL: z.string().min(1),
+    NEXT_PUBLIC_IS_USE_MOCK: z.boolean().optional(),
   },
   runtimeEnv: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
@@ -24,6 +25,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_IS_USE_MOCK: process.env.NEXT_PUBLIC_IS_USE_MOCK,
     CLERK_PEM_PUBLIC_KEY: process.env.CLERK_PEM_PUBLIC_KEY,
   },
 })

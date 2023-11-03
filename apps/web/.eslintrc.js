@@ -1,1 +1,0 @@
-module.exports = require("@sayvoca/config/eslint.json");

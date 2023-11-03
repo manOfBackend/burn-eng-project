@@ -9,16 +9,16 @@ export default function Page() {
     <Shell layout="auth">
       <Card>
         <CardHeader className="space-y-1">
-          <div className="flex justify-center items-center mb-5 min-h-[375px]">
+          <div className="mb-5 flex min-h-[375px] items-center justify-center">
             <ZammanboLottie className='max-w-xs' />
           </div>
-          <CardTitle className="text-2xl text-center">Hi</CardTitle>
+          <CardTitle className="text-center text-2xl">Hi</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <SignInForm />
         </CardContent>
         <CardFooter className="flex flex-wrap items-center space-x-2">
-          <div className="flex-1 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex-1 text-sm">
             <Link
               aria-label="Sign up"
               href="/signup"
@@ -30,7 +30,7 @@ export default function Page() {
           <Link
             aria-label="Reset password"
             href="/signin/reset-password"
-            className="text-sm text-primary underline-offset-4 transition-colors hover:underline"
+            className="text-primary text-sm underline-offset-4 transition-colors hover:underline"
           >
             비밀번호 초기화
           </Link>
