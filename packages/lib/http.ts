@@ -20,7 +20,7 @@ http.interceptors.request.use((config) => {
   config.baseURL = env.NEXT_PUBLIC_IS_USE_MOCK ? MOCK_API_URL : env.NEXT_PUBLIC_API_URL;
   const sessionToken = Cookies.get('__session');
 
-  if (sessionToken !== null) {
+  if (sessionToken) {
     config.headers.Authorization = `Bearer ${sessionToken}`;
   }
 
