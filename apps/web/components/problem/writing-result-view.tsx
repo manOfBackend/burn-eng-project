@@ -1,18 +1,18 @@
 "use client"
-import React, { useEffect, useLayoutEffect } from "react"
-import SentenceFeedbackChart from "../sentence-feedback-chart"
-import { useMutation } from "@tanstack/react-query"
-import { submitWriting } from "@sayvoca/lib/api"
-import { queryClient } from "../queryClient"
 import { useFeedbackStore } from "@/store/feedback"
-import { useRouter } from "next/navigation"
+import { cn } from "@sayvoca/lib/utils"
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
-import { cn } from "@sayvoca/lib/utils"
+import { useRouter } from "next/navigation"
+import React, { useLayoutEffect } from "react"
+import SentenceFeedbackChart from "../sentence-feedback-chart"
+import { useClerk } from "@clerk/nextjs"
 
 export default function WritingResultView() {
   const { addFeedback, ...data } = useFeedbackStore()
   const router = useRouter()
+
+  const { user } = useClerk()
 
   useLayoutEffect(() => {
     if (!data?.advice) {
@@ -74,7 +74,11 @@ export default function WritingResultView() {
           disabled={data?.feedbackResult !== "PASS"}
           size={"icon"}
           onClick={() => {
-            router.replace("/writing")
+            if (user) {
+              router.replace("/writing")
+            } else {
+              router.replace("/guest/writing")
+            }
           }}
         >
           <Icons.arrowRightCircle color="#9108bf" />
