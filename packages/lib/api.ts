@@ -26,7 +26,7 @@ export function searchSentence({ search }: { search: string }) {
 }
 
 export function getSentenceProblem({ level }: { level: number }) {
-  return http.get<SentenceProblemResponse>(`/sentence/random`);
+  return http.get<SentenceProblemResponse>(`/sentence/random`, { params: { level } });
 }
 
 export function getHistoryDates({ languageFrom, languageTo, month, year }: { year: number, month: number, languageFrom: Sentence['language'], languageTo: Sentence['language'] }) {
