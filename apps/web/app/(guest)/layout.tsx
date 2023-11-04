@@ -1,4 +1,3 @@
-import BottomNavigationBar from "@/components/bottom-navigation-bar"
 import { Shell } from "@/components/shell"
 import WithPreviousLayout from "@/components/with-previous-layout"
 import { Card, CardContent } from "@sayvoca/ui/card"
@@ -9,7 +8,7 @@ interface GuestLayoutProps {
 
 export default function GuestLayout({ children }: GuestLayoutProps) {
   return (
-    <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
+    <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pt-[50px]">
       <WithPreviousLayout />
       <Shell>
         <Card className="relative">

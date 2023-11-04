@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 }
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="h-screen w-full overflow-y-scroll overscroll-y-none">
+    <div className="h-screen w-full overflow-y-scroll overscroll-none pb-[50px]">
       <Shell layout="dashboard">
         <Card className="pt-8">
           <CardContent className="grid gap-4">{children}</CardContent>

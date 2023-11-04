@@ -1,11 +1,10 @@
+import Providers from "@/components/providers"
 import { ClerkProvider } from "@clerk/nextjs"
 import { cn } from "@sayvoca/lib/utils"
-import { Analytics, ThemeProvider, Toaster } from "@sayvoca/ui"
-import "../styles/globals.css"
+import { Analytics, Toaster } from "@sayvoca/ui"
+import { Viewport } from "next"
 import { Inter as FontSans } from "next/font/google"
-import Providers from "@/components/providers"
-import { Icons } from "@sayvoca/ui/Icons"
-import WithPreviousLayout from "@/components/with-previous-layout"
+import "../styles/globals.css"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -27,6 +26,13 @@ export const metadata = {
     },
   ],
   creator: "hyunBell",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  userScalable: false,
+  maximumScale: 1,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },

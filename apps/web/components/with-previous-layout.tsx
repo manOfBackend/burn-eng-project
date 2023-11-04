@@ -7,7 +7,7 @@ export default function WithPreviousLayout() {
   const router = useRouter()
 
   return (
-    <nav className="sticky top-0 h-[50px] w-full bg-white z-50">
+    <nav className="fixed top-0 z-50 h-[50px] w-full bg-white">
       <button
         type="button"
         className="flex h-[50px] w-[50px] items-center justify-center active:bg-gray-300/50"

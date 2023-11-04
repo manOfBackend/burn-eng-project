@@ -9,7 +9,7 @@ interface VocaLayoutProps {
 
 export default function WritingLayout({ children }: VocaLayoutProps) {
   return (
-    <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
+    <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pt-[50px] pb-[150px]">
       <WithPreviousLayout />
       <Shell>
         <Card className="relative">

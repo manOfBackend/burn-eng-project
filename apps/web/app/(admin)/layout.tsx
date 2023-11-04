@@ -8,9 +8,9 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <>
+    <div className="pt-[50px]">
       <WithPreviousLayout />
       <Shell>{children}</Shell>
-    </>
+    </div>
   )
 }

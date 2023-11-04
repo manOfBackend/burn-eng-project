@@ -31,27 +31,25 @@ export default function BottomNavigationBar() {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky bottom-0 z-50 h-[50px] w-full bg-white">
-      <div className="btm-nav">
-        {MENU.map((item, index) => {
-          const isActive = item.strictHref
-            ? pathname === item.href
-            : pathname.startsWith(item.href)
+    <nav className="btm-nav z-50 h-[50px] w-full bg-white">
+      {MENU.map((item, index) => {
+        const isActive = item.strictHref
+          ? pathname === item.href
+          : pathname.startsWith(item.href)
 
-          return (
-            <Link
-              key={`${index}_${isActive}`}
-              type="button"
-              href={item.href}
-              className={cn("btm-nav__item", {
-                "active text-purple-700": isActive,
-              })}
-            >
-              {item.icon}
-            </Link>
-          )
-        })}
-      </div>
+        return (
+          <Link
+            key={`${index}_${isActive}`}
+            type="button"
+            href={item.href}
+            className={cn("btm-nav__item", {
+              "active text-purple-700": isActive,
+            })}
+          >
+            {item.icon}
+          </Link>
+        )
+      })}
     </nav>
   )
 }

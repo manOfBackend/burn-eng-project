@@ -6,7 +6,7 @@ interface SignupLayoutProps {
 
 export default function SignupLayout({ children }: SignupLayoutProps) {
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full overscroll-none pt-[50px]">
       <WithPreviousLayout />
       {children}
     </div>
