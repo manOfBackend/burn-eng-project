@@ -13,7 +13,7 @@ export default function WritingLayout({ children }: VocaLayoutProps) {
       <WithPreviousLayout />
       <Shell>
         <Card className="relative">
-          <CardContent className="grid gap-4 pt-8">{children}</CardContent>
+          <CardContent className="grid gap-4 pt-8 overscroll-none overflow-y-scroll">{children}</CardContent>
         </Card>
       </Shell>
       <BottomNavigationBar />
