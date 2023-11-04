@@ -72,8 +72,9 @@ export default function WritingHistoryView() {
               >
                 {history.translatedFeedback?.feedbackResult}
               </p>
-              <p>Score: {history.translatedFeedback?.overallEvaluationScore}</p>
+              <p>점수: {history.translatedFeedback?.overallEvaluationScore}</p>
             </div>
+            <p>피드백: {history.translatedFeedback?.advice}</p>
           </article>
         ))}
       </section>
