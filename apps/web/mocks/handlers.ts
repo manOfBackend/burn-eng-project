@@ -81,7 +81,7 @@ export const handlers = [
         {
           "email": "aaa@aa.com",
           "role": "ADMIN",
-          "recentLevelHistories": [
+          "recentUserLevelHistories": [
             {
               date: '2023-11-01',
               level: 1,

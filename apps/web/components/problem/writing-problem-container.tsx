@@ -9,9 +9,11 @@ import {
 import { InputSentence } from "@sayvoca/lib/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
+import { queryClient } from "../queryClient"
 import WritingProblemForm from "./writing-problem-form"
+import WritingWaitingView from "./writing-waiting-view"
 
-export default function WritingProblemView() {
+export default function WritingProblemContainer() {
   const router = useRouter()
 
   const { addFeedback } = useFeedbackStore()
@@ -34,9 +36,12 @@ export default function WritingProblemView() {
   } = useMutation({
     mutationKey: ["writing"],
     mutationFn: submitWriting,
+    retry: false,
     onSuccess: (data) => {
       addFeedback(data)
-      router.replace("/writing/result")
+      router.replace(`/writing/result`)
+      queryClient.invalidateQueries(["sentence-random"])
+      queryClient.invalidateQueries(["users"])
     },
   })
 
@@ -50,6 +55,10 @@ export default function WritingProblemView() {
   }
 
   if (!problem) return null
+
+  if (isLoading || isSuccess) {
+    return <WritingWaitingView />
+  }
 
   return (
     <WritingProblemForm

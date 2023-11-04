@@ -40,7 +40,7 @@ export const sentenceHistoryResponseSchema = z.array(z.object({
 export const userInfoResponseSchema = z.object({
   email: z.string(),
   role: z.enum(['ADMIN', 'USER']),
-  recentLevelHistories: z.array(z.object({
+  recentUserLevelHistories: z.array(z.object({
     date: z.string(),
     level: z.number(),
   })),

@@ -1,16 +1,15 @@
 "use client"
 
+import { Serie } from "@nivo/line"
+import { getUserInfo } from "@sayvoca/lib/api"
 import { Button } from "@sayvoca/ui"
-import React, { useMemo } from "react"
+import { Icons } from "@sayvoca/ui/Icons"
+import { useQuery } from "@tanstack/react-query"
+import dayjs from "dayjs"
+import { useRouter } from "next/navigation"
+import { useMemo } from "react"
 import DashboardChart from "./dashboard-chart"
 import DashboardStat from "./dashboard-stat"
-import { Serie } from "@nivo/line"
-import { Icons } from "@sayvoca/ui/Icons"
-import { useRouter } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
-import { getUserInfo } from "@sayvoca/lib/api"
-import { useClerk } from "@clerk/nextjs"
-import dayjs from "dayjs"
 
 export default function DashboardForm() {
   const router = useRouter()
@@ -22,7 +21,7 @@ export default function DashboardForm() {
 
   const chartData: Serie[] | null = useMemo(() => {
     const today = dayjs().format("YYYY-MM-DD")
-    const data = user?.recentLevelHistories?.map((x) => {
+    const data = user?.recentUserLevelHistories?.map((x) => {
       return {
         x: today === x.date ? "오늘" : dayjs(x.date).format("MM/DD"),
         y: x.level,
@@ -38,7 +37,7 @@ export default function DashboardForm() {
         data,
       },
     ]
-  }, [user?.recentLevelHistories])
+  }, [user?.recentUserLevelHistories])
 
   return (
     <section className="overflow-y-scroll">

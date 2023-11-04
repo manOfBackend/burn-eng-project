@@ -1,15 +1,22 @@
 "use client"
 
-import { Inputs } from '@sayvoca/lib/types'
-import { signinErrorMessages } from '@/utils/errorMessage'
-import { useAuth, useSignIn } from '@clerk/nextjs'
+import { Inputs } from "@sayvoca/lib/types"
+import { signinErrorMessages } from "@/utils/errorMessage"
+import { useAuth, useSignIn } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { userAuthSchema } from "@sayvoca/lib/validations/auth"
 import { Button, Icons, Input, PasswordInput, useToast } from "@sayvoca/ui"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@sayvoca/ui/form"
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@sayvoca/ui/form"
+import { useRouter } from "next/navigation"
+import React from "react"
+import { useForm } from "react-hook-form"
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn()
@@ -29,14 +36,13 @@ export default function SignInForm() {
     },
   })
 
-
   function onSubmit(data: Inputs) {
     if (!isLoaded) return
     if (isSignedIn) {
       toast({
-        title: '이미 로그인 중입니다.'
+        title: "이미 로그인 중입니다.",
       })
-      router.push('/dashboard')
+      router.push("/dashboard")
       return
     }
 
@@ -48,7 +54,6 @@ export default function SignInForm() {
         })
 
         if (result.status === "complete") {
-
           await setActive({ session: result.createdSessionId })
 
           router.push(`${window.location.origin}/dashboard`)
@@ -57,12 +62,12 @@ export default function SignInForm() {
         }
       } catch (error: any) {
         toast({
-          title: signinErrorMessages.get(error.errors[0].code) ?? '알 수 없는 오류'
+          title:
+            signinErrorMessages.get(error.errors[0].code) ?? "알 수 없는 오류",
         })
       }
     })
   }
-
 
   return (
     <Form {...form}>
@@ -96,7 +101,7 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        <Button disabled={isPending}>
+        <Button disabled={isPending} variant="submit">
           {isPending && (
             <Icons.spinner
               className="mr-2 h-4 w-4 animate-spin"

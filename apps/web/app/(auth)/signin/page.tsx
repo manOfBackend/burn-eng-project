@@ -1,5 +1,7 @@
 import { Shell } from "@/components/shell"
 import SignInForm from "@/components/signin-form"
+import { Button } from "@sayvoca/ui"
+import { Icons } from "@sayvoca/ui/Icons"
 import {
   Card,
   CardContent,
@@ -15,7 +17,6 @@ export default function Page() {
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-center text-2xl">
-            <section></section>
             <span className="text-red-700">Burn</span> English
           </CardTitle>
         </CardHeader>
@@ -33,12 +34,20 @@ export default function Page() {
             </Link>
           </div>
           <Link
+            aria-label="start with guest"
+            href="/guest/writing"
+            className="flex items-center gap-2 text-lg font-bold text-purple-900"
+          >
+            <Icons.arrowBigRight color="#9108bf" />
+            게스트로 시작하기
+          </Link>
+          {/* <Link
             aria-label="Reset password"
             href="/signin/reset-password"
             className="text-primary text-sm underline-offset-4 transition-colors hover:underline"
           >
             비밀번호 초기화
-          </Link>
+          </Link> */}
         </CardFooter>
       </Card>
     </Shell>

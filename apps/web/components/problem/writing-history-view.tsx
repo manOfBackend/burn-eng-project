@@ -42,6 +42,9 @@ export default function WritingHistoryView() {
           className="!w-full !max-w-[600px] !border-none text-sm"
           value={date}
           calendarType="gregory"
+          formatDay={(locale, date) => {
+            return dayjs(date).format("D")
+          }}
           tileClassName={({ date, view }) => {
             return cn("h-8", {
               "!bg-green-800 !font-bold text-white": historyDates?.dates.find(
@@ -66,7 +69,7 @@ export default function WritingHistoryView() {
               <h3 className="font-bold">{history.sentence}</h3>
               <p>{history.translatedSentence}</p>
               <details className="collapse">
-                <summary className="collapse-title !px-0 font-medium text-xs">
+                <summary className="collapse-title !px-0 text-xs font-medium">
                   <span>피드백 보기</span>
                   <Icons.chevronRightIcon className="inline-block" />
                 </summary>
@@ -82,9 +85,9 @@ export default function WritingHistoryView() {
                 className={cn(
                   "radial-progress whitespace-pre-wrap text-center",
                   {
-                    "text-green-800":
+                    "text-green-800 bg-green-100":
                       history.translatedFeedback?.feedbackResult === "PASS",
-                    "text-red-800":
+                    "text-red-800 bg-red-100":
                       history.translatedFeedback?.feedbackResult === "FAIL",
                   }
                 )}

@@ -49,6 +49,7 @@ import {
   X,
   type Icon as LucideIcon,
   Heart,
+  ArrowBigRight,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -117,4 +118,5 @@ export const Icons = {
   home: Home,
   arrowRightCircle: ArrowRightCircle,
   heart: Heart,
+  arrowBigRight: ArrowBigRight,
 }
