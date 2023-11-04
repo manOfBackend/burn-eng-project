@@ -1,16 +1,15 @@
 "use client"
 
-import React, { useState } from "react"
-import WritingProblemForm from "./writing-problem-form"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useFeedbackStore } from "@/store/feedback"
 import {
   getSentenceProblem,
   getUserInfo,
   submitWriting,
 } from "@sayvoca/lib/api"
-import { useRouter } from "next/navigation"
-import { useFeedbackStore } from "@/store/feedback"
 import { InputSentence } from "@sayvoca/lib/types"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
+import WritingProblemForm from "./writing-problem-form"
 
 export default function WritingProblemView() {
   const router = useRouter()
@@ -24,7 +23,7 @@ export default function WritingProblemView() {
 
   const { data: problem } = useQuery({
     queryKey: ["sentence-random"],
-    queryFn: () => getSentenceProblem({ level: user?.level ?? 1 }),
+    queryFn: () => user && getSentenceProblem({ level: user.level }),
     enabled: Boolean(user),
   })
 
@@ -50,11 +49,13 @@ export default function WritingProblemView() {
     })
   }
 
+  if (!problem) return null
+
   return (
     <WritingProblemForm
       isLoading={isLoading || isSuccess}
-      level={problem?.level}
-      problem={problem?.sentence ?? ""}
+      level={problem.level}
+      problem={problem.sentence}
       onSubmit={onSubmit}
     />
   )
