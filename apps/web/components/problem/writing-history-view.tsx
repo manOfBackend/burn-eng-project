@@ -42,6 +42,7 @@ export default function WritingHistoryView() {
           onChange(dayjs(value?.toString()).toDate())
         }}
         value={date}
+        calendarType="gregory"
         tileClassName={({ date, view }) => {
           if (
             historyDates?.dates.find(
