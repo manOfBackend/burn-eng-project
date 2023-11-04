@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@sayvoca/ui"
-import React from "react"
+import React, { useMemo } from "react"
 import DashboardChart from "./dashboard-chart"
 import DashboardStat from "./dashboard-stat"
 import { Serie } from "@nivo/line"
@@ -10,72 +10,8 @@ import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { getUserInfo } from "@sayvoca/lib/api"
 import { useClerk } from "@clerk/nextjs"
+import dayjs from "dayjs"
 
-const data: Serie[] = [
-  {
-    id: "stats",
-    color: "hsl(187, 70%, 50%)",
-    data: [
-      {
-        x: "10/9",
-        y: 1,
-      },
-      {
-        x: "10/10",
-        y: 3,
-      },
-      {
-        x: "10/11",
-        y: 4,
-      },
-      {
-        x: "10/12",
-        y: 8,
-      },
-      {
-        x: "어제",
-        y: 15,
-      },
-      {
-        x: "오늘",
-        y: 20,
-      },
-    ],
-  },
-]
-
-const data2: Serie[] = [
-  {
-    id: "stats",
-    color: "hsl(187, 70%, 50%)",
-    data: [
-      {
-        x: "10/9",
-        y: 80,
-      },
-      {
-        x: "10/10",
-        y: 50,
-      },
-      {
-        x: "10/11",
-        y: 40,
-      },
-      {
-        x: "10/12",
-        y: 60,
-      },
-      {
-        x: "어제",
-        y: 100,
-      },
-      {
-        x: "오늘",
-        y: 90,
-      },
-    ],
-  },
-]
 export default function DashboardForm() {
   const router = useRouter()
 
@@ -84,6 +20,25 @@ export default function DashboardForm() {
     queryFn: () => getUserInfo(),
   })
 
+  const chartData: Serie[] | null = useMemo(() => {
+    const today = dayjs().format("YYYY-MM-DD")
+    const data = user?.recentLevelHistories.map((x) => {
+      return {
+        x: today === x.date ? "오늘" : dayjs(x.date).format("MM/DD"),
+        y: x.level,
+      }
+    })
+
+    if (!data) return null
+
+    return [
+      {
+        id: "stats",
+        color: "hsl(187, 70%, 50%)",
+        data,
+      },
+    ]
+  }, [user?.recentLevelHistories])
   const { signOut } = useClerk()
 
   return (
@@ -92,9 +47,9 @@ export default function DashboardForm() {
         <DashboardStat />
       </article>
       <article>
-        <h3 className="font-bold">레벨</h3>
+        <h3 className="font-bold">최고 레벨</h3>
         <div className="h-52 w-full">
-          <DashboardChart data={data} />
+          {chartData && <DashboardChart data={chartData} />}
         </div>
       </article>
       <article className="mt-7 flex flex-col gap-3">
@@ -120,19 +75,6 @@ export default function DashboardForm() {
           <Icons.history color="#9108bf" />
           학습이력
         </Button>
-        {user?.role === "ADMIN" && (
-          <Button
-            className="w-full gap-2"
-            variant={"secondary"}
-            size={"icon"}
-            onClick={() => {
-              router.push("/admin")
-            }}
-          >
-            <Icons.lock color="#9108bf" />
-            관리자 메뉴
-          </Button>
-        )}
         <Button
           className="w-full gap-2"
           variant={"ghost"}

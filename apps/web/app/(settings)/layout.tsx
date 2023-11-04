@@ -3,11 +3,11 @@ import { Shell } from "@/components/shell"
 import WithPreviousLayout from "@/components/with-previous-layout"
 import { Card, CardContent } from "@sayvoca/ui/card"
 
-interface VocaLayoutProps {
+interface SettingsLayoutProps {
   children: React.ReactNode
 }
 
-export default function WritingLayout({ children }: VocaLayoutProps) {
+export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
     <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
       <WithPreviousLayout />

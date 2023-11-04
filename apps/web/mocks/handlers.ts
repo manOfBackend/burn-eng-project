@@ -54,7 +54,7 @@ export const handlers = [
               grammarAccuracy: 50,
               naturalness: 70,
               overallEvaluationScore: 80,
-              advice: '더 분발하세요',
+              advice: '더 분발하세요 더 분발하세요 더 분발하세요 더 분발하세요 더 분발하세요 더 분발하세요 더 분발하세요',
               betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
               feedbackResult: 'PASS',
             }
@@ -81,11 +81,24 @@ export const handlers = [
         {
           "email": "aaa@aa.com",
           "role": "ADMIN",
-          "recentLevelHistories": {
-            "additionalProp1": 0,
-            "additionalProp2": 0,
-            "additionalProp3": 0
-          },
+          "recentLevelHistories": [
+            {
+              date: '2023-11-01',
+              level: 1,
+            },
+            {
+              date: '2023-11-02',
+              level: 2,
+            },
+            {
+              date: '2023-11-03',
+              level: 3,
+            },
+            {
+              date: '2023-11-04',
+              level: 4,
+            },
+          ],
           "level": 5,
           "exp": 0
         }

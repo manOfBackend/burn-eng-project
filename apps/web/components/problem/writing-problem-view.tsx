@@ -36,7 +36,7 @@ export default function WritingProblemView() {
     mutationFn: submitWriting,
     onSuccess: (data) => {
       addFeedback(data)
-      router.push("/writing/result")
+      router.replace("/writing/result")
     },
   })
 

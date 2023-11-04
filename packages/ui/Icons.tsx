@@ -48,6 +48,7 @@ import {
   User,
   X,
   type Icon as LucideIcon,
+  Heart,
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -115,4 +116,5 @@ export const Icons = {
   logOut: LogOut,
   home: Home,
   arrowRightCircle: ArrowRightCircle,
+  heart: Heart,
 }

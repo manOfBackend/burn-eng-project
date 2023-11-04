@@ -1,53 +1,83 @@
 "use client"
 
-import { getSentencePage, searchSentence } from '@sayvoca/lib/api'
-import { Button, Form, FormControl, FormField, FormItem, FormMessage, Input, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@sayvoca/ui'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
-import React, { useState } from 'react'
-import { columns } from './columns'
-import { DataTablePagination } from './data-table-pagination'
-import { InputSentence, Sentence } from '@sayvoca/lib/types'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { sentenceInputSchema } from '@sayvoca/lib'
-import { Icons } from '@sayvoca/ui/Icons'
+import { getSentencePage, searchSentence } from "@sayvoca/lib/api"
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  Input,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@sayvoca/ui"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import {
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import React, { useState } from "react"
+import { columns } from "./columns"
+import { DataTablePagination } from "./data-table-pagination"
+import { InputSentence, Sentence } from "@sayvoca/lib/types"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { sentenceInputSchema } from "@sayvoca/lib"
+import { Icons } from "@sayvoca/ui/Icons"
 
-const data2: Sentence[] = [{
-  id: 0,
-  createdAt: '2021-09-01T00:00:00',
-  updatedAt: '2021-09-01T00:00:00',
-  enable: true,
-  sentence: '안녕하세요',
-  deletedAt: '2022-09-01T00:00:00',
-  language: 'KOREAN',
-  level: 3
-}, {
-  id: 1,
-  createdAt: '2021-09-01T00:00:00',
-  updatedAt: '2021-09-01T00:00:00',
-  enable: true,
-  sentence: '안녕하세요',
-  deletedAt: '2022-09-01T00:00:00',
-  language: 'KOREAN',
-  level: 2
-}]
+const data2: Sentence[] = [
+  {
+    id: 0,
+    createdAt: "2021-09-01T00:00:00",
+    updatedAt: "2021-09-01T00:00:00",
+    enable: true,
+    sentence: "안녕하세요",
+    deletedAt: "2022-09-01T00:00:00",
+    language: "KOREAN",
+    level: 3,
+  },
+  {
+    id: 1,
+    createdAt: "2021-09-01T00:00:00",
+    updatedAt: "2021-09-01T00:00:00",
+    enable: true,
+    sentence: "안녕하세요",
+    deletedAt: "2022-09-01T00:00:00",
+    language: "KOREAN",
+    level: 2,
+  },
+]
 export default function AdminSentenceView() {
-
   const [isPending, startTransition] = React.useTransition()
 
-
   const [rowSelection, setRowSelection] = useState({})
-  const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>({})
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
   const [page, setPage] = React.useState(0)
 
-  const { status, data: sentences, error } = useQuery({
-    queryKey: ['sentence', page],
-    queryFn: () => getSentencePage({ page, size: 20 })
+  const {
+    status,
+    data: sentences,
+    error,
+  } = useQuery({
+    queryKey: ["sentence", page],
+    queryFn: () => getSentencePage({ page, size: 20 }),
   })
 
   const table = useReactTable({
@@ -80,27 +110,26 @@ export default function AdminSentenceView() {
   const form = useForm<InputSentence>({
     resolver: zodResolver(sentenceInputSchema),
     defaultValues: {
-      sentence: '',
+      sentence: "",
     },
   })
   const { mutate } = useMutation({
-    mutationKey: ['searchSentence', form.getValues('sentence')],
+    mutationKey: ["searchSentence", form.getValues("sentence")],
     mutationFn: searchSentence,
   })
-
 
   function onSubmit(data: InputSentence) {
     form.reset()
     startTransition(async () => {
       mutate({
-        search: data.sentence
+        search: data.sentence,
       })
     })
   }
 
   return (
-    <div className='flex w-full flex-col'>
-      <div className='flex w-full items-center justify-end gap-4 pb-4'>
+    <div className="flex w-full flex-col">
+      <div className="flex w-full items-center justify-end gap-4 pb-4">
         <div>
           <Form {...form}>
             <form
@@ -111,7 +140,7 @@ export default function AdminSentenceView() {
                 control={form.control}
                 name="sentence"
                 render={({ field }) => (
-                  <FormItem className='w-[200px]'>
+                  <FormItem className="w-[200px]">
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -143,9 +172,9 @@ export default function AdminSentenceView() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}

@@ -8,6 +8,7 @@ import { useFeedbackStore } from "@/store/feedback"
 import { useRouter } from "next/navigation"
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
+import { cn } from "@sayvoca/lib/utils"
 
 export default function WritingResultView() {
   const { addFeedback, ...data } = useFeedbackStore()
@@ -24,6 +25,25 @@ export default function WritingResultView() {
   return (
     <section className="mt-4">
       <h2 className="mb-2 text-xl font-bold">피드백</h2>
+      <div className="flex items-center justify-center py-4">
+        <div
+          className={cn("radial-progress whitespace-pre-wrap text-center", {
+            "text-green-800": data?.feedbackResult === "PASS",
+            "text-red-800": data?.feedbackResult === "FAIL",
+          })}
+          style={
+            {
+              "--value": data?.overallEvaluationScore,
+            } as React.CSSProperties
+          }
+        >
+          <span>
+            {data?.feedbackResult}
+            {"\n"}
+            <span className="font-bold">{data?.overallEvaluationScore}</span>
+          </span>
+        </div>
+      </div>
       <div className="h-[200px] w-full">
         {data && (
           <SentenceFeedbackChart

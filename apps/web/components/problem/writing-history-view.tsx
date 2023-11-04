@@ -1,14 +1,11 @@
 "use client"
 
-import {
-  getHistoryDates,
-  getSentenceProblem,
-  getSentenceProblemHistory,
-} from "@sayvoca/lib/api"
+import { getHistoryDates, getSentenceProblemHistory } from "@sayvoca/lib/api"
 import { cn } from "@sayvoca/lib/utils"
 import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { useState } from "react"
+import { Icons } from "@sayvoca/ui/Icons"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 
@@ -47,7 +44,7 @@ export default function WritingHistoryView() {
           calendarType="gregory"
           tileClassName={({ date, view }) => {
             return cn("h-8", {
-              "!bg-purple-600 text-white": historyDates?.dates.find(
+              "!bg-green-800 !font-bold text-white": historyDates?.dates.find(
                 (x) => x === dayjs(date).format("YYYY-MM-DD")
               ),
             })
@@ -55,27 +52,58 @@ export default function WritingHistoryView() {
         />
       </div>
       <section className="mt-4 flex w-full flex-col gap-2">
+        {histories?.length === 0 && (
+          <div className="flex w-full items-center justify-center py-10">
+            <p>해당 날짜에 제출한 기록이 없습니다.</p>
+          </div>
+        )}
         {histories?.map((history, index) => (
           <article
             key={index}
-            className="w-full rounded-xl border-2 border-solid p-2"
+            className="flex w-full items-center justify-between gap-4 rounded-xl border-2 border-solid p-3"
           >
-            <h3 className="font-bold">{history.sentence}</h3>
-            <p>{history.translatedSentence}</p>
-            <div className="flex gap-1">
-              <p
-                className={cn({
-                  "text-green-800":
-                    history.translatedFeedback?.feedbackResult === "PASS",
-                  "text-red-800":
-                    history.translatedFeedback?.feedbackResult === "FAIL",
-                })}
-              >
-                {history.translatedFeedback?.feedbackResult}
-              </p>
-              <p>점수: {history.translatedFeedback?.overallEvaluationScore}</p>
+            <div>
+              <h3 className="font-bold">{history.sentence}</h3>
+              <p>{history.translatedSentence}</p>
+              <details className="collapse">
+                <summary className="collapse-title !px-0 font-medium text-xs">
+                  <span>피드백 보기</span>
+                  <Icons.chevronRightIcon className="inline-block" />
+                </summary>
+                <div className="collapse-content !px-0">
+                  <p className="text-sm">
+                    {history.translatedFeedback?.advice}
+                  </p>
+                </div>
+              </details>
             </div>
-            <p>피드백: {history.translatedFeedback?.advice}</p>
+            <div className="flex w-20 items-center justify-center">
+              <div
+                className={cn(
+                  "radial-progress whitespace-pre-wrap text-center",
+                  {
+                    "text-green-800":
+                      history.translatedFeedback?.feedbackResult === "PASS",
+                    "text-red-800":
+                      history.translatedFeedback?.feedbackResult === "FAIL",
+                  }
+                )}
+                style={
+                  {
+                    "--value":
+                      history.translatedFeedback?.overallEvaluationScore,
+                  } as React.CSSProperties
+                }
+              >
+                <span>
+                  {history.translatedFeedback?.feedbackResult}
+                  {"\n"}
+                  <span className="font-bold">
+                    {history.translatedFeedback?.overallEvaluationScore}
+                  </span>
+                </span>
+              </div>
+            </div>
           </article>
         ))}
       </section>

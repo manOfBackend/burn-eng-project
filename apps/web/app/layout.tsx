@@ -40,7 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "max-w-screen bg-background mx-auto flex min-h-screen w-full justify-center font-sans antialiased",
+            "!max-w-[100vw] bg-background mx-auto flex h-screen w-full justify-center font-sans antialiased",
             fontSans.variable
           )}
         >

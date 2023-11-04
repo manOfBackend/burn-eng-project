@@ -1,18 +1,23 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@sayvoca/ui/card";
-import { Shell } from "@/components/shell";
-import SignInForm from "@/components/signin-form";
-import Link from "next/link";
-import { ZammanboLottie } from "@sayvoca/ui";
+import { Shell } from "@/components/shell"
+import SignInForm from "@/components/signin-form"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@sayvoca/ui/card"
+import Link from "next/link"
 
 export default function Page() {
   return (
-    <Shell layout="auth">
+    <Shell layout="auth" className="grid h-screen">
       <Card>
         <CardHeader className="space-y-1">
-          <div className="mb-5 flex min-h-[375px] items-center justify-center">
-            <ZammanboLottie className='max-w-xs' />
-          </div>
-          <CardTitle className="text-center text-2xl">Hi</CardTitle>
+          <CardTitle className="text-center text-2xl">
+            <section></section>
+            <span className="text-red-700">Burn</span> English
+          </CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
           <SignInForm />
@@ -37,5 +42,5 @@ export default function Page() {
         </CardFooter>
       </Card>
     </Shell>
-  );
+  )
 }

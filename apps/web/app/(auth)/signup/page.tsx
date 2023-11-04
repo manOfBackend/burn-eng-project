@@ -1,7 +1,13 @@
-import { Shell } from "@/components/shell";
-import SignUpForm from "@/components/signup-form";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@sayvoca/ui/card";
-import Link from "next/link";
+import { Shell } from "@/components/shell"
+import SignUpForm from "@/components/signup-form"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@sayvoca/ui/card"
+import Link from "next/link"
 
 export default function Page() {
   return (
@@ -26,5 +32,5 @@ export default function Page() {
         </CardFooter>
       </Card>
     </Shell>
-  );
+  )
 }
