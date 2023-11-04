@@ -40,12 +40,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "!max-w-[100vw] bg-background mx-auto flex h-screen w-full justify-center font-sans antialiased",
+            "bg-background mx-auto flex h-screen w-full !max-w-[100vw] justify-center font-sans antialiased",
             fontSans.variable
           )}
         >
           <Providers>
-            <div className="h-full w-full">{children}</div>
+            <div className="h-full w-full max-w-3xl">{children}</div>
             <Analytics />
             <Toaster />
           </Providers>
