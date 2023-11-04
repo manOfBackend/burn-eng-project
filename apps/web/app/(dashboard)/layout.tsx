@@ -3,9 +3,5 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  return (
-    <div className="mb-[200px] h-full w-full overflow-y-scroll pb-10">
-      {children}
-    </div>
-  )
+  return <div className="h-full w-full overflow-y-scroll">{children}</div>
 }

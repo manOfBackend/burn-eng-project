@@ -37,23 +37,24 @@ export default function WritingHistoryView() {
   return (
     <section className="mt-4 overflow-x-hidden overflow-y-scroll">
       <h2 className="mb-2 text-xl font-bold">히스토리</h2>
-      <Calendar
-        onChange={(value) => {
-          onChange(dayjs(value?.toString()).toDate())
-        }}
-        value={date}
-        calendarType="gregory"
-        tileClassName={({ date, view }) => {
-          if (
-            historyDates?.dates.find(
-              (x) => x === dayjs(date).format("YYYY-MM-DD")
-            )
-          ) {
-            return "!bg-blue-500"
-          }
-        }}
-      />
-      <section className="mt-4 flex flex-col gap-2">
+      <div className="flex w-full justify-center">
+        <Calendar
+          onChange={(value) => {
+            onChange(dayjs(value?.toString()).toDate())
+          }}
+          className="!w-full !max-w-[600px] !border-none text-sm"
+          value={date}
+          calendarType="gregory"
+          tileClassName={({ date, view }) => {
+            return cn("h-8", {
+              "!bg-purple-600 text-white": historyDates?.dates.find(
+                (x) => x === dayjs(date).format("YYYY-MM-DD")
+              ),
+            })
+          }}
+        />
+      </div>
+      <section className="mt-4 flex w-full flex-col gap-2">
         {histories?.map((history, index) => (
           <article
             key={index}

@@ -6,13 +6,13 @@ interface VocaLayoutProps {
 }
 
 export default function WritingLayout({ children }: VocaLayoutProps) {
-  return <div className="h-full w-full">
-    <Shell layout="dashboard">
-      <Card className="pt-8">
-        <CardContent className="grid gap-4">
-          {children}
-        </CardContent>
-      </Card>
-    </Shell>
-  </div>
+  return (
+    <div className="h-full w-full overflow-y-scroll">
+      <Shell>
+        <Card className="pt-8">
+          <CardContent className="grid gap-4">{children}</CardContent>
+        </Card>
+      </Shell>
+    </div>
+  )
 }

@@ -1,7 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs"
 import { cn } from "@sayvoca/lib/utils"
-import { Analytics, ThemeProvider, Toaster } from '@sayvoca/ui'
-import '../styles/globals.css'
+import { Analytics, ThemeProvider, Toaster } from "@sayvoca/ui"
+import "../styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
 import Providers from "@/components/providers"
 
@@ -15,12 +15,9 @@ const fontSans = FontSans({
 })
 
 export const metadata = {
-  title: '번잉',
-  description: 'Burn English',
-  keywords: [
-    "english voca learning",
-    "chatGPT",
-  ],
+  title: "번잉",
+  description: "Burn English",
+  keywords: ["english voca learning", "chatGPT"],
   authors: [
     {
       name: "hyunBell",
@@ -32,7 +29,6 @@ export const metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -42,19 +38,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "max-w-screen bg-background mx-auto flex min-h-screen w-full justify-center overflow-hidden font-sans antialiased",
-            fontSans.variable,
+            "max-w-screen bg-background mx-auto flex min-h-screen w-full justify-center font-sans antialiased",
+            fontSans.variable
           )}
         >
           <Providers>
-            <div className='w-full'>
-              {children}
-            </div>
+            <div className="h-full w-full">{children}</div>
             <Analytics />
             <Toaster />
           </Providers>
         </body>
       </html>
     </ClerkProvider>
-  );
+  )
 }
