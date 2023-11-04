@@ -25,7 +25,7 @@ export function searchSentence({ search }: { search: string }) {
   return http.post<Sentence[]>('/admin/sentence/search', { search });
 }
 
-export function getSentenceProblem({ level }: { level: number }) {
+export function getSentenceProblem({ level }: { level?: number } = {}) {
   return http.get<SentenceProblemResponse>(`/sentence/random`, { params: { level } });
 }
 
