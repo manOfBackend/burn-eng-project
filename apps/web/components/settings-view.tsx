@@ -1,5 +1,7 @@
 "use client"
+import { useClerk } from "@clerk/nextjs"
 import { getUserInfo } from "@sayvoca/lib/api"
+import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
@@ -10,6 +12,8 @@ export default function SettingsView() {
     queryKey: ["users"],
     queryFn: () => getUserInfo(),
   })
+  const { signOut } = useClerk()
+
   return (
     <section className="flex flex-col gap-4">
       <article>
@@ -24,7 +28,19 @@ export default function SettingsView() {
         </a>
       </article>
       <article>
-        {user?.role === "ADMIN" && (
+        <button
+          type="button"
+          className="flex cursor-pointer items-center gap-1"
+          onClick={() => {
+            signOut()
+          }}
+        >
+          <Icons.logOut color="#9108bf" />
+          <span className="text-lg font-bold">로그아웃</span>
+        </button>
+      </article>
+      {user?.role === "ADMIN" && (
+        <article>
           <Link
             href="/admin"
             className="flex cursor-pointer items-center gap-1"
@@ -32,8 +48,8 @@ export default function SettingsView() {
             <Icons.lock color="#9108bf" />
             <span className="text-lg font-bold">관리자 페이지</span>
           </Link>
-        )}
-      </article>
+        </article>
+      )}
     </section>
   )
 }

@@ -58,13 +58,13 @@ export default function WritingProblemForm({
                 <FormItem>
                   <FormLabel className="font-bold">작문</FormLabel>
                   <FormControl>
-                    <Input className="ml-2" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button disabled={isLoading || !problem}>
+            <Button disabled={isLoading || !problem} variant={"submit"}>
               {isLoading && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"

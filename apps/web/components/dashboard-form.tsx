@@ -22,7 +22,7 @@ export default function DashboardForm() {
 
   const chartData: Serie[] | null = useMemo(() => {
     const today = dayjs().format("YYYY-MM-DD")
-    const data = user?.recentLevelHistories.map((x) => {
+    const data = user?.recentLevelHistories?.map((x) => {
       return {
         x: today === x.date ? "오늘" : dayjs(x.date).format("MM/DD"),
         y: x.level,
@@ -39,11 +39,10 @@ export default function DashboardForm() {
       },
     ]
   }, [user?.recentLevelHistories])
-  const { signOut } = useClerk()
 
   return (
     <section className="overflow-y-scroll">
-      <article className="mb-5">
+      <article className="mb-5 overflow-hidden p-1">
         <DashboardStat />
       </article>
       <article>
@@ -74,17 +73,6 @@ export default function DashboardForm() {
         >
           <Icons.history color="#9108bf" />
           학습이력
-        </Button>
-        <Button
-          className="w-full gap-2"
-          variant={"ghost"}
-          size={"icon"}
-          onClick={() => {
-            signOut()
-          }}
-        >
-          <Icons.logOut color="#9108bf" />
-          로그아웃
         </Button>
       </article>
     </section>
