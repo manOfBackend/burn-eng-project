@@ -14,7 +14,7 @@ import WritingWaitingView from "./writing-waiting-view"
 import { queryClient } from "../queryClient"
 import { useGuestStore } from "@/store/guest"
 
-export default function WritingProblemContainer() {
+export default function WritingGuestProblemContainer() {
   const router = useRouter()
 
   const { level, setLevel } = useGuestStore()

@@ -1,4 +1,5 @@
-import WritingProblemContainer from "@/components/problem/writing-problem-container"
+import WritingGuestProblemContainer from "@/components/problem/writing-problem-guest-container"
+
 export default async function Page() {
-  return <WritingProblemContainer />
+  return <WritingGuestProblemContainer />
 }
