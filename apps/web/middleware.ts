@@ -18,6 +18,10 @@ export default authMiddleware({
     }
     const url = new URL(req.nextUrl.origin)
 
+    if (req.nextUrl.pathname === '/') {
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
     const publicKey = env.CLERK_PEM_PUBLIC_KEY as string;
     const sessionObj = req.cookies.get('__session')
 
