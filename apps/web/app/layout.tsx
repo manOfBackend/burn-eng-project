@@ -4,6 +4,8 @@ import { Analytics, ThemeProvider, Toaster } from "@sayvoca/ui"
 import "../styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
 import Providers from "@/components/providers"
+import { Icons } from "@sayvoca/ui/Icons"
+import WithPreviousLayout from "@/components/with-previous-layout"
 
 interface RootLayoutProps {
   children: React.ReactNode

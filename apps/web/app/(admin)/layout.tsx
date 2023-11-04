@@ -1,5 +1,6 @@
-import { Shell } from '@/components/shell'
-import React from 'react'
+import { Shell } from "@/components/shell"
+import WithPreviousLayout from "@/components/with-previous-layout"
+import React from "react"
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -7,8 +8,9 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
-    <Shell>
-      {children}
-    </Shell>
+    <>
+      <WithPreviousLayout />
+      <Shell>{children}</Shell>
+    </>
   )
 }
