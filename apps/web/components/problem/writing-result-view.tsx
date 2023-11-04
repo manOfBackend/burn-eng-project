@@ -47,7 +47,7 @@ export default function WritingResultView() {
           ))}
         </ul>
       )}
-      <article className="flex gap-2 mt-4">
+      <article className="mt-4 flex gap-2">
         <Button
           className="w-full gap-2"
           variant={"dashboard"}

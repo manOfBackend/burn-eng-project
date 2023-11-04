@@ -35,14 +35,46 @@ export const handlers = [
     return res(
       ctx.json(
         {
-         dates: [
-          "2023-11-01",
-          "2023-11-02",
-         ]
+          dates: [
+            "2023-11-01",
+            "2023-11-02",
+          ]
         }
       ))
   }),
-
+  rest.get('/translated/history', (req, res, ctx) => {
+    return res(
+      ctx.json(
+        [
+          {
+            sentence: '나는 맛있는 사과다.',
+            translatedSentence: 'I am an apple.',
+            translatedFeedback: {
+              meaningAccuracy: 30,
+              grammarAccuracy: 50,
+              naturalness: 70,
+              overallEvaluationScore: 80,
+              advice: '더 분발하세요',
+              betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
+              feedbackResult: 'PASS',
+            }
+          },
+          {
+            sentence: '나는 맛있는 사과를 먹었다.',
+            translatedSentence: 'I ate an apple.',
+            translatedFeedback: {
+              meaningAccuracy: 30,
+              grammarAccuracy: 50,
+              naturalness: 70,
+              overallEvaluationScore: 80,
+              advice: '더 분발하세요',
+              betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
+              feedbackResult: 'PASS',
+            }
+          }
+        ]
+      ))
+  }),
   rest.get('/users', (req, res, ctx) => {
     return res(
       ctx.json(
