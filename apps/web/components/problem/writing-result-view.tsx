@@ -1,26 +1,35 @@
 "use client"
 import { useFeedbackStore } from "@/store/feedback"
+import { useGuestStore } from "@/store/guest"
+import { useAuth } from "@clerk/nextjs"
 import { cn } from "@sayvoca/lib/utils"
 import { Button } from "@sayvoca/ui/Button"
 import { Icons } from "@sayvoca/ui/Icons"
 import { useRouter } from "next/navigation"
-import React, { useLayoutEffect } from "react"
+import React, { useEffect, useLayoutEffect } from "react"
+import { queryClient } from "../queryClient"
 import SentenceFeedbackChart from "../sentence-feedback-chart"
-import { useClerk } from "@clerk/nextjs"
 
 export default function WritingResultView() {
   const { addFeedback, ...data } = useFeedbackStore()
   const router = useRouter()
 
-  const { user } = useClerk()
+  const { isSignedIn } = useAuth()
+
+  const { level } = useGuestStore()
+
+  useEffect(() => {
+    queryClient.invalidateQueries(["sentence-random"])
+    queryClient.invalidateQueries(["users"])
+  }, [])
 
   useLayoutEffect(() => {
-    if (!data?.advice) {
+    if (!data?.feedbackResult) {
       router.replace("/dashboard")
     }
   }, [data, router])
 
-  if (!data?.advice) return null
+  if (!data || !data?.feedbackResult) return null
 
   return (
     <section className="mt-4">
@@ -34,6 +43,7 @@ export default function WritingResultView() {
           style={
             {
               "--value": data?.overallEvaluationScore,
+              "--size": "150px",
             } as React.CSSProperties
           }
         >
@@ -48,16 +58,29 @@ export default function WritingResultView() {
         {data && (
           <SentenceFeedbackChart
             data={{
-              ...data,
+              overallEvaluationScore: data?.overallEvaluationScore ?? 0,
+              grammarAccuracy: data?.grammarAccuracy ?? 0,
+              meaningAccuracy: data?.meaningAccuracy ?? 0,
+              naturalness: data?.naturalness ?? 0,
             }}
           />
         )}
       </div>
+      <section className="mt-4 w-full flex flex-col gap-2">
+        <article>
+          <h2 className="font-bold">원문</h2>
+          <p className="pl-2 text-sm">{data?.problem?.sentence}</p>
+        </article>
+        <article>
+          <h2 className="font-bold">입력한 문장</h2>
+          <p className="pl-2 text-sm">{data?.userInputSentence?.sentence}</p>
+        </article>
+      </section>
       <section className="mt-4 h-52 w-full border-2 border-solid p-2">
         <h2 className="text-lg font-bold">코멘트</h2>
         <p className="pl-2 text-sm">{data?.advice}</p>
       </section>
-      {data?.betterTranslatedSentences?.length > 0 && (
+      {data?.betterTranslatedSentences?.length && (
         <ul className="mt-4 flex flex-col gap-2">
           <h2 className="text-lg font-bold">제안</h2>
           {data?.betterTranslatedSentences.map((sentence, index) => (
@@ -71,10 +94,10 @@ export default function WritingResultView() {
         <Button
           className="w-full gap-2"
           variant={"dashboard"}
-          disabled={data?.feedbackResult !== "PASS"}
+          disabled={!isSignedIn && level >= 5 ? true : false}
           size={"icon"}
           onClick={() => {
-            if (user) {
+            if (isSignedIn) {
               router.replace("/writing")
             } else {
               router.replace("/guest/writing")
@@ -96,6 +119,23 @@ export default function WritingResultView() {
           돌아가기
         </Button>
       </article>
+      {!isSignedIn && (
+        <article className="w-full flex justify-center mt-14">
+          <div
+            className="tooltip before:text-white before:font-bold animate-bounce tooltip-open tooltip-info "
+            data-tip="회원가입을 하면 훨씬 많은 기능이 있어요!"
+          >
+            <button
+              className="btn btn-info font-bold text-white text-xl"
+              onClick={() => {
+                router.replace("/signup")
+              }}
+            >
+              회원가입
+            </button>
+          </div>
+        </article>
+      )}
     </section>
   )
 }

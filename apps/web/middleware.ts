@@ -13,8 +13,10 @@ export default authMiddleware({
     "/api(.*)",
     "/guest\/(.*)",
   ],
+  signInUrl: "/signin",
   async afterAuth(auth, req) {
     if (auth.isPublicRoute) {
+
       return NextResponse.next()
     }
     const url = new URL(req.nextUrl.origin)
@@ -23,7 +25,7 @@ export default authMiddleware({
       url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
-    const publicKey = env.CLERK_PEM_PUBLIC_KEY as string;
+    const publicKey = env.CLERK_PEM_PUBLIC_KEY;
     const sessionObj = req.cookies.get('__session')
 
     if (!sessionObj || !sessionObj.value) {
@@ -42,6 +44,12 @@ export default authMiddleware({
       url.pathname = "/signin"
       return NextResponse.redirect(url)
     }
+
+    if (req.nextUrl.pathname.startsWith('/guest')) {
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
+
     const { payload: sessionTokenBody } = sessionTokenSchema.parse(verified)
 
     if (req.nextUrl.pathname.startsWith('/admin') && sessionTokenBody.publicMeta) {

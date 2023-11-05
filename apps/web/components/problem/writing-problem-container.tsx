@@ -9,14 +9,13 @@ import {
 import { InputSentence } from "@sayvoca/lib/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
-import { queryClient } from "../queryClient"
 import WritingProblemForm from "./writing-problem-form"
 import WritingWaitingView from "./writing-waiting-view"
 
 export default function WritingProblemContainer() {
   const router = useRouter()
 
-  const { addFeedback } = useFeedbackStore()
+  const { addFeedback, setUserInputSentence, setProblem } = useFeedbackStore()
 
   const { data: user } = useQuery({
     queryKey: ["users"],
@@ -40,13 +39,13 @@ export default function WritingProblemContainer() {
     onSuccess: (data) => {
       addFeedback(data)
       router.replace(`/writing/result`)
-      queryClient.invalidateQueries(["sentence-random"])
-      queryClient.invalidateQueries(["users"])
     },
   })
 
   function onSubmit(data: InputSentence) {
     if (!problem) return
+    setUserInputSentence(data)
+    setProblem(problem)
     submit({
       sentenceId: problem.id,
       translatedLanguage: "ENGLISH",

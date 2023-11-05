@@ -57,10 +57,12 @@ export default function WritingProblemForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="font-bold">작문</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
+                  <div className="px-2">
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </div>
                 </FormItem>
               )}
             />
