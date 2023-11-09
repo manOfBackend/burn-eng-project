@@ -30,14 +30,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { columns } from "./columns"
 import { DataTablePagination } from "./data-table-pagination"
-import { InputSentence, Sentence } from "@sayvoca/lib/types"
+import { InputSentence, Sentence, SentencePage } from "@sayvoca/lib/types"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { sentenceInputSchema } from "@sayvoca/lib"
 import { Icons } from "@sayvoca/ui/Icons"
+import { queryClient } from "./queryClient"
 
 const data2: Sentence[] = [
   {
@@ -69,31 +70,62 @@ export default function AdminSentenceView() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
-  const [page, setPage] = React.useState(0)
+  const [{ pageIndex, pageSize }, setPage] = React.useState<{
+    pageIndex: number
+    pageSize: number
+  }>({
+    pageIndex: 0,
+    pageSize: 20,
+  })
+
+  const form = useForm<InputSentence>({
+    resolver: zodResolver(sentenceInputSchema),
+    defaultValues: {
+      sentence: "",
+    },
+  })
+  const { mutate, data: searched } = useMutation({
+    mutationKey: ["searchSentence", form.getValues("sentence")],
+    mutationFn: searchSentence,
+    onSuccess: (data) => {
+      queryClient.setQueriesData(["sentence"], (old: SentencePage) => {
+        return { ...old, content: data }
+      })
+      setPage({
+        pageIndex: 0,
+        pageSize: 20,
+      })
+    },
+  })
 
   const {
     status,
     data: sentences,
     error,
   } = useQuery({
-    queryKey: ["sentence", page],
-    queryFn: () => getSentencePage({ page, size: 20 }),
+    queryKey: ["sentence", pageIndex],
+    queryFn: () => getSentencePage({ page: pageIndex, size: pageSize }),
   })
 
+  const tableData = useMemo(() => {
+    return sentences?.content ?? data2
+  }, [sentences?.content])
+
   const table = useReactTable({
-    data: sentences?.content ?? data2,
+    data: tableData,
     columns,
-    initialState: {
-      pagination: {
-        pageSize: 20,
-      },
-    },
+    pageCount: 100,
     state: {
       sorting,
+      pagination: {
+        pageIndex,
+        pageSize,
+      },
       columnVisibility,
       rowSelection,
       columnFilters,
     },
+    onPaginationChange: setPage,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
@@ -107,19 +139,7 @@ export default function AdminSentenceView() {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
-  const form = useForm<InputSentence>({
-    resolver: zodResolver(sentenceInputSchema),
-    defaultValues: {
-      sentence: "",
-    },
-  })
-  const { mutate } = useMutation({
-    mutationKey: ["searchSentence", form.getValues("sentence")],
-    mutationFn: searchSentence,
-  })
-
   function onSubmit(data: InputSentence) {
-    form.reset()
     startTransition(async () => {
       mutate({
         search: data.sentence,

@@ -1,4 +1,9 @@
-import { Sentence, editSentence } from "@sayvoca/lib"
+import {
+  Sentence,
+  SentencePage,
+  SentenceResponse,
+  editSentence,
+} from "@sayvoca/lib"
 import { useMutation } from "@tanstack/react-query"
 import React from "react"
 import { queryClient } from "./queryClient"
@@ -16,7 +21,17 @@ export default function AdminSentenceEnableHeadder({
     mutationKey: ["editSentence"],
     mutationFn: editSentence,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["sentence"] })
+      queryClient.setQueryData(["sentence"], (old: SentencePage) => {
+        old.content = old?.content?.map((sentence) => {
+          if (sentence.id === row.getValue("id")) {
+            sentence.enable = !Boolean(row.getValue("enable"))
+          }
+          return sentence
+        })
+        return old
+      })
+
+      // queryClient.invalidateQueries({ queryKey: ["sentence"] })
     },
   })
   return (

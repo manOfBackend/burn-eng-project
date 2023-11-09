@@ -7,6 +7,7 @@ import { DataTableColumnHeader } from "./data-table-column-header"
 import { Icons } from "@sayvoca/ui/Icons"
 import { DataTableRowActions } from "./data-table-row-actions"
 import AdminSentenceEnableHeadder from "./admin-sentence-enable-header"
+import dayjs from "dayjs"
 
 export const columns: ColumnDef<Sentence>[] = [
   {
@@ -47,36 +48,6 @@ export const columns: ColumnDef<Sentence>[] = [
     cell: AdminSentenceEnableHeadder,
   },
   {
-    accessorKey: "sentence",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="문장" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("sentence")}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: "language",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="언어" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("language")}
-          </span>
-        </div>
-      )
-    },
-  },
-  {
     accessorKey: "level",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="레벨" />
@@ -92,6 +63,21 @@ export const columns: ColumnDef<Sentence>[] = [
     },
   },
   {
+    accessorKey: "sentence",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="문장" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("sentence")}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
     accessorKey: "updatedAt",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="최근수정시간" />
@@ -100,7 +86,7 @@ export const columns: ColumnDef<Sentence>[] = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[700px] truncate font-medium">
-            {row.getValue("updatedAt")}
+            {dayjs(row.getValue("updatedAt")).format("YY-MM-DD HH:mm:ss")}
           </span>
         </div>
       )
@@ -133,6 +119,21 @@ export const columns: ColumnDef<Sentence>[] = [
   //     return value.includes(row.getValue(id))
   //   },
   // },
+  {
+    accessorKey: "language",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="언어" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[700px] truncate font-medium">
+            {row.getValue("language")}
+          </span>
+        </div>
+      )
+    },
+  },
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
