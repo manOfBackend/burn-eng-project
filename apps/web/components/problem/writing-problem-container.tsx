@@ -31,11 +31,14 @@ export default function WritingProblemContainer() {
   const {
     mutate: submit,
     isLoading,
+    isError,
+    reset,
     isSuccess,
   } = useMutation({
     mutationKey: ["writing"],
     mutationFn: submitWriting,
     retry: false,
+    useErrorBoundary: true,
     onSuccess: (data) => {
       addFeedback(data)
       router.replace(`/writing/result`)

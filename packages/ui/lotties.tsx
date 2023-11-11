@@ -29,6 +29,16 @@ export const DeniedLottie = (
   />
 )
 
+export const ErrorLottie = (
+  props: Omit<ComponentProps<typeof Lottie>, "src">
+) => (
+  <Lottie
+    {...props}
+    src="https://lottie.host/71395ddc-dc6d-4d04-b076-2455f6bda666/jwtZoZzgyw.json"
+    loop={true}
+  />
+)
+
 export const WaitingLottie = (
   props: Omit<ComponentProps<typeof Lottie>, "src">
 ) => (

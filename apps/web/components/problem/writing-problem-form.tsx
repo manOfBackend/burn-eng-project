@@ -35,7 +35,7 @@ export default function WritingProblemForm({
   })
 
   return (
-    <section className="h-full !max-w-[100vw] overscroll-none overflow-y-scroll overflow-x-hidden">
+    <section className="h-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
       <Form {...form}>
         <section className="pb-4">
           <div className="flex justify-between">
