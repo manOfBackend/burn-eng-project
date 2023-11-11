@@ -87,3 +87,10 @@ export const sentencePageResponseSchema = z.object({
   first: z.boolean(),
   last: z.boolean(),
 })
+
+export const sentenceLevelSchema = z.object({
+  levelToSentenceCounts: z.object({
+    level: z.number(),
+    sentenceCount: z.number(),
+  }).array(),
+})

@@ -1,8 +1,12 @@
-import { InputSentence, Sentence, SentenceHistoryDatesResponse, SentenceHistoryResponse, SentencePage, SentenceProblemResponse, SentenceResponse, UserInfoResponse } from '../lib/types';
+import { InputSentence, Sentence, SentenceHistoryDatesResponse, SentenceHistoryResponse, SentenceLevelResponse, SentencePage, SentenceProblemResponse, SentenceResponse, UserInfoResponse } from '../lib/types';
 import { http } from './http';
 
 export function getSentencePage({ page, size }: { page: number, size: number }) {
   return http.get<SentencePage>('/admin/sentence', { params: { page, size } });
+}
+
+export function getSentenceLevelCount() {
+  return http.get<SentenceLevelResponse>('/admin/level/to/sentence-count');
 }
 
 export function addSentence({ language, sentence }: InputSentence) {

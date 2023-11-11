@@ -1,6 +1,10 @@
 "use client"
 
-import { getSentencePage, searchSentence } from "@sayvoca/lib/api"
+import {
+  getSentenceLevelCount,
+  getSentencePage,
+  searchSentence,
+} from "@sayvoca/lib/api"
 import {
   Button,
   Form,
@@ -105,6 +109,11 @@ export default function AdminSentenceView() {
   } = useQuery({
     queryKey: ["sentence", pageIndex],
     queryFn: () => getSentencePage({ page: pageIndex, size: pageSize }),
+  })
+
+  const { data: sentenceLevelCount } = useQuery({
+    queryKey: ["sentence-count"],
+    queryFn: () => getSentenceLevelCount(),
   })
 
   const tableData = useMemo(() => {
