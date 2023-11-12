@@ -3,7 +3,7 @@ import * as z from "zod"
 
 export const sentenceInputSchema = z.object({
   language: z.enum(['KOREAN', 'ENGLISH']).default('KOREAN'),
-  sentence: z.string().min(1, { message: '문장을 입력해주세요.' }),
+  sentence: z.string().min(1, { message: '문장을 입력해주세요.' }).regex(/^[A-Za-z]*%/, { message: '영어만 입력 가능합니다.' }),
 })
 
 export const sentenceResponseSchema = z.object({
