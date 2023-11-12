@@ -9,11 +9,13 @@ interface VocaLayoutProps {
 
 export default function WritingLayout({ children }: VocaLayoutProps) {
   return (
-    <div className="h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pb-[150px] pt-[50px]">
+    <div className="h-screen scrollbar-none w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pb-[150px] pt-[50px]">
       <WithPreviousLayout />
       <Shell>
         <Card className="relative">
-          <CardContent className="grid gap-4 pt-8">{children}</CardContent>
+          <CardContent className="grid gap-4 pt-8 scrollbar-none">
+            {children}
+          </CardContent>
         </Card>
       </Shell>
       <BottomNavigationBar />

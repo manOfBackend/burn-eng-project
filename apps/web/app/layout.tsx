@@ -16,9 +16,8 @@ const fontSans = FontSans({
 })
 
 export const metadata = {
-  title: "🔥번잉🔥",
+  title: "AI 영어 공부 서비스,🔥번잉🔥",
   description: "English Writing Study with AI",
-
   keywords: [
     "영어 작문 연습",
     "english writing",
@@ -27,12 +26,7 @@ export const metadata = {
     "영어공부",
     "직장인영어공부",
   ],
-  authors: [
-    {
-      name: "hyunBell",
-      url: "https://irondeveloper.tistory.com",
-    },
-  ],
+
   creator: "hyunBell",
 }
 
@@ -54,7 +48,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "bg-background mx-auto flex h-screen w-full !max-w-[100vw] justify-center font-sans antialiased",
+            "bg-background mx-auto scrollbar-none flex h-screen w-full !max-w-[100vw] justify-center font-sans antialiased",
             fontSans.variable
           )}
         >

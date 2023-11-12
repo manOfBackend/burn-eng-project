@@ -31,7 +31,7 @@ export default function BottomNavigationBar() {
   const pathname = usePathname()
 
   return (
-    <nav className="btm-nav z-50 h-[50px] w-full bg-white">
+    <nav className="btm-nav z-50 h-[50px] w-full max-w-3xl mx-auto bg-white">
       {MENU.map((item, index) => {
         const isActive = item.strictHref
           ? pathname === item.href
