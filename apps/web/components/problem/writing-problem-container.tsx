@@ -25,6 +25,7 @@ export default function WritingProblemContainer() {
   const { data: problem } = useQuery({
     queryKey: ["sentence-random"],
     queryFn: () => getSentenceProblem(),
+    staleTime: 60 * 1000,
     enabled: Boolean(user),
   })
 
@@ -37,7 +38,6 @@ export default function WritingProblemContainer() {
   } = useMutation({
     mutationKey: ["writing"],
     mutationFn: submitWriting,
-    retry: false,
     useErrorBoundary: true,
     onSuccess: (data) => {
       addFeedback(data)
@@ -47,7 +47,7 @@ export default function WritingProblemContainer() {
 
   function onSubmit(data: InputSentence) {
     if (!problem) return
-    setUserInputSentence(data)
+    setUserInputSentence(problem.id, data)
     setProblem(problem)
     submit({
       sentenceId: problem.id,
@@ -65,6 +65,7 @@ export default function WritingProblemContainer() {
   return (
     <WritingProblemForm
       isLoading={isLoading || isSuccess}
+      sentenceId={problem.id}
       level={problem.level}
       problem={problem.sentence}
       onSubmit={onSubmit}

@@ -1,4 +1,5 @@
 "use client"
+import { useFeedbackStore } from "@/store/feedback"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { InputSentence } from "@sayvoca/lib/types"
 import { sentenceInputSchema } from "@sayvoca/lib/validations"
@@ -18,6 +19,7 @@ import { useForm } from "react-hook-form"
 interface WritingProblemFormProps {
   level: number
   problem: string
+  sentenceId: number
   onSubmit: (data: InputSentence) => void
   isLoading?: boolean
 }
@@ -25,12 +27,15 @@ export default function WritingProblemForm({
   level,
   problem,
   onSubmit,
+  sentenceId,
   isLoading,
 }: WritingProblemFormProps) {
+  const { userInputSentence } = useFeedbackStore()
+
   const form = useForm<InputSentence>({
     resolver: zodResolver(sentenceInputSchema),
     defaultValues: {
-      sentence: "",
+      sentence: userInputSentence?.get(sentenceId)?.sentence ?? "",
     },
   })
 

@@ -66,14 +66,18 @@ export default function WritingResultView() {
           />
         )}
       </div>
-      <section className="mt-4 w-full flex flex-col gap-2">
+      <section className="mt-4 flex w-full flex-col gap-2">
         <article>
           <h2 className="font-bold">원문</h2>
           <p className="pl-2 text-sm">{data?.problem?.sentence}</p>
         </article>
         <article>
           <h2 className="font-bold">입력한 문장</h2>
-          <p className="pl-2 text-sm">{data?.userInputSentence?.sentence}</p>
+          <p className="pl-2 text-sm">
+            {data?.problem?.id && (
+              <>{data.userInputSentence?.get(data.problem.id)?.sentence}</>
+            )}
+          </p>
         </article>
       </section>
       <section className="mt-4 h-52 w-full border-2 border-solid p-2">
@@ -120,13 +124,13 @@ export default function WritingResultView() {
         </Button>
       </article>
       {!isSignedIn && (
-        <article className="w-full flex justify-center mt-14">
+        <article className="mt-14 flex w-full justify-center">
           <div
-            className="tooltip before:text-white before:font-bold animate-bounce tooltip-open tooltip-info "
+            className="tooltip tooltip-open tooltip-info animate-bounce before:font-bold before:text-white "
             data-tip="회원가입을 하면 훨씬 많은 기능이 있어요!"
           >
             <button
-              className="btn btn-info font-bold text-white text-xl"
+              className="btn btn-info text-xl font-bold text-white"
               onClick={() => {
                 router.replace("/signup")
               }}

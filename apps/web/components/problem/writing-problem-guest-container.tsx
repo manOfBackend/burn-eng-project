@@ -40,7 +40,7 @@ export default function WritingGuestProblemContainer() {
 
   function onSubmit(data: InputSentence) {
     if (!problem) return
-    setUserInputSentence(data)
+    setUserInputSentence(problem.id, data)
     setProblem(problem)
     submit({
       sentenceId: problem.id,
@@ -57,6 +57,7 @@ export default function WritingGuestProblemContainer() {
   return (
     <WritingProblemForm
       isLoading={isLoading || isSuccess}
+      sentenceId={problem.id}
       level={problem.level}
       problem={problem.sentence}
       onSubmit={onSubmit}

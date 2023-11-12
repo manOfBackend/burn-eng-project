@@ -5,7 +5,7 @@ export const handlers = [
   rest.post('/translated-feedback', (req, res, ctx) => {
     return res(
       ctx.delay(1000),
-      ctx.status(500),
+      ctx.status(200),
       ctx.json({
         meaningAccuracy: 30,
         grammarAccuracy: 50,

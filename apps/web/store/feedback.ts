@@ -2,11 +2,11 @@ import { InputSentence, SentenceProblemResponse, SentenceResponse } from '@sayvo
 import { create } from 'zustand'
 
 type Feedback = Partial<SentenceResponse> & {
-  userInputSentence?: InputSentence;
+  userInputSentence?: Map<number, InputSentence>;
   problem?: SentenceProblemResponse;
 }
 type FeedbackStore = Feedback & {
-  setUserInputSentence: (sentence: InputSentence) => void
+  setUserInputSentence: (sentenceId: number, sentence: InputSentence) => void
   addFeedback: (feedback: SentenceResponse) => void
   setProblem: (problem: SentenceProblemResponse) => void
 }
@@ -14,5 +14,10 @@ type FeedbackStore = Feedback & {
 export const useFeedbackStore = create<FeedbackStore>((set) => ({
   addFeedback: (feedback) => set(feedback),
   setProblem: (problem) => set({ problem }),
-  setUserInputSentence: (userInputSentence) => set({ userInputSentence }),
+  setUserInputSentence: (sentenceId, userInputSentence) => {
+    const { userInputSentence: prevUserInputSentence } = useFeedbackStore.getState()
+    const newUserInputSentence = new Map(prevUserInputSentence)
+    newUserInputSentence.set(sentenceId, userInputSentence)
+    set({ userInputSentence: newUserInputSentence })
+  },
 }))
