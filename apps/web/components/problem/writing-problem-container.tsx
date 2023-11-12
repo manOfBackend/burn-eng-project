@@ -25,7 +25,7 @@ export default function WritingProblemContainer() {
   const { data: problem } = useQuery({
     queryKey: ["sentence-random"],
     queryFn: () => getSentenceProblem(),
-    staleTime: 60 * 1000,
+    staleTime: 60 * 1000 * 10,
     enabled: Boolean(user),
   })
 

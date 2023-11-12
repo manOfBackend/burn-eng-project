@@ -18,6 +18,7 @@ export default function WritingGuestProblemContainer() {
 
   const { data: problem } = useQuery({
     queryKey: ["sentence-random"],
+    staleTime: 60 * 1000 * 10,
     queryFn: () => getSentenceProblem({ level }),
   })
 
