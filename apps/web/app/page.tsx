@@ -74,8 +74,8 @@ export default function Page() {
                 />
               </div>
               <div className="flex flex-col justify-center space-y-8 text-center">
-                <h2 className="bg-gradient-to-r from-black to-gray-500 bg-clip-text text-2xl font-bold tracking-tighter">
-                  꾸준한 학습을 응원하기 위한 히스토리 제공
+                <h2 className="whitespace-pre-wrap bg-gradient-to-r from-black to-gray-500 bg-clip-text text-2xl font-bold tracking-tighter">
+                  꾸준한 학습을 응원하기 위한{"\n"}히스토리 제공
                 </h2>
               </div>
             </section>

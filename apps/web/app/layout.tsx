@@ -16,8 +16,9 @@ const fontSans = FontSans({
 })
 
 export const metadata = {
-  title: "번잉",
+  title: "🔥번잉🔥",
   description: "English Writing Study with AI",
+
   keywords: [
     "영어 작문 연습",
     "english writing",
