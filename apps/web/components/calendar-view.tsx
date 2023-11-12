@@ -34,7 +34,7 @@ export default function CalendarView() {
         }}
         tileClassName={({ date, view }) => {
           return cn("h-8", {
-            "!bg-green-800 !font-bold text-white": historyDates?.dates.find(
+            "!bg-green-600 !font-bold text-white": historyDates?.dates.find(
               (x) => x === dayjs(date).format("YYYY-MM-DD")
             ),
           })
