@@ -12,6 +12,7 @@ export default authMiddleware({
     "/sso-callback(.*)",
     "/api(.*)",
     "/guest\/(.*)",
+    '/',
   ],
   signInUrl: "/signin",
   async afterAuth(auth, req) {
@@ -21,10 +22,10 @@ export default authMiddleware({
     }
     const url = new URL(req.nextUrl.origin)
 
-    if (req.nextUrl.pathname === '/') {
-      url.pathname = '/dashboard'
-      return NextResponse.redirect(url)
-    }
+    // if (req.nextUrl.pathname === '/') {
+    //   url.pathname = '/dashboard'
+    //   return NextResponse.redirect(url)
+    // }
     const publicKey = env.CLERK_PEM_PUBLIC_KEY;
     const sessionObj = req.cookies.get('__session')
 

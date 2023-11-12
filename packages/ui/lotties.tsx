@@ -39,6 +39,23 @@ export const ErrorLottie = (
   />
 )
 
+export const AILottie = (props: Omit<ComponentProps<typeof Lottie>, "src">) => (
+  <Lottie
+    {...props}
+    src="https://lottie.host/4e665d02-0038-4731-a724-9da45dbb224c/aS86VvnOnP.json"
+    loop={true}
+  />
+)
+export const CommunityLottie = (
+  props: Omit<ComponentProps<typeof Lottie>, "src">
+) => (
+  <Lottie
+    {...props}
+    src="https://lottie.host/6d696aba-b3a1-4caf-9c94-a7ffc640b573/UkeWwFVqIq.json"
+    loop={true}
+  />
+)
+
 export const WaitingLottie = (
   props: Omit<ComponentProps<typeof Lottie>, "src">
 ) => (
