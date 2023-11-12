@@ -82,7 +82,7 @@ export default function SignInForm() {
             <FormItem>
               <FormLabel>이메일</FormLabel>
               <FormControl>
-                <Input placeholder="hyunbell@gmail.com" {...field} />
+                <Input placeholder="your_email@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

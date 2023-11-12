@@ -1,14 +1,26 @@
 "use client"
 
-import { Inputs, signUpInputs } from '@sayvoca/lib/types'
-import { signUpErrorMessages } from '@/utils/errorMessage'
-import { useSignUp } from '@clerk/nextjs'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { signUpSchema, userAuthSchema } from '@sayvoca/lib/validations/auth'
-import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, PasswordInput, useToast } from '@sayvoca/ui'
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import { Inputs, signUpInputs } from "@sayvoca/lib/types"
+import { signUpErrorMessages } from "@/utils/errorMessage"
+import { useSignUp } from "@clerk/nextjs"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { signUpSchema, userAuthSchema } from "@sayvoca/lib/validations/auth"
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Icons,
+  Input,
+  PasswordInput,
+  useToast,
+} from "@sayvoca/ui"
+import { useRouter } from "next/navigation"
+import React from "react"
+import { useForm } from "react-hook-form"
 
 export default function SignUpForm() {
   const router = useRouter()
@@ -41,10 +53,11 @@ export default function SignUpForm() {
         })
 
         router.push("/signup/verify-email")
-
       } catch (error: any) {
         toast({
-          title: signUpErrorMessages.get(error.errors[0].code) ?? '알 수 없는 오류가 발생했습니다.'
+          title:
+            signUpErrorMessages.get(error.errors[0].code) ??
+            "알 수 없는 오류가 발생했습니다.",
         })
       }
     })
@@ -62,7 +75,7 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>이메일</FormLabel>
               <FormControl>
-                <Input placeholder="hyunbell@gmail.com" {...field} />
+                <Input placeholder="your_email@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -17,8 +17,15 @@ const fontSans = FontSans({
 
 export const metadata = {
   title: "번잉",
-  description: "Burn English",
-  keywords: ["english voca learning", "chatGPT"],
+  description: "English Writing Study with AI",
+  keywords: [
+    "영어 작문 연습",
+    "english writing",
+    "영어공부사이트",
+    "영어학습사이트",
+    "영어공부",
+    "직장인영어공부",
+  ],
   authors: [
     {
       name: "hyunBell",
