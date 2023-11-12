@@ -28,6 +28,7 @@ export default function WritingGuestProblemContainer() {
   } = useMutation({
     mutationKey: ["writing"],
     mutationFn: submitWriting,
+    useErrorBoundary: true,
     onSuccess: (data) => {
       addFeedback(data)
       if (data.feedbackResult === "PASS" && level < 5) {

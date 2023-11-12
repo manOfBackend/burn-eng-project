@@ -5,7 +5,11 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query"
 import { ErrorBoundary } from "@/components/error-boundary"
 import WritingProblemContainer from "./writing-problem-container"
 import WritingErrorView from "./writing-error-view"
-export default function WritingErrorContainer() {
+
+interface Props {
+  children?: React.ReactNode
+}
+export default function WritingErrorContainer({ children }: Props = {}) {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
@@ -15,7 +19,7 @@ export default function WritingErrorContainer() {
             <WritingErrorView reset={resetErrorBoundary} />
           )}
         >
-          <WritingProblemContainer />
+          {children}
         </ErrorBoundary>
       )}
     </QueryErrorResetBoundary>
