@@ -4,7 +4,7 @@ import WithPreviousLayout from "@/components/with-previous-layout"
 import { Card, CardContent } from "@sayvoca/ui/card"
 
 interface SettingsLayoutProps {
-  children: React.ReactNode
+    children: React.ReactNode
 }
 
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
