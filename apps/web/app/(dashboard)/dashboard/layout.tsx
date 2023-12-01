@@ -3,6 +3,7 @@ interface DashboardLayoutProps {
   stats: React.ReactNode
   chart: React.ReactNode
   menu: React.ReactNode
+  calendar: React.ReactNode
 }
 
 export default function DashboardLayout({
@@ -10,6 +11,7 @@ export default function DashboardLayout({
   stats,
   chart,
   menu,
+  calendar
 }: DashboardLayoutProps) {
   return (
     <section className="overflow-y-scroll scrollbar-none">
@@ -17,6 +19,12 @@ export default function DashboardLayout({
       <article>
         <h3 className="font-bold">최고 레벨</h3>
         <div className="h-52 w-full">{chart}</div>
+      </article>
+      <article className="mt-7 flex flex-col gap-3">
+        <h3 className="font-bold">출석체크</h3>
+        <div className="flex justify-center">
+          {calendar}
+        </div>
       </article>
       <article className="mt-7 flex flex-col gap-3">{menu}</article>
       {children}

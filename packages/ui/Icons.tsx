@@ -50,6 +50,7 @@ import {
   type Icon as LucideIcon,
   Heart,
   ArrowBigRight,
+  Trophy
 } from "lucide-react"
 
 export type Icon = LucideIcon
@@ -119,4 +120,5 @@ export const Icons = {
   arrowRightCircle: ArrowRightCircle,
   heart: Heart,
   arrowBigRight: ArrowBigRight,
+  trophy: Trophy
 }
