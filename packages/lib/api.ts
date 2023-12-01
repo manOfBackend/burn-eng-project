@@ -2,7 +2,7 @@ import { InputSentence, Sentence, SentenceHistoryDatesResponse, SentenceHistoryR
 import { http, httpWithAuth } from './http';
 
 export function getSentencePage({ page, size }: { page: number, size: number }) {
-  return httpWithAuth.get<SentencePage>('/admin/sentence', { params: { page, size } });
+  return httpWithAuth.get<SentencePage>('/admin/sentences', { params: { page, size } });
 }
 
 export function getSentenceLevelCount() {
@@ -10,15 +10,15 @@ export function getSentenceLevelCount() {
 }
 
 export function addSentence({ language, sentence }: InputSentence) {
-  return httpWithAuth.post<Sentence>('/admin/sentence', { language, sentence });
+  return httpWithAuth.post<Sentence>('/admin/sentences', { language, sentence });
 }
 
 export function editSentence({ enable, id, language, level, sentence }: Pick<Sentence, 'id' | 'enable' | 'language' | 'sentence' | 'level'>) {
-  return httpWithAuth.put<void>(`/admin/sentence`, { enable, id, language, level, sentence });
+  return httpWithAuth.put<void>(`/admin/sentences`, { enable, id, language, level, sentence });
 }
 
 export function deleteSentence(sentenceId: Sentence['id']) {
-  return httpWithAuth.delete<void>(`/admin/sentence/${sentenceId}`);
+  return httpWithAuth.delete<void>(`/admin/sentences/${sentenceId}`);
 }
 
 export function submitWriting({ sentenceId, translatedLanguage, translatedSentence }: { translatedLanguage: string, translatedSentence: string, sentenceId: number }) {
@@ -30,7 +30,7 @@ export function submitGuestWriting({ sentenceId, translatedLanguage, translatedS
 }
 
 export function searchSentence({ search }: { search: string }) {
-  return httpWithAuth.post<Sentence[]>('/admin/sentence/search', { search });
+  return httpWithAuth.post<Sentence[]>('/admin/sentences/search', { search });
 }
 
 export function getSentenceProblem({ level }: { level?: number } = {}) {
