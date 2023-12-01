@@ -48,7 +48,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "bg-background mx-auto scrollbar-none flex h-screen w-full !max-w-[100vw] justify-center font-sans antialiased",
+            "bg-background scrollbar-none mx-auto flex h-screen w-full !max-w-[100vw] justify-center font-sans antialiased",
             fontSans.variable
           )}
         >

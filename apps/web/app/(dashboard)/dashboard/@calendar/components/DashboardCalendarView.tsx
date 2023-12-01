@@ -70,7 +70,7 @@ export default function DashboardCalendarView() {
   ]
   return (
     <div
-      className="grid grid-cols-7 gap-1 w-full max-w-xs justify-center place-items-center cursor-pointer"
+      className="grid w-full max-w-xs cursor-pointer grid-cols-7 place-items-center justify-center gap-1"
       onClick={() => {
         router.push("/writing/history")
       }}
@@ -80,7 +80,7 @@ export default function DashboardCalendarView() {
         <div
           key={x.text}
           className={cn(
-            "w-8 h-8 grid relative border-solid border-2 place-content-center rounded-full bg-gray-100",
+            "relative grid h-8 w-8 place-content-center rounded-full border-2 border-solid bg-gray-100",
             {
               "bg-yellow-500 border-yellow-500": historyDates?.dates.find(
                 (y) => y === dayjs(x.start).format("YYYY-MM-DD")
@@ -91,7 +91,7 @@ export default function DashboardCalendarView() {
           {historyDates?.dates.find(
             (y) => y === dayjs(x.start).format("YYYY-MM-DD")
           ) ? (
-            <Icons.trophy className="w-4 h-4 text-white" />
+            <Icons.trophy className="h-4 w-4 text-white" />
           ) : (
             <p className="text-xs">{x.text}</p>
           )}

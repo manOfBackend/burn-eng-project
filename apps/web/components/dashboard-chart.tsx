@@ -9,7 +9,7 @@ export default function DashboardChart({ data }: DashboardChartProps) {
   return (
     <div className="relative h-full w-full">
       {(!data || data.length === 0) && (
-        <div className="flex bg-white/30  absolute w-full top-0 left-1/2 -translate-x-1/2 items-center justify-center h-full">
+        <div className="absolute left-1/2  top-0 flex h-full w-full -translate-x-1/2 items-center justify-center bg-white/30">
           <p>아직 데이터가 없습니다.</p>
         </div>
       )}

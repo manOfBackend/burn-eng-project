@@ -9,10 +9,10 @@ export default function HistoryLayout({
   histories,
 }: HistoryLayoutProps) {
   return (
-    <section className="mt-4 scrollbar-none overflow-x-hidden overflow-y-scroll">
+    <section className="scrollbar-none mt-4 overflow-x-hidden overflow-y-scroll">
       <h2 className="mb-2 text-xl font-bold">히스토리</h2>
       {calendar}
-      <section className="mt-4 flex w-full flex-col scrollbar-none gap-2">
+      <section className="scrollbar-none mt-4 flex w-full flex-col gap-2">
         {histories}
       </section>
     </section>

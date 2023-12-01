@@ -32,7 +32,7 @@ export default function WritingResultView() {
   if (!data || !data?.feedbackResult) return null
 
   return (
-    <section className="mt-4 scrollbar-none">
+    <section className="scrollbar-none mt-4">
       <h2 className="mb-2 text-xl font-bold">채점 결과</h2>
       <div className="flex items-center justify-center py-4">
         <div
@@ -54,7 +54,7 @@ export default function WritingResultView() {
           </span>
         </div>
       </div>
-      <div className="h-[200px] w-full scrollbar-none">
+      <div className="scrollbar-none h-[200px] w-full">
         {data && (
           <SentenceFeedbackChart
             data={{
@@ -66,7 +66,7 @@ export default function WritingResultView() {
           />
         )}
       </div>
-      <section className="mt-4 flex w-full flex-col gap-2 scrollbar-none">
+      <section className="scrollbar-none mt-4 flex w-full flex-col gap-2">
         <article>
           <h2 className="font-bold">원문</h2>
           <p className="pl-2 text-sm">{data?.problem?.sentence}</p>

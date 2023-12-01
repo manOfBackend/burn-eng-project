@@ -25,6 +25,7 @@ export const sentenceProblemResponseSchema = z.object({
   deletedAt: z.any().nullable(),
   enable: z.boolean(),
   language: z.enum(['KOREAN', 'ENGLISH']),
+  percentageOfCorrectAnswers: z.number(),
 })
 
 export const sentenceHistoryDatesResponseSchema = z.object({

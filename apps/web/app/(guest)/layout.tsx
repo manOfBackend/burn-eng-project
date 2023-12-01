@@ -8,7 +8,7 @@ interface GuestLayoutProps {
 
 export default function GuestLayout({ children }: GuestLayoutProps) {
   return (
-    <div className="h-screen scrollbar-none w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pb-[100px] pt-[50px]">
+    <div className="scrollbar-none h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pb-[100px] pt-[50px]">
       <WithPreviousLayout />
       <Shell>
         <Card className="relative">

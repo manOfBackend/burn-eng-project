@@ -37,16 +37,16 @@ export default function WritingProblemForm({
   })
 
   return (
-    <section className="relative h-full !max-w-[100vw] scrollbar-none overflow-x-hidden overflow-y-scroll overscroll-none">
+    <section className="scrollbar-none relative h-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
       <Form {...form}>
         <section className="pb-4">
-          <div className="flex justify-between flex-nowrap">
+          <div className="flex flex-nowrap justify-between">
             <h2 className="mb-2 font-bold">문제</h2>
-            <div className="flex gap-1 flex-nowrap">
-              <p className="px-2 py-1 whitespace-nowrap bg-blue-400 text-white font-bold rounded-md">
+            <div className="flex flex-nowrap gap-1">
+              <p className="whitespace-nowrap rounded-md bg-blue-400 px-2 py-1 font-bold text-white">
                 레벨 {level}
               </p>
-              <p className={cn("px-2 py-1 whitespace-nowrap text-white font-bold rounded-md", {
+              <p className={cn("whitespace-nowrap rounded-md px-2 py-1 font-bold text-white", {
                 "bg-green-400": percentageOfCorrectAnswers >= 70,
                 "bg-yellow-400": percentageOfCorrectAnswers < 70 && percentageOfCorrectAnswers >= 30,
                 "bg-red-400": percentageOfCorrectAnswers < 30,

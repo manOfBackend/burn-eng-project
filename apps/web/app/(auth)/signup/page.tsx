@@ -20,7 +20,7 @@ export default function Page() {
           <SignUpForm />
         </CardContent>
         <CardFooter className="flex flex-wrap items-center space-x-2">
-          <div className="flex-1 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex-1 text-sm">
             <Link
               aria-label="Sign in"
               href="/signin"
