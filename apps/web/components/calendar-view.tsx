@@ -10,7 +10,7 @@ import "react-calendar/dist/Calendar.css"
 export default function CalendarView() {
   const { date, setDate } = useHistoryStore()
   const { data: historyDates } = useQuery({
-    queryKey: ["sentence-history", "dates"],
+    queryKey: ["sentence-history", "dates", date.getFullYear(), date.getMonth() + 1],
     queryFn: () =>
       getHistoryDates({
         year: date.getFullYear(),
@@ -26,6 +26,10 @@ export default function CalendarView() {
         onChange={(value) => {
           setDate(dayjs(value?.toString()).toDate())
         }}
+        onActiveStartDateChange={(value) => {
+          setDate(dayjs(value?.activeStartDate?.toString()).toDate())
+        }}
+        // onViewChange={(value) => { value.action === 'next' && value.view === 'month'}
         className="!w-full !max-w-[600px] !border-none text-sm"
         value={date}
         calendarType="gregory"
