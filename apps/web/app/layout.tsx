@@ -44,7 +44,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider>
-      <html lang="ko" suppressHydrationWarning>
+      <html data-theme="light" lang="ko" suppressHydrationWarning>
         <head />
         <body
           className={cn(
