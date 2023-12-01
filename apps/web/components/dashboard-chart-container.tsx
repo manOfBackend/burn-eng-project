@@ -36,6 +36,5 @@ export default function DashboardChartContainer() {
     ]
   }, [user?.recentUserLevelHistories])
 
-  console.log('@chartData', chartData)
-  return <>{<DashboardChart data={chartData} />}</>
+  return <DashboardChart data={chartData} />
 }

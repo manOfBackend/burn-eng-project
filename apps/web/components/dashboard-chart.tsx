@@ -3,7 +3,7 @@ import React from "react"
 import { ResponsiveLine, Serie } from "@nivo/line"
 import dayjs from 'dayjs'
 interface DashboardChartProps {
-  data: Serie[]
+  data: Serie[] | null
 }
 export default function DashboardChart({ data }: DashboardChartProps) {
   return (
