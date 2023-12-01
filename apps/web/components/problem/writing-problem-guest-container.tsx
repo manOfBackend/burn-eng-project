@@ -2,7 +2,7 @@
 
 import { useFeedbackStore } from "@/store/feedback"
 import { useGuestStore } from "@/store/guest"
-import { getSentenceProblem, submitWriting } from "@sayvoca/lib/api"
+import { getSentenceProblem, submitGuestWriting } from "@sayvoca/lib/api"
 import { InputSentence } from "@sayvoca/lib/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
@@ -14,10 +14,10 @@ export default function WritingGuestProblemContainer() {
 
   const { level, setLevel } = useGuestStore()
 
-  const { addFeedback, setUserInputSentence, setProblem } = useFeedbackStore()
+  const { addFeedback,  setProblem } = useFeedbackStore()
 
   const { data: problem } = useQuery({
-    queryKey: ["sentence-random"],
+    queryKey: ["sentence-random-guest"],
     staleTime: 60 * 1000 * 10,
     queryFn: () => getSentenceProblem({ level }),
   })
@@ -27,8 +27,8 @@ export default function WritingGuestProblemContainer() {
     isLoading,
     isSuccess,
   } = useMutation({
-    mutationKey: ["writing"],
-    mutationFn: submitWriting,
+    mutationKey: ["writing-guest"],
+    mutationFn: submitGuestWriting,
     useErrorBoundary: true,
     onSuccess: (data) => {
       addFeedback(data)
@@ -41,7 +41,6 @@ export default function WritingGuestProblemContainer() {
 
   function onSubmit(data: InputSentence) {
     if (!problem) return
-    setUserInputSentence(problem.id, data)
     setProblem(problem)
     submit({
       sentenceId: problem.id,
@@ -58,7 +57,6 @@ export default function WritingGuestProblemContainer() {
   return (
     <WritingProblemForm
       isLoading={isLoading || isSuccess}
-      sentenceId={problem.id}
       level={problem.level}
       problem={problem.sentence}
       onSubmit={onSubmit}
