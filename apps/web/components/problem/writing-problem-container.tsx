@@ -48,7 +48,7 @@ export default function WritingProblemContainer() {
   function onSubmit(data: InputSentence) {
     if (!problem) return
     setProblem(problem)
-    setUserInputSentence(data.sentence)
+    setUserInputSentence(problem.id, data)
     submit({
       sentenceId: problem.id,
       translatedLanguage: "ENGLISH",
