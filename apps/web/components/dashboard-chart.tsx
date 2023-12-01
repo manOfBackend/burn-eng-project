@@ -1,37 +1,57 @@
-'use client'
-import React from 'react'
-import { ResponsiveLine, Serie } from '@nivo/line'
-
+"use client"
+import React from "react"
+import { ResponsiveLine, Serie } from "@nivo/line"
+import dayjs from 'dayjs'
 interface DashboardChartProps {
   data: Serie[]
 }
 export default function DashboardChart({ data }: DashboardChartProps) {
   return (
-    <ResponsiveLine
-      data={data}
-      margin={{ top: 20, right: 20, bottom: 50, left: 20 }}
-      xScale={{ type: 'point' }}
-      yScale={{
-        type: 'linear',
-        min: 'auto',
-        max: 'auto',
-        stacked: true,
-        reverse: false
-      }}
-      enableGridX={false}
-      enableGridY={false}
-      isInteractive={false}
-      enablePointLabel={true}
-      pointLabel={({ y }) => Number(y) > 0 ? `${y}` : ''}
-      pointBorderColor={'#fff'}
-      axisLeft={null}
-      axisTop={null}
-      axisRight={null}
-      enableArea={true}
-      pointSize={10}
-      pointBorderWidth={2}
-      pointLabelYOffset={-12}
-      useMesh={true}
-    />
+    <div className="relative h-full w-full">
+      {(!data || data.length === 0) && (
+        <div className="flex bg-white/30  absolute w-full top-0 left-1/2 -translate-x-1/2 items-center justify-center h-full">
+          <p>아직 데이터가 없습니다.</p>
+        </div>
+      )}
+      <ResponsiveLine
+        data={!data || data.length === 0 ? DUMMY_DATA : data}
+        margin={{ top: 20, right: 20, bottom: 50, left: 20 }}
+        xScale={{ type: "point" }}
+        yScale={{
+          type: "linear",
+          min: "auto",
+          max: "auto",
+          stacked: true,
+          reverse: false,
+        }}
+        enableGridX={false}
+        enableGridY={false}
+        isInteractive={false}
+        enablePointLabel={true}
+        pointLabel={({ y }) => (Number(y) > 0 ? `${y}` : "")}
+        pointBorderColor={"#fff"}
+        axisLeft={null}
+        axisTop={null}
+        axisRight={null}
+        enableArea={true}
+        pointSize={10}
+        pointBorderWidth={2}
+        pointLabelYOffset={-12}
+        useMesh={true}
+      />
+    </div>
   )
 }
+
+const DUMMY_DATA = [
+  {
+    id: "stats",
+    color: "hsl(187, 70%, 50%)",
+    data: [
+      {
+        x: dayjs().format("MM/DD"),
+        y: 1,
+      },
+    ],
+  },
+]

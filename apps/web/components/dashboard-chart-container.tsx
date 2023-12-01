@@ -25,7 +25,7 @@ export default function DashboardChartContainer() {
         }
       })
 
-    if (!data) return null
+    if (!data || data.length === 0) return null
 
     return [
       {
@@ -36,5 +36,6 @@ export default function DashboardChartContainer() {
     ]
   }, [user?.recentUserLevelHistories])
 
-  return <>{chartData && <DashboardChart data={chartData} />}</>
+  console.log('@chartData', chartData)
+  return <>{<DashboardChart data={chartData} />}</>
 }
