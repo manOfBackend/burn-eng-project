@@ -15,7 +15,7 @@ import WritingWaitingView from "./writing-waiting-view"
 export default function WritingProblemContainer() {
   const router = useRouter()
 
-  const { addFeedback,  setProblem } = useFeedbackStore()
+  const { addFeedback, setUserInputSentence,  setProblem } = useFeedbackStore()
 
   const { data: user } = useQuery({
     queryKey: ["users"],
@@ -48,6 +48,7 @@ export default function WritingProblemContainer() {
   function onSubmit(data: InputSentence) {
     if (!problem) return
     setProblem(problem)
+    setUserInputSentence(data.sentence)
     submit({
       sentenceId: problem.id,
       translatedLanguage: "ENGLISH",

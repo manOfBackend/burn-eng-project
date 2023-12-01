@@ -40,7 +40,7 @@ export default function WritingProblemForm({
     <section className="scrollbar-none relative h-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none">
       <Form {...form}>
         <section className="pb-4">
-          <div className="flex flex-nowrap justify-between">
+          <div className="mb-3 flex flex-nowrap justify-between">
             <h2 className="mb-2 font-bold">문제</h2>
             <div className="flex flex-nowrap gap-1">
               <p className="whitespace-nowrap rounded-md bg-blue-400 px-2 py-1 font-bold text-white">

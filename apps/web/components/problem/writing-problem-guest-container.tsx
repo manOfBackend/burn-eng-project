@@ -14,7 +14,7 @@ export default function WritingGuestProblemContainer() {
 
   const { level, setLevel } = useGuestStore()
 
-  const { addFeedback, setProblem } = useFeedbackStore()
+  const { addFeedback, setUserInputSentence, setProblem } = useFeedbackStore()
 
   const { data: problem } = useQuery({
     queryKey: ["sentence-random-guest"],
@@ -42,6 +42,7 @@ export default function WritingGuestProblemContainer() {
   function onSubmit(data: InputSentence) {
     if (!problem) return
     setProblem(problem)
+    setUserInputSentence(data.sentence)
     submit({
       sentenceId: problem.id,
       translatedLanguage: "ENGLISH",
