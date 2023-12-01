@@ -14,15 +14,17 @@ import {
 } from "@sayvoca/ui"
 import { Icons } from "@sayvoca/ui/Icons"
 import { useForm } from "react-hook-form"
-
+import { cn } from "@sayvoca/lib/utils"
 interface WritingProblemFormProps {
   level: number
+  percentageOfCorrectAnswers: number
   problem: string
   onSubmit: (data: InputSentence) => void
   isLoading?: boolean
 }
 export default function WritingProblemForm({
   level,
+  percentageOfCorrectAnswers,
   problem,
   onSubmit,
   isLoading,
@@ -35,12 +37,23 @@ export default function WritingProblemForm({
   })
 
   return (
-    <section className="h-full !max-w-[100vw] scrollbar-none overflow-x-hidden overflow-y-scroll overscroll-none">
+    <section className="relative h-full !max-w-[100vw] scrollbar-none overflow-x-hidden overflow-y-scroll overscroll-none">
       <Form {...form}>
         <section className="pb-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between flex-nowrap">
             <h2 className="mb-2 font-bold">문제</h2>
-            <p>레벨 {level}</p>
+            <div className="flex gap-1 flex-nowrap">
+              <p className="px-2 py-1 whitespace-nowrap bg-blue-400 text-white font-bold rounded-md">
+                레벨 {level}
+              </p>
+              <p className={cn("px-2 py-1 whitespace-nowrap text-white font-bold rounded-md", {
+                "bg-green-400": percentageOfCorrectAnswers >= 70,
+                "bg-yellow-400": percentageOfCorrectAnswers < 70 && percentageOfCorrectAnswers >= 30,
+                "bg-red-400": percentageOfCorrectAnswers < 30,
+              })}>
+                정답률 {Number(percentageOfCorrectAnswers.toFixed(2))}%
+              </p>
+            </div>
           </div>
           <p className="ml-2 text-base font-semibold text-green-900">
             {problem}

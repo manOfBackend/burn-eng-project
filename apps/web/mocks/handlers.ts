@@ -28,7 +28,8 @@ export const handlers = [
           "enable": true,
           "language": "KOREAN",
           "sentence": "나는 맛있는 사과다.",
-          "level": 2
+          "level": 2,
+          "percentageOfCorrectAnswers": 49
         }
       ))
   }),

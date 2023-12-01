@@ -14,7 +14,7 @@ export default function WritingGuestProblemContainer() {
 
   const { level, setLevel } = useGuestStore()
 
-  const { addFeedback,  setProblem } = useFeedbackStore()
+  const { addFeedback, setProblem } = useFeedbackStore()
 
   const { data: problem } = useQuery({
     queryKey: ["sentence-random-guest"],
@@ -56,6 +56,7 @@ export default function WritingGuestProblemContainer() {
   }
   return (
     <WritingProblemForm
+      percentageOfCorrectAnswers={problem.percentageOfCorrectAnswers}
       isLoading={isLoading || isSuccess}
       level={problem.level}
       problem={problem.sentence}

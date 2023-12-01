@@ -64,6 +64,7 @@ export default function WritingProblemContainer() {
   return (
     <WritingProblemForm
       isLoading={isLoading || isSuccess}
+      percentageOfCorrectAnswers={problem.percentageOfCorrectAnswers}
       level={problem.level}
       problem={problem.sentence}
       onSubmit={onSubmit}
