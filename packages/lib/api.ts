@@ -6,7 +6,7 @@ export function getSentencePage({ page, size }: { page: number, size: number }) 
 }
 
 export function getSentenceLevelCount() {
-  return httpWithAuth.get<SentenceLevelResponse>('/admin/level/to/sentence-count');
+  return httpWithAuth.get<SentenceLevelResponse>('/admin/level-to-sentence-counts');
 }
 
 export function addSentence({ language, sentence }: InputSentence) {
