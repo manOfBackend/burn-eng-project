@@ -28,3 +28,11 @@ httpWithAuth.interceptors.request.use((config) => {
 
   return config;
 });
+
+http.interceptors.response.use(res => res.data);
+
+http.interceptors.request.use((config) => {
+  if (!config.headers) return config;
+  config.baseURL = env.NEXT_PUBLIC_IS_USE_MOCK ? MOCK_API_URL : env.NEXT_PUBLIC_API_URL;
+  return config;
+});
