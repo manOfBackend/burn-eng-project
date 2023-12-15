@@ -4,6 +4,7 @@ import { Icons } from "@sayvoca/ui/Icons"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import DailyGoalPopup from "./daily-goal-popup"
+import { cn } from "@sayvoca/lib/utils"
 
 export default function DashboardStat() {
   const { data: user } = useQuery({
@@ -24,6 +25,10 @@ export default function DashboardStat() {
 
   if (!user) return null
 
+  const percent = Math.floor(
+    (user?.dailyGoalCount / user?.dailyGoal ?? 0) * 100
+  )
+
   return (
     <>
       <div className="flex w-full justify-between rounded-2xl p-4 shadow">
@@ -41,23 +46,21 @@ export default function DashboardStat() {
         <div className="flex flex-col justify-center gap-2">
           <div className="flex items-center justify-center">
             <div
-              className={
-                "radial-progress whitespace-pre-wrap text-center text-purple-500"
-              }
+              className={cn(
+                "radial-progress whitespace-pre-wrap text-center ",
+                {
+                  "text-purple-200": percent === 0,
+                  "text-purple-500": percent > 0,
+                }
+              )}
               style={
                 {
-                  "--value":
-                    (user?.dailyGoalCount / user?.dailyGoal ?? 0) * 100,
+                  "--value": percent === 0 ? 100 : percent,
                   "--thickness": "2px",
                 } as React.CSSProperties
               }
             >
-              <span>
-                {Math.floor(
-                  (user?.dailyGoalCount / user?.dailyGoal ?? 0) * 100
-                )}
-                %
-              </span>
+              <span>{percent}%</span>
             </div>
           </div>
           <div
@@ -68,9 +71,11 @@ export default function DashboardStat() {
           >
             <p className="">
               하루 목표:{" "}
-              <span className="font-bold">{user?.dailyGoal} 문제</span>
+              <span className="font-bold text-purple-500">
+                {user?.dailyGoal} 문제
+              </span>
             </p>
-            <Icons.chevronRight className="rotate-90" />
+            <Icons.chevronRight className="rotate-90 text-purple-500" />
           </div>
         </div>
       </div>
