@@ -103,7 +103,10 @@ export const handlers = [
             },
           ],
           "level": 5,
-          "exp": 0
+          "userExp": 2,
+          "totalLevelExp": 5,
+          "dailyGoal": 5,
+          "dailyGoalCount": 2,
         }
       ))
   })

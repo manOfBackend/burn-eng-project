@@ -46,11 +46,18 @@ export default function WritingProblemForm({
               <p className="whitespace-nowrap rounded-md bg-blue-400 px-2 py-1 font-bold text-white">
                 레벨 {level}
               </p>
-              <p className={cn("whitespace-nowrap rounded-md px-2 py-1 font-bold text-white", {
-                "bg-green-400": percentageOfCorrectAnswers >= 70,
-                "bg-yellow-400": percentageOfCorrectAnswers < 70 && percentageOfCorrectAnswers >= 30,
-                "bg-red-400": percentageOfCorrectAnswers < 30,
-              })}>
+              <p
+                className={cn(
+                  "whitespace-nowrap rounded-md px-2 py-1 font-bold text-white",
+                  {
+                    "bg-green-400": percentageOfCorrectAnswers >= 70,
+                    "bg-yellow-400":
+                      percentageOfCorrectAnswers < 70 &&
+                      percentageOfCorrectAnswers >= 30,
+                    "bg-red-400": percentageOfCorrectAnswers < 30,
+                  }
+                )}
+              >
                 정답률 {Number(percentageOfCorrectAnswers.toFixed(2))}%
               </p>
             </div>
@@ -72,7 +79,7 @@ export default function WritingProblemForm({
                   <FormLabel className="font-bold">작문</FormLabel>
                   <div className="px-2">
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} autoFocus />
                     </FormControl>
                     <FormMessage />
                   </div>

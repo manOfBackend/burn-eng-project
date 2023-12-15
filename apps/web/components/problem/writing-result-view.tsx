@@ -74,9 +74,9 @@ export default function WritingResultView() {
         <article>
           <h2 className="font-bold">입력한 문장</h2>
           <p className="pl-2 text-sm">
-            {data?.problem?.id && (
+            {data?.problem?.id ? (
               <>{data.userInputSentence?.get(data.problem.id)?.sentence}</>
-            )}
+            ) : null}
           </p>
         </article>
       </section>

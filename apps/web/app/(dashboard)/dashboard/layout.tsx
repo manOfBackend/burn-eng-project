@@ -14,7 +14,7 @@ export default function DashboardLayout({
   calendar
 }: DashboardLayoutProps) {
   return (
-    <section className="overflow-y-scroll scrollbar-none">
+    <section className="scrollbar-none overflow-y-scroll">
       <article className="mb-5 overflow-hidden p-1">{stats}</article>
       <article>
         <h3 className="font-bold">최고 레벨</h3>

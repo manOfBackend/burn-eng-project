@@ -45,6 +45,10 @@ export function getSentenceProblemHistory({ date, languageFrom, languageTo }: { 
   return httpWithAuth.get<SentenceHistoryResponse>('/translated/history', { params: { languageFrom, languageTo, date } });
 }
 
+export function submitUserDailyGoal({ goal }: { goal: number }) {
+  return httpWithAuth.put<void>('/user-daily-goal', { params: { goal } });
+}
+
 export function getUserInfo() {
   return httpWithAuth.get<UserInfoResponse>(`/users`);
 }

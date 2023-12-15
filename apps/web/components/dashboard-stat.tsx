@@ -1,6 +1,9 @@
 "use client"
-import { getUserInfo } from "@sayvoca/lib/api"
-import { useQuery } from "@tanstack/react-query"
+import { getUserInfo, submitUserDailyGoal } from "@sayvoca/lib/api"
+import { Icons } from "@sayvoca/ui/Icons"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { useState } from "react"
+import DailyGoalPopup from "./daily-goal-popup"
 
 export default function DashboardStat() {
   const { data: user } = useQuery({
@@ -9,29 +12,79 @@ export default function DashboardStat() {
     suspense: true,
   })
 
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["submit-daily-goal"],
+    mutationFn: submitUserDailyGoal,
+    onSuccess: () => {
+      setOpenDailyPopup(false)
+    },
+  })
+
+  const [isOpenDailyPopup, setOpenDailyPopup] = useState(false)
+
+  if (!user) return null
+
   return (
-    <div className="stats w-full shadow">
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <div className="avatar placeholder">
-            <div className="text-neutral-content w-16 rounded-full bg-purple-900">
-              <span className="text-3xl">
-                {user?.email?.slice(0, 2)?.toUpperCase()}
+    <>
+      <div className="flex w-full justify-between rounded-2xl p-4 shadow">
+        <div className="flex flex-col gap-2">
+          <div className="text-4xl font-bold">레벨 {user.level}</div>
+          <div className="flex flex-col">
+            <h2 className="text-sm text-gray-600">경험치</h2>
+            <progress
+              className="progress progress-info my-1 w-[100px]"
+              value={user.userExp}
+              max={user.totalLevelExp}
+            ></progress>
+          </div>
+        </div>
+        <div className="flex flex-col justify-center gap-2">
+          <div className="flex items-center justify-center">
+            <div
+              className={
+                "radial-progress whitespace-pre-wrap text-center text-purple-500"
+              }
+              style={
+                {
+                  "--value":
+                    (user?.dailyGoalCount / user?.dailyGoal ?? 0) * 100,
+                  "--thickness": "2px",
+                } as React.CSSProperties
+              }
+            >
+              <span>
+                {Math.floor(
+                  (user?.dailyGoalCount / user?.dailyGoal ?? 0) * 100
+                )}
+                %
               </span>
             </div>
           </div>
-        </div>
-        <div className="stat-value">레벨 {user?.level ?? 1}</div>
-        <div className="stat-title">작문 학습</div>
-        <progress
-          className="progress progress-info my-1 w-[100px]"
-          value={user?.exp ?? 0}
-          max="5"
-        ></progress>
-        <div className="stat-desc text-purple-600">
-          현재 레벨에서 문제 푼 수 {user?.exp ?? 0}개
+          <div
+            className="flex"
+            onClick={() => {
+              setOpenDailyPopup(true)
+            }}
+          >
+            <p className="">
+              하루 목표:{" "}
+              <span className="font-bold">{user?.dailyGoal} 문제</span>
+            </p>
+            <Icons.chevronRight className="rotate-90" />
+          </div>
         </div>
       </div>
-    </div>
+      <DailyGoalPopup
+        open={isOpenDailyPopup}
+        goal={user.dailyGoal}
+        isSubmitting={isLoading}
+        onClose={() => {
+          setOpenDailyPopup(false)
+        }}
+        onConfirm={(goal) => {
+          mutate({ goal })
+        }}
+      />
+    </>
   )
 }

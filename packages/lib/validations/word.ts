@@ -46,8 +46,11 @@ export const userInfoResponseSchema = z.object({
     level: z.number(),
   })),
   level: z.number().min(1),
-  exp: z.number(),
+  userExp: z.number(),
   todayTranslated: z.number(),
+  totalLevelExp: z.number(),
+  dailyGoal: z.number(),
+  dailyGoalCount: z.number()
 })
 
 export const sentenceSchema = z.object({
