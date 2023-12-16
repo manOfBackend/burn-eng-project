@@ -22,6 +22,8 @@ export type SentenceHistoryDatesResponse = z.infer<typeof sentenceHistoryDatesRe
 
 export type SentenceHistoryResponse = z.infer<typeof sentenceHistoryResponseSchema>
 
+export type UserInfoResponse = z.infer<typeof userInfoResponseSchema>
+
 export type SubmitDailyGoalResponse = z.infer<typeof submitDailyGoalResponseSchema>
 
 export type SentencePage = z.infer<typeof sentencePageResponseSchema>
