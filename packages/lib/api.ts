@@ -37,6 +37,10 @@ export function getSentenceProblem({ level }: { level?: number } = {}) {
   return httpWithAuth.get<SentenceProblemResponse>(`/sentence/random`, { params: { level } });
 }
 
+export function getGuestSentenceProblem({ level }: { level?: number } = {}) {
+  return http.get<SentenceProblemResponse>(`/sentence/random`, { params: { level } });
+}
+
 export function getHistoryDates({ languageFrom, languageTo, month, year }: { year: number, month: number, languageFrom: Sentence['language'], languageTo: Sentence['language'] }) {
   return httpWithAuth.get<SentenceHistoryDatesResponse>(`/translated/history/dates`, { params: { languageFrom, languageTo, month, year } });
 }
@@ -46,7 +50,7 @@ export function getSentenceProblemHistory({ date, languageFrom, languageTo }: { 
 }
 
 export function submitUserDailyGoal({ goal }: { goal: number }) {
-  return httpWithAuth.put<void>('/user-daily-goal', { params: { goal } });
+  return httpWithAuth.put<void>('/user-daily-goal', { goal });
 }
 
 export function getUserInfo() {

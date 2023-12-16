@@ -2,7 +2,7 @@
 
 import { useFeedbackStore } from "@/store/feedback"
 import { useGuestStore } from "@/store/guest"
-import { getSentenceProblem, submitGuestWriting } from "@sayvoca/lib/api"
+import { getGuestSentenceProblem, submitGuestWriting } from "@sayvoca/lib/api"
 import { InputSentence } from "@sayvoca/lib/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
@@ -17,9 +17,9 @@ export default function WritingGuestProblemContainer() {
   const { addFeedback, setUserInputSentence, setProblem } = useFeedbackStore()
 
   const { data: problem } = useQuery({
-    queryKey: ["sentence-random-guest"],
+    queryKey: ["sentence-random-guest", level],
     staleTime: 60 * 1000 * 10,
-    queryFn: () => getSentenceProblem({ level }),
+    queryFn: () => getGuestSentenceProblem({ level }),
   })
 
   const {
