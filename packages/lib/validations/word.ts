@@ -38,18 +38,31 @@ export const sentenceHistoryResponseSchema = z.array(z.object({
   translatedFeedback: z.object(sentenceResponseSchema.shape),
 }))
 
+export const submitDailyGoalResponseSchema = z.object({
+  dailyGoal: z.number(),
+})
+
 export const userInfoResponseSchema = z.object({
   email: z.string(),
+  /** 유저 권한 
+   * ADMIN: 관리자
+   * USER: 일반 유저
+  */
   role: z.enum(['ADMIN', 'USER']),
+  /** 레벨 변화 */
   recentUserLevelHistories: z.array(z.object({
     date: z.string(),
     level: z.number(),
   })),
+  /** 현재 레벨 */
   level: z.number().min(1),
+  /** 해당 레벨에서 채운 경험치 */
   userExp: z.number(),
-  todayTranslated: z.number(),
+  /** 현재 레벨에서 전체 경험치 */
   totalLevelExp: z.number(),
+  /** 하루 목표량 */
   dailyGoal: z.number(),
+  /** 하루 목표 중 푼 수 */
   dailyGoalCount: z.number()
 })
 
@@ -60,12 +73,6 @@ export const sentenceSchema = z.object({
   level: z.number(),
   updatedAt: z.any().nullable(),
   deletedAt: z.any().nullable(),
-  // sentenses: z.object({
-  //   id: z.number(),
-  //   sentense: z.string(),
-  //   meaning: z.string().nullish(),
-  // }).array().nullish(),
-  // status: z.enum(['active', 'inactive']).default('active'),
 }).and(sentenceInputSchema)
 
 export const sentencePageResponseSchema = z.object({

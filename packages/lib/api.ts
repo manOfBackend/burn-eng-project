@@ -1,4 +1,4 @@
-import { InputSentence, Sentence, SentenceHistoryDatesResponse, SentenceHistoryResponse, SentenceLevelResponse, SentencePage, SentenceProblemResponse, SentenceResponse, UserInfoResponse } from '../lib/types';
+import { InputSentence, Sentence, SentenceHistoryDatesResponse, SentenceHistoryResponse, SentenceLevelResponse, SentencePage, SentenceProblemResponse, SentenceResponse, SubmitDailyGoalResponse, UserInfoResponse } from '../lib/types';
 import { http, httpWithAuth } from './http';
 
 export function getSentencePage({ page, size }: { page: number, size: number }) {
@@ -50,7 +50,7 @@ export function getSentenceProblemHistory({ date, languageFrom, languageTo }: { 
 }
 
 export function submitUserDailyGoal({ goal }: { goal: number }) {
-  return httpWithAuth.put<void>('/user-daily-goal', { goal });
+  return httpWithAuth.put<SubmitDailyGoalResponse>('/user-daily-goal', { goal });
 }
 
 export function getUserInfo() {

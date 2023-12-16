@@ -1,5 +1,5 @@
 import { addWordSchema, signUpSchema, userAuthSchema, userRoleSchema } from "../validations/auth"
-import { sentenceHistoryDatesResponseSchema, sentenceHistoryResponseSchema, sentenceInputSchema, sentenceLevelSchema, sentencePageResponseSchema, sentenceProblemResponseSchema, sentenceResponseSchema, sentenceSchema, userInfoResponseSchema } from "../validations/word"
+import { sentenceHistoryDatesResponseSchema, sentenceHistoryResponseSchema, sentenceInputSchema, sentenceLevelSchema, sentencePageResponseSchema, sentenceProblemResponseSchema, sentenceResponseSchema, sentenceSchema, submitDailyGoalResponseSchema, userInfoResponseSchema } from "../validations/word"
 import { z } from "zod"
 
 export * as env from '../env.mjs'
@@ -22,7 +22,7 @@ export type SentenceHistoryDatesResponse = z.infer<typeof sentenceHistoryDatesRe
 
 export type SentenceHistoryResponse = z.infer<typeof sentenceHistoryResponseSchema>
 
-export type UserInfoResponse = z.infer<typeof userInfoResponseSchema>
+export type SubmitDailyGoalResponse = z.infer<typeof submitDailyGoalResponseSchema>
 
 export type SentencePage = z.infer<typeof sentencePageResponseSchema>
 

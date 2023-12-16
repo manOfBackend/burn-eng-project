@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import DailyGoalPopup from "./daily-goal-popup"
 import { cn } from "@sayvoca/lib/utils"
+import { queryClient } from "./queryClient"
 
 export default function DashboardStat() {
   const { data: user } = useQuery({
@@ -16,8 +17,16 @@ export default function DashboardStat() {
   const { mutate, isLoading } = useMutation({
     mutationKey: ["submit-daily-goal"],
     mutationFn: submitUserDailyGoal,
-    onSuccess: () => {
+    onSuccess: ({ data }) => {
       setOpenDailyPopup(false)
+      if (data) {
+        queryClient.setQueryData(["users"], (oldData: any) => {
+          return {
+            ...oldData,
+            dailyGoal: data.dailyGoal,
+          }
+        })
+      }
     },
   })
 
