@@ -3,9 +3,12 @@ import { getUserInfo, submitUserDailyGoal } from "@sayvoca/lib/api"
 import { Icons } from "@sayvoca/ui/Icons"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useState } from "react"
-import DailyGoalPopup from "./daily-goal-popup"
 import { cn } from "@sayvoca/lib/utils"
 import { queryClient } from "./queryClient"
+import UserRankImage from "./user-rank-image"
+import dynamic from "next/dynamic"
+
+const DailyGoalPopup = dynamic(() => import("./daily-goal-popup"))
 
 export default function DashboardStat() {
   const { data: user } = useQuery({
@@ -40,19 +43,20 @@ export default function DashboardStat() {
 
   return (
     <>
-      <div className="flex w-full justify-between rounded-2xl p-4 shadow">
-        <div className="flex flex-col gap-2">
-          <div className="text-4xl font-bold">레벨 {user.level}</div>
-          <div className="flex flex-col">
+      <section className="flex w-full justify-between rounded-2xl p-4 shadow">
+        <section className="flex flex-col items-center gap-2">
+          <UserRankImage level={user.level} />
+          <h2 className="text-4xl font-bold">레벨 {user.level}</h2>
+          <article className="flex flex-col">
             <h2 className="text-sm text-gray-600">경험치</h2>
             <progress
               className="progress progress-info my-1 w-[100px]"
               value={user.userExp}
               max={user.totalLevelExp}
             ></progress>
-          </div>
-        </div>
-        <div className="flex flex-col justify-center gap-2">
+          </article>
+        </section>
+        <section className="flex flex-col justify-center gap-2">
           <div className="flex items-center justify-center">
             <div
               className={cn(
@@ -86,8 +90,8 @@ export default function DashboardStat() {
             </p>
             <Icons.chevronRight className="rotate-90 text-purple-500" />
           </div>
-        </div>
-      </div>
+        </section>
+      </section>
       <DailyGoalPopup
         open={isOpenDailyPopup}
         goal={user.dailyGoal}
