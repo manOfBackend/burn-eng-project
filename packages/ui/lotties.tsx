@@ -29,6 +29,26 @@ export const DeniedLottie = (
   />
 )
 
+export const CongratulationsLottie = (
+  props: Omit<ComponentProps<typeof Lottie>, "src">
+) => (
+  <Lottie
+    {...props}
+    src="https://lottie.host/d75313ce-4637-4387-b5be-e345887de369/jtmPgcaxHM.json"
+    loop={true}
+  />
+)
+
+export const SadLottie = (
+  props: Omit<ComponentProps<typeof Lottie>, "src">
+) => (
+  <Lottie
+    {...props}
+    src="https://lottie.host/c2426b12-d9d9-46ac-b822-2885c51b7f9a/eb3SkAd5e8.json"
+    loop={true}
+  />
+)
+
 export const ErrorLottie = (
   props: Omit<ComponentProps<typeof Lottie>, "src">
 ) => (

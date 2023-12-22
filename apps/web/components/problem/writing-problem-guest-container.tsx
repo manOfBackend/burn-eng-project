@@ -32,7 +32,7 @@ export default function WritingGuestProblemContainer() {
     useErrorBoundary: true,
     onSuccess: (data) => {
       addFeedback(data)
-      if (data.feedbackResult === "PASS" && level < 5) {
+      if (data.data.feedbackResult === "PASS" && level < 5) {
         setLevel(level + 1)
       }
       router.replace(`/guest/writing/result`)
