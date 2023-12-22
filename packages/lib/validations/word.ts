@@ -7,13 +7,19 @@ export const sentenceInputSchema = z.object({
 })
 
 export const sentenceResponseSchema = z.object({
-  meaningAccuracy: z.number(),
-  grammarAccuracy: z.number(),
-  naturalness: z.number(),
-  overallEvaluationScore: z.number(),
-  advice: z.string(),
-  betterTranslatedSentences: z.string().array(),
-  feedbackResult: z.enum(['PASS', 'FAIL']),
+  data: z.object({
+    meaningAccuracy: z.number(),
+    grammarAccuracy: z.number(),
+    naturalness: z.number(),
+    overallEvaluationScore: z.number(),
+    advice: z.string(),
+    betterTranslatedSentences: z.string().array(),
+    feedbackResult: z.enum(['PASS', 'FAIL']),
+  }),
+  additionalData: z.object({
+    userLevel: z.number(),
+    userLevelDiff: z.enum(['UP', 'DOWN', 'EQUAL'])
+  })
 })
 
 export const sentenceProblemResponseSchema = z.object({

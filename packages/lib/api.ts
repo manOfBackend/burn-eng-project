@@ -22,11 +22,11 @@ export function deleteSentence(sentenceId: Sentence['id']) {
 }
 
 export function submitWriting({ sentenceId, translatedLanguage, translatedSentence }: { translatedLanguage: string, translatedSentence: string, sentenceId: number }) {
-  return httpWithAuth.post<SentenceResponse>('/translated-feedback', { translatedLanguage, translatedSentence, sentenceId });
+  return httpWithAuth.post<SentenceResponse>('/translated/feedback', { translatedLanguage, translatedSentence, sentenceId });
 }
 
 export function submitGuestWriting({ sentenceId, translatedLanguage, translatedSentence }: { translatedLanguage: string, translatedSentence: string, sentenceId: number }) {
-  return http.post<SentenceResponse>('/translated-feedback', { translatedLanguage, translatedSentence, sentenceId });
+  return http.post<SentenceResponse>('/translated/feedback', { translatedLanguage, translatedSentence, sentenceId });
 }
 
 export function searchSentence({ search }: { search: string }) {
