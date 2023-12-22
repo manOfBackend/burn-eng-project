@@ -5,7 +5,7 @@ import { SentenceResponse } from "@sayvoca/lib"
 
 interface SentenceFeedbackChartProps {
   data: Pick<
-    SentenceResponse,
+    SentenceResponse["data"],
     | "grammarAccuracy"
     | "meaningAccuracy"
     | "naturalness"
