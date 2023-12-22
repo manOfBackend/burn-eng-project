@@ -2,18 +2,33 @@ import { SentenceResponse } from '@sayvoca/lib'
 import { rest } from 'msw'
 
 export const handlers = [
-  rest.post('/translated-feedback', (req, res, ctx) => {
+  rest.post('/translated/feedback', (req, res, ctx) => {
     return res(
       ctx.delay(1000),
       ctx.status(200),
       ctx.json({
-        meaningAccuracy: 30,
-        grammarAccuracy: 50,
-        naturalness: 70,
-        overallEvaluationScore: 80,
-        advice: '더 분발하세요',
-        betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
-        feedbackResult: 'PASS',
+        data: {
+          meaningAccuracy: 30,
+          grammarAccuracy: 50,
+          naturalness: 70,
+          overallEvaluationScore: 80,
+          advice: '더 분발하세요',
+          betterTanslatedSentences: ['Test Sentence', 'Test Sentence 2'],
+          feedbackResult: 'PASS',
+        },
+        additionalData: {
+          userLevel: 12,
+          userLevelDiff: 'DOWN',
+        }
+      })
+    )
+  }),
+  rest.put('/user-daily-goal', (req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.status(200),
+      ctx.json({
+        dailyGoal: 5,
       })
     )
   }),
