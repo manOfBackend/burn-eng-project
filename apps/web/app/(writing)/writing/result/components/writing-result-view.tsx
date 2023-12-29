@@ -10,8 +10,8 @@ import React, { useEffect, useLayoutEffect } from "react"
 import { queryClient } from "../../../../../components/queryClient"
 import SentenceFeedbackChart from "../../../../../components/sentence-feedback-chart"
 
-const LevelUpPopup = dynamic(() => import("./LevelUpPopup"))
-const LevelDownPopup = dynamic(() => import("./LevelDownPopup"))
+const LevelUpPopup = dynamic(() => import("./level-up-popup"))
+const LevelDownPopup = dynamic(() => import("./level-down-popup"))
 
 import dynamic from "next/dynamic"
 

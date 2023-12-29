@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 import "react-calendar/dist/Calendar.css"
 
 export default function DashboardCalendarView() {
-  const { date, setDate } = useHistoryStore()
+  const { date } = useHistoryStore()
   const router = useRouter()
 
   const { data: historyDates } = useQuery({

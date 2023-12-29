@@ -18,7 +18,7 @@ export const handlers = [
         },
         additionalData: {
           userLevel: 12,
-          userLevelDiff: 'DOWN',
+          userLevelDiff: 'UP',
         }
       })
     )
@@ -48,11 +48,16 @@ export const handlers = [
         }
       ))
   }),
-  rest.get('/translated/history/dates', (req, res, ctx) => {
+  rest.get('/translated/history/dates?version=20231223', (req, res, ctx) => {
     return res(
       ctx.json(
         {
           dates: [
+            {
+              date: '2023-11-01',
+              isAchievedDailyGoal: true,
+            },
+            
             "2023-11-26",
             "2023-11-27",
             "2023-12-01",
