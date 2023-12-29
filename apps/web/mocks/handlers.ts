@@ -52,15 +52,19 @@ export const handlers = [
     return res(
       ctx.json(
         {
-          dates: [
+          data: [
             {
-              date: '2023-11-01',
-              isAchievedDailyGoal: true,
+              date: '2023-12-27',
+              isAccomplishedDailyGoal: true,
             },
-            
-            "2023-11-26",
-            "2023-11-27",
-            "2023-12-01",
+            {
+              date: '2023-12-28',
+              isAccomplishedDailyGoal: true,
+            },
+            {
+              date: '2023-12-30',
+              isAccomplishedDailyGoal: false,
+            },
           ]
         }
       ))

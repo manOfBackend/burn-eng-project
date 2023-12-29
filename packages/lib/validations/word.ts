@@ -35,7 +35,10 @@ export const sentenceProblemResponseSchema = z.object({
 })
 
 export const sentenceHistoryDatesResponseSchema = z.object({
-  dates: z.string().array(),
+  data: z.object({
+    date: z.string(),
+    isAccomplishedDailyGoal: z.boolean(),
+  }).array(),
 })
 
 export const sentenceHistoryResponseSchema = z.array(z.object({

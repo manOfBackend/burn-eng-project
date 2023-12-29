@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
 import { useRouter } from "next/navigation"
 import "react-calendar/dist/Calendar.css"
+import DailyDay from "./DailyDay"
 
 export default function DashboardCalendarView() {
   const { date } = useHistoryStore()
@@ -68,6 +69,11 @@ export default function DashboardCalendarView() {
       text: "일",
     },
   ]
+
+  const datesWithAccomplishedDailyGoal = historyDates?.data?.filter(
+    (x) => x.isAccomplishedDailyGoal
+  )
+
   return (
     <div
       className="grid w-full max-w-xs cursor-pointer grid-cols-7 place-items-center justify-center gap-1"
@@ -76,27 +82,24 @@ export default function DashboardCalendarView() {
       }}
       role="button"
     >
-      {weeks.map((x) => (
-        <div
-          key={x.text}
-          className={cn(
-            "relative grid h-8 w-8 place-content-center rounded-full border-2 border-solid bg-gray-100",
-            {
-              "bg-yellow-500 border-yellow-500": historyDates?.dates.find(
-                (y) => y === dayjs(x.end).format("YYYY-MM-DD")
-              ),
+      {weeks.map((x) => {
+        const date = historyDates?.data?.find(
+          (y) => y.date === dayjs(x.end).format("YYYY-MM-DD")
+        )
+        return (
+          <DailyDay
+            key={x.text}
+            status={
+              date?.isAccomplishedDailyGoal
+                ? "GOAL_DONE"
+                : date
+                ? "DOING"
+                : "NOT_DONE"
             }
-          )}
-        >
-          {historyDates?.dates.find(
-            (y) => y === dayjs(x.end).format("YYYY-MM-DD")
-          ) ? (
-            <Icons.trophy className="h-4 w-4 text-white" />
-          ) : (
-            <p className="text-xs">{x.text}</p>
-          )}
-        </div>
-      ))}
+            text={x.text}
+          />
+        )
+      })}
     </div>
   )
 }
