@@ -44,7 +44,7 @@ export const sentenceHistoryDatesResponseSchema = z.object({
 export const sentenceHistoryResponseSchema = z.array(z.object({
   sentence: z.string(),
   translatedSentence: z.string(),
-  translatedFeedback: z.object(sentenceResponseSchema.shape),
+  translatedFeedback: z.object(sentenceResponseSchema.shape.data.shape),
 }))
 
 export const submitDailyGoalResponseSchema = z.object({
