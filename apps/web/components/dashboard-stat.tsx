@@ -20,16 +20,12 @@ export default function DashboardStat() {
   const { mutate, isLoading } = useMutation({
     mutationKey: ["submit-daily-goal"],
     mutationFn: submitUserDailyGoal,
-    onSuccess: ({ data }) => {
+    onSuccess: (data) => {
       setOpenDailyPopup(false)
-      if (data) {
-        queryClient.setQueryData(["users"], (oldData: any) => {
-          return {
-            ...oldData,
-            dailyGoal: data.dailyGoal,
-          }
-        })
-      }
+      queryClient.setQueryData(["users"], (oldData: any) => ({
+        ...oldData,
+        ...data,
+      }))
     },
   })
 
