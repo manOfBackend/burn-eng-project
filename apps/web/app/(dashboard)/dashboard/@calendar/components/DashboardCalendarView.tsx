@@ -83,13 +83,13 @@ export default function DashboardCalendarView() {
             "relative grid h-8 w-8 place-content-center rounded-full border-2 border-solid bg-gray-100",
             {
               "bg-yellow-500 border-yellow-500": historyDates?.dates.find(
-                (y) => y === dayjs(x.start).format("YYYY-MM-DD")
+                (y) => y === dayjs(x.end).format("YYYY-MM-DD")
               ),
             }
           )}
         >
           {historyDates?.dates.find(
-            (y) => y === dayjs(x.start).format("YYYY-MM-DD")
+            (y) => y === dayjs(x.end).format("YYYY-MM-DD")
           ) ? (
             <Icons.trophy className="h-4 w-4 text-white" />
           ) : (
