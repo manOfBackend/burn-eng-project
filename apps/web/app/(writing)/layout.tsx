@@ -10,7 +10,7 @@ interface VocaLayoutProps {
 
 export default function WritingLayout({ children }: VocaLayoutProps) {
   return (
-    <div className="scrollbar-none h-screen w-full !max-w-[100vw] overflow-x-hidden overflow-y-scroll overscroll-none pb-[150px] pt-[50px]">
+    <div className="scrollbar-none h-screen w-full overflow-x-hidden overflow-y-scroll overscroll-none pb-[150px] pt-[50px]">
       <WithDailyGoalLayout />
       <Shell>
         <Card className="relative">

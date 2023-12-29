@@ -12,9 +12,11 @@ export default function WithDailyGoalLayout() {
     suspense: true,
   })
 
+  if (!user?.dailyGoal) return null
+
   return (
-    <nav className="fixed top-0 z-50 h-[50px] w-full bg-white">
-      <div className="flex w-full">
+    <nav className="container fixed top-0 z-50 h-[50px] max-w-3xl bg-white">
+      <div className="flex">
         <button
           type="button"
           className="flex h-[50px] w-[50px] items-center justify-center active:bg-gray-300/50"
@@ -29,7 +31,7 @@ export default function WithDailyGoalLayout() {
             <div className="flex items-center gap-1">
               <h1 className="text-lg font-bold">하루 목표</h1>
               <div className="text-sm text-gray-500">
-                {user?.dailyGoalCount ?? 0} / {user?.dailyGoal ?? 0}
+                {user.dailyGoalCount} / {user.dailyGoal}
               </div>
             </div>
           </div>
