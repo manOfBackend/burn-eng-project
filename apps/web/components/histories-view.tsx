@@ -41,9 +41,7 @@ export default function HistoriesView() {
                 <Icons.chevronRightIcon className="inline-block" />
               </summary>
               <div className="collapse-content !px-0">
-                <p className="text-sm">
-                  {history.translatedFeedback?.data?.advice}
-                </p>
+                <p className="text-sm">{history.translatedFeedback?.advice}</p>
               </div>
             </details>
           </div>
@@ -51,22 +49,21 @@ export default function HistoriesView() {
             <div
               className={cn("radial-progress whitespace-pre-wrap text-center", {
                 "text-green-800 bg-green-100":
-                  history.translatedFeedback?.data?.feedbackResult === "PASS",
+                  history.translatedFeedback?.feedbackResult === "PASS",
                 "text-red-800 bg-red-100":
-                  history.translatedFeedback?.data?.feedbackResult === "FAIL",
+                  history.translatedFeedback?.feedbackResult === "FAIL",
               })}
               style={
                 {
-                  "--value":
-                    history.translatedFeedback?.data?.overallEvaluationScore,
+                  "--value": history.translatedFeedback?.overallEvaluationScore,
                 } as React.CSSProperties
               }
             >
               <span>
-                {history.translatedFeedback?.data?.feedbackResult}
+                {history.translatedFeedback?.feedbackResult}
                 {"\n"}
                 <span className="font-bold">
-                  {history.translatedFeedback?.data?.overallEvaluationScore}
+                  {history.translatedFeedback?.overallEvaluationScore}
                 </span>
               </span>
             </div>
