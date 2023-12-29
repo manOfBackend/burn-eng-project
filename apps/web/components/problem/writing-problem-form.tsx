@@ -43,12 +43,12 @@ export default function WritingProblemForm({
           <div className="mb-3 flex flex-nowrap justify-between">
             <h2 className="mb-2 font-bold">문제</h2>
             <div className="flex flex-nowrap gap-1">
-              <p className="whitespace-nowrap rounded-md bg-blue-400 px-2 py-1 font-bold text-white">
+              <p className="h-fit w-fit whitespace-nowrap rounded-md bg-blue-400 px-2 py-1 font-bold text-white">
                 레벨 {level}
               </p>
               <p
                 className={cn(
-                  "whitespace-nowrap rounded-md px-2 py-1 font-bold text-white",
+                  "h-fit w-fit whitespace-nowrap rounded-md px-2 py-1 font-bold text-white",
                   {
                     "bg-green-400": percentageOfCorrectAnswers >= 70,
                     "bg-yellow-400":
@@ -79,23 +79,49 @@ export default function WritingProblemForm({
                   <FormLabel className="font-bold">작문</FormLabel>
                   <div className="px-2">
                     <FormControl>
-                      <Input {...field} autoFocus />
+                      <Input
+                        {...field}
+                        autoFocus
+                        inputMode="text"
+                        autoCapitalize="none"
+                        autoComplete="off"
+                        ref={function (ref) {
+                          if (ref !== null) {
+                            ref.focus()
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </div>
                 </FormItem>
               )}
             />
-            <Button disabled={isLoading || !problem} variant={"submit"}>
-              {isLoading && (
-                <Icons.spinner
-                  className="mr-2 h-4 w-4 animate-spin"
-                  aria-hidden="true"
-                />
-              )}
-              제출
-              <span className="sr-only">제출</span>
-            </Button>
+            <div className="flex w-full gap-2">
+              <Button
+                className="w-28"
+                variant={"secondary"}
+                onClick={() => {
+                  form.reset()
+                }}
+              >
+                지우기
+              </Button>
+              <Button
+                className="w-full"
+                disabled={isLoading || !problem}
+                variant={"submit"}
+              >
+                {isLoading && (
+                  <Icons.spinner
+                    className="mr-2 h-4 w-4 animate-spin"
+                    aria-hidden="true"
+                  />
+                )}
+                제출
+                <span className="sr-only">제출</span>
+              </Button>
+            </div>
           </form>
         </section>
       </Form>
