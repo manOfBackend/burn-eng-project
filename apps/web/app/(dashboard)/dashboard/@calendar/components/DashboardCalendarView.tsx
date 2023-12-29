@@ -30,42 +30,34 @@ export default function DashboardCalendarView() {
     suspense: true,
   })
   const startWeek = dayjs().startOf("week")
-  const endWeek = dayjs().endOf("week")
 
   const weeks = [
     {
-      start: startWeek,
-      end: startWeek.add(1, "day"),
+      date: startWeek.add(1, "day"),
       text: "월",
     },
     {
-      start: startWeek.add(1, "day"),
-      end: startWeek.add(2, "day"),
+      date: startWeek.add(2, "day"),
       text: "화",
     },
     {
-      start: startWeek.add(2, "day"),
-      end: startWeek.add(3, "day"),
+      date: startWeek.add(3, "day"),
       text: "수",
     },
     {
-      start: startWeek.add(3, "day"),
-      end: startWeek.add(4, "day"),
+      date: startWeek.add(4, "day"),
       text: "목",
     },
     {
-      start: startWeek.add(4, "day"),
-      end: startWeek.add(5, "day"),
+      date: startWeek.add(5, "day"),
       text: "금",
     },
     {
-      start: startWeek.add(5, "day"),
-      end: startWeek.add(6, "day"),
+      date: startWeek.add(6, "day"),
       text: "토",
     },
     {
-      start: startWeek.add(6, "day"),
-      end: endWeek,
+      date: startWeek.add(7, "day"),
       text: "일",
     },
   ]
@@ -84,7 +76,7 @@ export default function DashboardCalendarView() {
     >
       {weeks.map((x) => {
         const date = historyDates?.data?.find(
-          (y) => y.date === dayjs(x.end).format("YYYY-MM-DD")
+          (y) => y.date === dayjs(x.date).format("YYYY-MM-DD")
         )
         return (
           <DailyDay
