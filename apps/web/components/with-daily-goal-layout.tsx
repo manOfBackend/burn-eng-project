@@ -15,7 +15,7 @@ export default function WithDailyGoalLayout() {
   if (!user?.dailyGoal) return null
 
   return (
-    <nav className="container fixed top-0 z-50 h-[50px] max-w-3xl bg-white">
+    <nav className="fixed left-0 top-0 z-50 h-[50px] max-w-3xl bg-white">
       <div className="flex">
         <button
           type="button"
