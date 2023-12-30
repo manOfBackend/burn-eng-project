@@ -26,6 +26,7 @@ httpWithAuth.interceptors.request.use((config) => {
   if (sessionToken) {
     config.headers.Authorization = `Bearer ${sessionToken}`;
   }
+  config.headers['X-Version'] = env.NEXT_PUBLIC_API_VERSION;
 
   return config;
 });
